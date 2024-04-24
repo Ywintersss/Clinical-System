@@ -1,13 +1,17 @@
 package Project.Controller;
 
-import Project.Users.User;
+import Project.Users.Patient;
+import Project.Utilities;
 
 public class userDataManager {
-    public void addUser(User user) {
-        // Add user to txt file
+
+    // Add user to txt file
+    public void addPatient(Patient patient) {
     }
-    public User getUser(String username, String password) {
-        // Read and Gets user from txt file with username and password
+
+    // Read and Gets user from txt file with username and password
+    public<T> T getUser(String username, String password) {
+        //login logic
         return null;
     }
 }
