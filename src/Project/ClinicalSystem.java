@@ -2,7 +2,7 @@ package Project;
 
 import Project.Controller.userDataManager;
 
-public class MedicalSystem {
+public class ClinicalSystem {
     public <T> T login(String username, String password) {
         //validation
         userDataManager loginManager = new userDataManager();
