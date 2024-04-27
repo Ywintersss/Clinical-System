@@ -17,7 +17,7 @@ public class Home {
         AtomicBoolean visibility = new AtomicBoolean(login.getDefaultVisibility());
         JPanel loginPanel = login.createLogin(visibility.get());
 
-        loginPanel.setBounds(0, 0, 200, frame.getHeight());
+        loginPanel.setBounds(0, 0, 250, frame.getHeight());
         loginPanel.setBorder(BorderFactory.createLineBorder(Color.black, 1, true));
         layeredPane.add(loginPanel, JLayeredPane.POPUP_LAYER, 0);
         frame.add(layeredPane);
