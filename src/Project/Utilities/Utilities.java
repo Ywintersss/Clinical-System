@@ -11,12 +11,16 @@ public class Utilities {
         try {
             ArrayList<String> data = fileHandler.readFile(objPath);
             ArrayList<String[]> parsedData = fileHandler.parseData(data);
+            int IDIndex = 1;
             for (String[] dataArray : parsedData) {
                 ID = dataArray[0];
                 int IDnumber = Integer.parseInt(ID.substring(2));
-                System.out.println(IDnumber);
+                if (IDnumber != IDIndex) {
+                    return "ID" + IDIndex;
+                }
+                IDIndex++;
             }
-            return parsedData.get(0)[0];
+            return "ID" + IDIndex;
         } catch (IOException e) {
             e.printStackTrace();
         }
