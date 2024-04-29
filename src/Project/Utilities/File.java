@@ -19,7 +19,7 @@ public class File {
         if (!path.endsWith(".txt")){
             throw new IllegalArgumentException("Invalid file type");
         }
-        path = currentWorkingDirectory() + "\\" + path;
+        path = currentWorkingDirectory() + "\\src\\db\\" + path;
         //initialize an array that stores the data
         ArrayList<String> data = new ArrayList<>();
 
@@ -71,10 +71,7 @@ public class File {
 
     //write to txt file
     public static void writeToFile(String path, String data) throws IOException {
-        if (!(data instanceof String)) {
-            throw new IllegalArgumentException("Invalid data type");
-        }
-
+        path = currentWorkingDirectory() + "\\src\\db\\" + path;
         try {
             writer = new BufferedWriter(new FileWriter(path, true));
 
@@ -96,7 +93,7 @@ public class File {
     //testing
     public static void main(String[] args) {
         try {
-            ArrayList<String> data = readFile("\\src\\db\\Doctors.txt");
+            ArrayList<String> data = readFile("Doctors.txt");
             ArrayList<String[]> parsedData = parseData(data);
             System.out.println(parsedData);
 
