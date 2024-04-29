@@ -1,4 +1,4 @@
-package Project.Controller;
+package Project.Utilities;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Files {
+public class File {
     private static BufferedReader reader;
     private static BufferedWriter writer;
     public static String currentWorkingDirectory() {
@@ -19,6 +19,7 @@ public class Files {
         if (!path.endsWith(".txt")){
             throw new IllegalArgumentException("Invalid file type");
         }
+        path = currentWorkingDirectory() + "\\" + path;
         //initialize an array that stores the data
         ArrayList<String> data = new ArrayList<>();
 
@@ -57,8 +58,7 @@ public class Files {
                 }
             }
             //parsing single line data
-        } else if (data instanceof String) {
-            String str = (String) data;
+        } else if (data instanceof String str) {
             String[] array = str.split(",");
             parsedData.add(array);
         } else {
@@ -78,8 +78,8 @@ public class Files {
         try {
             writer = new BufferedWriter(new FileWriter(path, true));
 
-            writer.write(data);
             writer.newLine();
+            writer.write(data);
 
         } finally {
             if (writer != null) {
@@ -96,9 +96,9 @@ public class Files {
     //testing
     public static void main(String[] args) {
         try {
-            ArrayList<String> data = readFile(currentWorkingDirectory() + "\\src\\db\\Doctors.txtvs");
-            ArrayList<String[]> parsedData = parseData(data.get(0));
-            System.out.println(parsedData.get(0)[0]);
+            ArrayList<String> data = readFile("\\src\\db\\Doctors.txt");
+            ArrayList<String[]> parsedData = parseData(data);
+            System.out.println(parsedData);
 
         } catch (IOException e) {
             e.printStackTrace();

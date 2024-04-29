@@ -1,7 +1,6 @@
 package Project.Controller;
 
 import Project.Users.Patient;
-import Project.Utilities;
 
 public class userDataManager {
 
