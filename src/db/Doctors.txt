@@ -1,4 +1,4 @@
-ID1,Some text here,Eye
+ID1,This text is really cringe for some reason,Eye
 ID2,Some more text here,Chest
 ID3,Hahaha didnt expect me here eh,Heart
 ID4,Some more more text here,Legs

@@ -1,11 +1,8 @@
 package Project.Utilities;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class File {
     private static BufferedReader reader;
@@ -86,8 +83,43 @@ public class File {
     }
 
     //update txt file
-    public static void updateFile(String path, String data) throws IOException {
+    // Takes in String array of the user's updated data.
+    public static void updateFile(String path, String[] newData) throws IOException{
+        path = currentWorkingDirectory() + "\\src\\db\\" + path;
 
+        try {
+            reader = new BufferedReader(new FileReader(path));
+
+            String oldData;
+            ArrayList<String[]> DataArray = new ArrayList<>();
+
+            while ((oldData = reader.readLine()) != null) {
+                String[] oldDataArray = oldData.split(",");
+                DataArray.add(oldDataArray);
+                String ID = oldData.split(",")[0];
+
+                //Updating the specific row with the updated data
+                if (newData[0].equals(ID)) {
+                    int index = Integer.parseInt(ID.substring(2))-1;
+                    DataArray.set(index, newData);
+                }
+            }
+
+            // Writing the updated data back to the file
+            writer = new BufferedWriter(new FileWriter(path, false));
+
+            for (String[] i : DataArray) {
+                String line = String.join(",", i);
+                writer.write(line);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (writer != null) {
+                writer.close();
+            }
+        }
     }
 
     //testing
@@ -95,7 +127,8 @@ public class File {
         try {
             ArrayList<String> data = readFile("Doctors.txt");
             ArrayList<String[]> parsedData = parseData(data);
-            System.out.println(parsedData);
+            parsedData.get(0)[1] = "This text is really cringe for some reason";
+            updateFile("Doctors.txt", parsedData.get(0));
 
         } catch (IOException e) {
             e.printStackTrace();
