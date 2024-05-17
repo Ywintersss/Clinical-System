@@ -84,6 +84,22 @@ public class File {
             }
         }
     }
+    public static String formatData(String ...dataArray) {
+        StringBuilder formattedString = new StringBuilder();
+
+        // Loop through the data array
+        for (int i = 0; i < dataArray.length; i++) {
+            formattedString.append(dataArray[i]);
+
+            // Add comma if it's not the last element
+            if (i < dataArray.length - 1) {
+                formattedString.append(",");
+            }
+        }
+
+        return formattedString.toString();
+    }
+
 
     //update txt file
     public static void updateFile(String path, String data) throws IOException {

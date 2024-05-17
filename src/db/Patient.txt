@@ -1,0 +1,6 @@
+Erica,erica@gmail.com,012-111 8888,erica,1234,12,female,image
+Eric,eric@gmail.com,012-111 9999,eric,1234,13,male,image
+Elon,elon@gmail.com,012-111 1010,elon,1234,14,male,image
+Erison,elon@gmail.com,012-111 1010,elon,1234,14,male,image
+Erison,elon@gmail.com,012-111 1010,elon,1234,14,male,image
+Erison,elon@gmail.com,012-111 1010,elon,1234,14,male,image
