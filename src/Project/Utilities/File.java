@@ -1,22 +1,63 @@
 package Project.Utilities;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class File {
     private static BufferedReader reader;
     private static BufferedWriter writer;
-    public static String currentWorkingDirectory() {
-        return System.getProperty("user.dir");
+    public static String currentDbDirectory() {
+        return System.getProperty("user.dir") + "\\src\\db";
     }
 
+
+    /**
+     * Returns a list of all text files in the specified directory.
+     *
+     * @param path The path to the directory. The path should end with "/" and
+     *             specify a specific directory in the db directory.
+     * @return A list of all text files in the specified directory.
+     * @throws IOException If an I/O error occurs while reading the directory.
+     */
+    //get all txt files
+    public static ArrayList<String> getAllDbFilesFromDirectory(String path) throws IOException {
+        ArrayList<String> files = new ArrayList<>();
+
+        //initialize path
+        Path paths = Paths.get(currentDbDirectory() + path);
+
+        //try to open and read the directory
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(paths)) {
+            //iterate through each file
+            for (Path entry : stream) {
+                String file = entry.toString();
+                if (file.endsWith(".txt")){
+                    files.add(file.substring(currentDbDirectory().length()));
+                }
+            }
+        }
+        return files;
+    }
+
+
+    /**
+     * Reads a text file and returns all its contents as a list of strings.
+     *
+     * @param path The path to the text file. The path should end with ".txt" and
+     *             specify a specific directory in the db directory.
+     * @return A list of strings containing the contents of the text file.
+     * @throws IOException If an I/O error occurs while reading the file.
+     */
     //read txt file
     public static ArrayList<String> readFile(String path) throws IOException {
         if (!path.endsWith(".txt")){
             throw new IllegalArgumentException("Invalid file type");
         }
-        path = currentWorkingDirectory() + "\\src\\db\\" + path;
+        path = currentDbDirectory() + path;
         //initialize an array that stores the data
         ArrayList<String> data = new ArrayList<>();
 
@@ -41,6 +82,19 @@ public class File {
         }
     }
 
+    /**
+     * A generic method that modifies data read into the appropriate data format.
+     *
+     * Parses a read text file and returns all its contents as an ArrayList of list of strings.
+     *
+     * @param data Accepts a list of strings or a single string only.
+     *
+     * @return ArrayList of list of strings containing the contents of the text file.
+     *          (Format: [["data,data,data"], ["data,data,data"], [...]])
+     *
+     *
+     * @throws IllegalArgumentException If an invalid data type is provided.
+     */
     //parse txt file data <T> only accepts String or ArrayList<String>
     public static<T> ArrayList<String[]> parseData(T data) {
         //initialize an array that stores the data
@@ -66,9 +120,22 @@ public class File {
         return parsedData;
     }
 
+    /**
+     * Writes into a text file and appends the given data to the end of the file.
+     *
+     * @param path The path to the text file. The path should end with ".txt" and
+     *             specify a specific directory in the db directory.
+     * @param data The data to be written into the text file.
+     *             (Format: "data,data,data")
+     *
+     * @throws IOException If an I/O error occurs while reading the file.
+     */
     //write to txt file
     public static void writeToFile(String path, String data) throws IOException {
-        path = currentWorkingDirectory() + "\\src\\db\\" + path;
+        if (!path.endsWith(".txt")){
+            throw new IllegalArgumentException("Invalid file type");
+        }
+        path = currentDbDirectory() + path;
         try {
             writer = new BufferedWriter(new FileWriter(path, true));
 
@@ -81,27 +148,25 @@ public class File {
             }
         }
     }
+
+    /**
+     * Reads a text file and returns all its contents as a list of strings.
+     *
+     * @param dataArray an array of strings containing the data to be written into the text file.
+     * @return A concatenated string of the data array.
+     *      (Format: "data,data,data")
+     * @throws IOException If an I/O error occurs while reading the file.
+     */
+    //formats a data array into a string with commas between each element
     public static String formatData(String ...dataArray) {
-        StringBuilder formattedString = new StringBuilder();
-
-        // Loop through the data array
-        for (int i = 0; i < dataArray.length; i++) {
-            formattedString.append(dataArray[i]);
-
-            // Add comma if it's not the last element
-            if (i < dataArray.length - 1) {
-                formattedString.append(",");
-            }
-        }
-
-        return formattedString.toString();
+        return String.join(",", dataArray);
     }
 
 
     //update txt file
     // Takes in String array of the user's updated data.
     public static void updateFile(String path, String[] newData) throws IOException{
-        path = currentWorkingDirectory() + "\\src\\db\\" + path;
+        path = currentDbDirectory() + path;
 
         try {
             reader = new BufferedReader(new FileReader(path));
@@ -141,11 +206,7 @@ public class File {
     //testing
     public static void main(String[] args) {
         try {
-            ArrayList<String> data = readFile("Doctors.txt");
-            ArrayList<String[]> parsedData = parseData(data);
-            parsedData.get(0)[1] = "This text is really cringe for some reason";
-            updateFile("Doctors.txt", parsedData.get(0));
-
+            System.out.println(getAllDbFilesFromDirectory("\\users"));
         } catch (IOException e) {
             e.printStackTrace();
         }

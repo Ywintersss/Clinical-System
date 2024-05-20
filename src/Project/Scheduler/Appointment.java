@@ -50,12 +50,4 @@ public class Appointment {
         this.description = description;
     }
 
-    public static void main(String[] args) {
-        Doctor TTJ = new Doctor("Bloople", "password", "TTJ");
-        Schedule TTJschedule = TTJ.getSchedule();
-        TTJschedule.addAppointments(new Appointment(new Patient("Ywinters", "password", "Shawn"), TTJ,"description"));
-        Appointment appointment1 = TTJschedule.getAppointments().get(0);
-        Patient patient = appointment1.getPatient();
-        System.out.println(patient.getPatientName());
-    }
 }
