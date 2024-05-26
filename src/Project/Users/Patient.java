@@ -1,5 +1,6 @@
 package Project.Users;
 
+import Project.Payments.Payment;
 import Project.Scheduler.Appointment;
 import Project.Records.MedicalRecord;
 import java.util.ArrayList;
@@ -9,12 +10,15 @@ public class Patient extends User {
     private ArrayList<Appointment> appointments;
     private ArrayList<MedicalRecord> medicalRecords;
 
+    private ArrayList<Payment> paymentHistory;
+
     public Patient(String username, String password, String name, String email, String phoneNo, int age, Gender gender, String image, double height, double weight) {
         super(username, password, name, email, phoneNo, age, gender, image);
         this.height = height;
         this.weight = weight;
         this.appointments = new ArrayList<>();
         this.medicalRecords = new ArrayList<>();
+        this.paymentHistory = new ArrayList<>();
     }
 
 
@@ -52,6 +56,18 @@ public class Patient extends User {
 
     public ArrayList<MedicalRecord> getMedicalRecords() {
         return medicalRecords;
+    }
+
+    public ArrayList<Payment> getPaymentHistory() {
+        return paymentHistory;
+    }
+
+    public void removePaymentHistory(Payment payment) {
+        this.paymentHistory.remove(payment);
+    }
+
+    public void addPaymentHistory(Payment payment) {
+        this.paymentHistory.add(payment);
     }
 
 
