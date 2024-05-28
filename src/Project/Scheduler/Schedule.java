@@ -24,6 +24,7 @@ public class Schedule {
     }
     public ArrayList<Appointment> getAppointments() {
         return appointments;
+
     }
 
     public void addAppointments(Appointment appointments) {

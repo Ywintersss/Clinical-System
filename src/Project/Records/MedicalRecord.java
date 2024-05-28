@@ -46,3 +46,4 @@ public class MedicalRecord {
         this.pastAppointment = pastAppointment;
     }
 }
+

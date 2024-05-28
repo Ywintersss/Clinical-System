@@ -5,6 +5,8 @@ import Project.Records.Recorder;
 import Project.Users.Doctor;
 import Project.Users.Patient;
 import Project.Scheduler.Appointment;
+import java.io.IOException;
+import Project.Utilities.File;
 
 
 
@@ -20,6 +22,13 @@ public class Scheduler {
 
         patient.addAppointment(appointment);
         //Write to appointment file
+        String appointmentData = File.formatData(appointment.getPatient().getUsername(), appointment.getDoctor().getUsername(), appointment.getDescription());
+        try {
+            File.writeToFile("\\schedules\\appointments.txt", appointmentData, true);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 

@@ -8,11 +8,14 @@ import Project.Users.Gender;
 import Project.Users.Patient;
 import Project.Users.User;
 import Project.Records.MedicalRecord;
+import Project.Records.Recorder;
 import Project.Scheduler.Scheduler;
 import Project.Utilities.File;
 
 import javax.print.Doc;
 import java.io.IOException;
+import java.util.ArrayList;
+
 public class ClinicalSystem {
     public static User login(String username, String password) {
         //TODO validation
@@ -29,6 +32,7 @@ public class ClinicalSystem {
             }
         }
         return null;
+
     }
 
     public static void register(String username, String password) {
@@ -38,18 +42,24 @@ public class ClinicalSystem {
     public static void main(String[] args) {
         User user = login("Username1", "Password1");
 
-        System.out.println(user);
+        System.out.println("1" +user);
 
         Doctor TTJ = new Doctor("Bloople", "password", "TTJ", "TTJ@gmail", "012-111 8888", 12, Gender.MALE, "", 10, "Cardiology", "Doctor");
         Schedule TTJschedule = TTJ.getSchedule();
-        Patient patient = new Patient("password", "Shawn", "Shawn@gmail", "012-111 8888", "12", 12, Gender.MALE, "", 134, 40);
+        Patient patient = new Patient("wynter", "password", "Shawn", "Shawn@gmail", "012-111 8888", 12, Gender.MALE, "", 134, 40);
 
         Scheduler.makeAppointment(TTJ, patient, "description");
 
-        System.out.println(TTJ.getSchedule().getAppointments().get(0));
+        System.out.println("2" + TTJ.getSchedule().getAppointments().get(0));
         Scheduler.cancelAppointment(TTJ, patient, TTJschedule.getAppointments().get(0));
 
-        System.out.println(TTJ.getSchedule().getAppointments());
+        //System.out.println(TTJ.getSchedule().getAppointments());
+        Scheduler.makeAppointment(TTJ, patient, "description");
+        Appointment appointments = TTJ.getSchedule().getAppointments().get(0);
+        //Recorder.addRecord(patient, "Issue", "prescription", "followUpDate", appointments);
+        Recorder.removeRecord(patient, new MedicalRecord("Issue", "prescription", "followUpDate", appointments));
+
+
 
     }
 }

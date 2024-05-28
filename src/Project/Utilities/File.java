@@ -1,6 +1,7 @@
 package Project.Utilities;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.DirectoryStream;
@@ -131,16 +132,15 @@ public class File {
      * @throws IOException If an I/O error occurs while reading the file.
      */
     //write to txt file
-    public static void writeToFile(String path, String data) throws IOException {
+    public static void writeToFile(String path, String data, boolean append) throws IOException {
         if (!path.endsWith(".txt")){
             throw new IllegalArgumentException("Invalid file type");
         }
         path = currentDbDirectory() + path;
         try {
-            writer = new BufferedWriter(new FileWriter(path, true));
-
-            writer.newLine();
+            writer = new BufferedWriter(new FileWriter(path, append));
             writer.write(data);
+            writer.newLine();
 
         } finally {
             if (writer != null) {
@@ -162,10 +162,24 @@ public class File {
         return String.join(",", dataArray);
     }
 
+    public static void updateFile(String path, ArrayList<String> data) throws IOException {
+        path = currentDbDirectory() + path;
+        writer = new BufferedWriter(new FileWriter(path, false));
+        try {
+            for (String s: data){
+                writer.write(s);
+                writer.newLine();
+            }
 
+        } finally {
+            if (writer != null) {
+                writer.close();
+            }
+        }
+    }
     //update txt file
     // Takes in String array of the user's updated data.
-    public static void updateFile(String path, String[] newData) throws IOException{
+    public static void updatePatientFile(String path, String[] newData) throws IOException{
         path = currentDbDirectory() + path;
 
         try {
