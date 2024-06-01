@@ -2,6 +2,7 @@ package Project.Interface.Pages.Components;
 
 import Project.ClinicalSystem;
 import Project.Interface.Pages.Register;
+import Project.Interface.Pages.Templates.PopUp;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -11,8 +12,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class PopUp {
-    private VBox popUp;
+public class PopUpDefault extends PopUp {
+    private VBox popUpDefault;
     private Image profileImage;
     private Label username;
     private TextField usernameInput;
@@ -23,15 +24,7 @@ public class PopUp {
     private Label registerLabel;
     private Button register;
 
-    public PopUp() {
-        popUp = new VBox();
-
-        profileImage = new Image("/Project/Interface/Assets/Icons/profile.png");
-        ImageView profileImageView = new ImageView(profileImage);
-        profileImageView.setFitHeight(100);
-        profileImageView.setFitWidth(100);
-        profileImageView.setPreserveRatio(true);
-
+    public PopUpDefault() {
         username = new Label("Username");
 
         usernameInput = new TextField();
@@ -66,15 +59,11 @@ public class PopUp {
         registerContainer.setAlignment(Pos.CENTER);
         registerContainer.getChildren().addAll(registerLabel, register);
 
-        popUp.getChildren().addAll(profileImageView, username, usernameInput, password, passwordInput, login, registerContainer);
-        popUp.setSpacing(10);
-        popUp.setAlignment(Pos.CENTER);
-        popUp.setPadding(new Insets(10, 20, 10, 20));
-        popUp.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        popUp.setVisible(false);
+        addContent(username, usernameInput, password, passwordInput, login, registerContainer);
     }
 
+    @Override
     public VBox getPopUp() {
-        return popUp;
+        return super.getPopUp();
     }
 }

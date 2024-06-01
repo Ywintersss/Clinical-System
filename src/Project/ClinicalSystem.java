@@ -27,6 +27,9 @@ public class ClinicalSystem {
                 Doctor doctor = (Doctor) user;
                 System.out.println(doctor.getPosition());
                 layout.setContent(new Test2().getTest2());
+            } else if (user instanceof Admin) {
+                Admin admin = (Admin) user;
+                layout.setContent(new AdminMainPage().getAdminMainPage());
             }
         }
     }
@@ -58,7 +61,6 @@ public class ClinicalSystem {
         Appointment appointments = TTJ.getSchedule().getAppointments().get(0);
         //Recorder.addRecord(patient, "Issue", "prescription", "followUpDate", appointments);
         Recorder.removeRecord(patient, new MedicalRecord("Issue", "prescription", "followUpDate", appointments));
-
 
 
     }

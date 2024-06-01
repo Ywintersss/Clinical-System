@@ -1,9 +1,6 @@
 package Project.Controller;
 
-import Project.Users.Gender;
-import Project.Users.Patient;
-import Project.Users.Doctor;
-import Project.Users.User;
+import Project.Users.*;
 import Project.Utilities.File;
 
 import java.io.IOException;
@@ -73,6 +70,8 @@ public class userDataManager {
                             return new Doctor(dataArray[1], dataArray[2], dataArray[3], dataArray[4], dataArray[5],
                                     Integer.parseInt(dataArray[6]), Gender.valueOf(dataArray[7]), dataArray[8],
                                     Integer.parseInt(dataArray[9]), dataArray[10], dataArray[11]);
+                        } else if (file.contains("Admin")) {
+                            return new Admin(dataArray[1], dataArray[2]);
                         }
                         System.out.println(file + " OK");
                     }

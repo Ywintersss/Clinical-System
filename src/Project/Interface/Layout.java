@@ -1,12 +1,9 @@
 package Project.Interface;
 
-import Project.Interface.Pages.AdminMainPage;
 import Project.Interface.Pages.Home;
 import Project.Interface.Pages.Header;
 import Project.Interface.Pages.Footer;
-import Project.Interface.Pages.Components.PopUp;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
+import Project.Interface.Pages.Components.PopUpDefault;
 import javafx.scene.Parent;
 import javafx.scene.layout.*;
 import javafx.scene.Scene;
@@ -17,22 +14,22 @@ public class Layout{
     private HBox header;
     private VBox footer;
     private Parent content;
-    private VBox popUp;
+    private VBox popUpDefault;
     private VBox rightSideMargin;
 
     public Layout () {
-        popUp = new PopUp().getPopUp();
-        rightSideMargin = new PopUp().getPopUp();
+        popUpDefault = new PopUpDefault().getPopUp();
+        rightSideMargin = new PopUpDefault().getPopUp();
 
         mainLayout = new BorderPane();
-        header = new Header(popUp).getHeaderNode();
+        header = new Header(popUpDefault).getHeaderNode();
         content = new Home().getHome();
         footer = new Footer().getFooterNode();
 
         mainLayout.setTop(header);
         mainLayout.setCenter(content);
         mainLayout.setBottom(footer);
-        mainLayout.setLeft(popUp);
+        mainLayout.setLeft(popUpDefault);
         mainLayout.setRight(rightSideMargin);
 
         mainLayout.setStyle("-fx-background-color: #D4F0F7;");

@@ -32,8 +32,8 @@ public class Recorder {
             //String[] oldRecordArray = oldRecord.toArray(new String[0]);
             File.updateFile("\\records\\MedicalRecords.txt", oldRecord);
 
-	        } catch (IOException e) {
-	        throw new RuntimeException(e);
+        } catch (IOException e) {
+        throw new RuntimeException(e);
         }
 
     }
