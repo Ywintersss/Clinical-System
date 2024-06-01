@@ -132,13 +132,14 @@ public class File {
      * @throws IOException If an I/O error occurs while reading the file.
      */
     //write to txt file
-    public static void writeToFile(String path, String data, boolean append) throws IOException {
+    public static void writeToFile(String path, String data) throws IOException {
         if (!path.endsWith(".txt")){
             throw new IllegalArgumentException("Invalid file type");
         }
+
         path = currentDbDirectory() + path;
         try {
-            writer = new BufferedWriter(new FileWriter(path, append));
+            writer = new BufferedWriter(new FileWriter(path));
             writer.write(data);
             writer.newLine();
 

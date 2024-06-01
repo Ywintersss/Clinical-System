@@ -16,8 +16,7 @@ public class Recorder {
         // write to txt file
         String data = File.formatData(medicalRecord.getIssue(), medicalRecord.getPrescription(), medicalRecord.getFollowUpDate(), patient.getUsername());
         try {
-            File.writeToFile("\\records\\MedicalRecords.txt", data, true);
-            System.out.println(data);
+            File.writeToFile("\\records\\MedicalRecords.txt", data);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -39,8 +38,9 @@ public class Recorder {
 
     }
 
-	    public static void main(String[] args) {
-        addRecord(new Patient("username", "password", "name", "email", "phoneNo", 22, Gender.MALE, "image", 168, 58.9), "Issue", "prescription", "followUpDate", null);
-
+    public static void main(String[] args) {
+        Patient bloople = new Patient("bloople", "password", "Shawn", "Shawn@gmail", "012-111 8888", 22, Gender.MALE, "image", 168, 58.9);
+        addRecord(bloople, "Issue", "prescription", "followUpDate", null);
+        removeRecord(bloople, bloople.getMedicalRecords().get(0));
     }
 }

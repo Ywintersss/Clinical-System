@@ -14,7 +14,7 @@ public class userDataManager {
     public static void addPatient(String username, String password, String name, String email, String phoneNo,  String age, String gender, String image) {
         String data = File.formatData(username, password, name, email, phoneNo, age, gender, image);
         try {
-            File.writeToFile("Patient.txt", data, true);
+            File.writeToFile("Patient.txt", data);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -25,7 +25,7 @@ public class userDataManager {
         String data = File.formatData(username, password, name, email, phoneNo, age, gender, image,
                                     years, specialization, position, schedule);
         try {
-            File.writeToFile("Doctors.txt", data, true);
+            File.writeToFile("Doctors.txt", data);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -34,7 +34,7 @@ public class userDataManager {
     public static void addAdmin(String username, String password) {
         String data = File.formatData(username, password);
         try {
-            File.writeToFile("Admin.txt",data, true);
+            File.writeToFile("Admin.txt",data);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

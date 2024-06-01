@@ -1,5 +1,0 @@
-Issue,prescription,followUpDate,username
-Issue,prescription,followUpDate,username
-Issue,prescription,followUpDate,username
-Issue,prescription,followUpDate,username
-Issue,prescription,followUpDate,username
