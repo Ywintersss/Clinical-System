@@ -1,48 +1,48 @@
 package Project;
 
+import Project.Interface.Layout;
+import Project.Interface.Pages.*;
+
 import Project.Controller.userDataManager;
 import Project.Scheduler.Appointment;
 import Project.Scheduler.Schedule;
-import Project.Users.Doctor;
-import Project.Users.Gender;
-import Project.Users.Patient;
-import Project.Users.User;
+import Project.Users.*;
 import Project.Records.MedicalRecord;
 import Project.Records.Recorder;
 import Project.Scheduler.Scheduler;
 import Project.Utilities.File;
 
-import javax.print.Doc;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class ClinicalSystem {
-    public static User login(String username, String password) {
+    private static Layout layout;
+    public static void login(String username, String password) {
         //TODO validation
         User user = userDataManager.getUser(username, password);
         if (user != null) {
             if (user instanceof Patient) {
                 Patient patient = (Patient) user;
                 System.out.println(patient.getGender());
-                return patient;
+                layout.setContent(new Test1().getTest1());
             } else if (user instanceof Doctor) {
                 Doctor doctor = (Doctor) user;
                 System.out.println(doctor.getPosition());
-                return doctor;
+                layout.setContent(new Test2().getTest2());
             }
         }
-        return null;
-
     }
 
     public static void register(String username, String password) {
         //
         return;
     }
+    public static Layout getLayout() {
+        if (layout == null) {
+            layout = new Layout();
+        }
+        return layout;
+    }
     public static void main(String[] args) {
-        User user = login("Username1", "Password1");
-
-        System.out.println("1" +user);
+        login("Username1", "Password1");
 
         Doctor TTJ = new Doctor("Bloople", "password", "TTJ", "TTJ@gmail", "012-111 8888", 12, Gender.MALE, "", 10, "Cardiology", "Doctor");
         Schedule TTJschedule = TTJ.getSchedule();

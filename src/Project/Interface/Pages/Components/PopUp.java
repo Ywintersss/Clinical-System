@@ -1,6 +1,6 @@
 package Project.Interface.Pages.Components;
 
-import Project.Interface.Pages.Home;
+import Project.ClinicalSystem;
 import Project.Interface.Pages.Register;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class PopUp {
     private VBox popUp;
@@ -18,8 +19,9 @@ public class PopUp {
     private Label password;
     private TextField passwordInput;
     private Button login;
+    private HBox registerContainer;
+    private Label registerLabel;
     private Button register;
-
 
     public PopUp() {
         popUp = new VBox();
@@ -41,13 +43,33 @@ public class PopUp {
         passwordInput.setPromptText("Password");
 
         login = new Button("Login");
+        login.setOnAction(e -> {
+            ClinicalSystem.login(usernameInput.getText(), passwordInput.getText());
+            popUp.setVisible(false);
+            usernameInput.clear();
+            passwordInput.clear();
+        });
 
+        registerLabel = new Label("Don't have an account?");
+        registerLabel.setFont(Font.font(10));
         register = new Button("Register");
+        register.setOnAction(e -> {
+            ClinicalSystem.getLayout().setContent(new Register().getRegisterForm());
+            popUp.setVisible(false);
+            usernameInput.clear();
+            passwordInput.clear();
+        });
 
-        popUp.getChildren().addAll(profileImageView, username, usernameInput, password, passwordInput, login, register);
+        registerContainer = new HBox();
+        registerContainer.setSpacing(6);
+        registerContainer.setPadding(new Insets(10, 10, 10, 10));
+        registerContainer.setAlignment(Pos.CENTER);
+        registerContainer.getChildren().addAll(registerLabel, register);
+
+        popUp.getChildren().addAll(profileImageView, username, usernameInput, password, passwordInput, login, registerContainer);
         popUp.setSpacing(10);
         popUp.setAlignment(Pos.CENTER);
-        popUp.setPadding(new Insets(10, 30, 10, 30));
+        popUp.setPadding(new Insets(10, 20, 10, 20));
         popUp.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         popUp.setVisible(false);
     }

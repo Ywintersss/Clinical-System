@@ -4,7 +4,7 @@ import Project.Interface.Pages.Home;
 import Project.Interface.Pages.Header;
 import Project.Interface.Pages.Footer;
 import Project.Interface.Pages.Components.PopUp;
-import Project.Interface.Pages.Register;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.*;
@@ -17,25 +17,31 @@ public class Layout{
     private VBox footer;
     private Parent content;
     private VBox popUp;
+    private VBox rightSideMargin;
 
     public Layout () {
         popUp = new PopUp().getPopUp();
+        rightSideMargin = new PopUp().getPopUp();
 
         mainLayout = new BorderPane();
         header = new Header(popUp).getHeaderNode();
-        content = new Register().getRegisterForm();
+        content = new Home().getHome();
         footer = new Footer().getFooterNode();
 
         mainLayout.setTop(header);
         mainLayout.setCenter(content);
         mainLayout.setBottom(footer);
         mainLayout.setLeft(popUp);
+        mainLayout.setRight(rightSideMargin);
+
         mainLayout.setStyle("-fx-background-color: #D4F0F7;");
     }
-
-
-
     public Scene getScene() {
         return new Scene(mainLayout, 1080, 720, Color.SKYBLUE);
+    }
+
+    public void setContent(Parent content) {
+        this.content = content;
+        mainLayout.setCenter(content);
     }
 }

@@ -1,5 +1,5 @@
-import Project.Interface.Layout;
-import Project.Utilities.ScreenTools;
+
+import Project.ClinicalSystem;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -7,8 +7,7 @@ import javafx.stage.Stage;
 public class Main extends Application{
     @Override
     public void start(Stage stage) throws Exception {
-        Layout layout = new Layout();
-        stage.setScene(layout.getScene());
+        stage.setScene(ClinicalSystem.getLayout().getScene());
 
         stage.setMinWidth(1080);
         stage.setMinHeight(720);
