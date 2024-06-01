@@ -4,6 +4,7 @@ import Project.Interface.Pages.Home;
 import Project.Interface.Pages.Header;
 import Project.Interface.Pages.Footer;
 import Project.Interface.Pages.Components.PopUp;
+import Project.Interface.Pages.Register;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.*;
@@ -22,7 +23,7 @@ public class Layout{
 
         mainLayout = new BorderPane();
         header = new Header(popUp).getHeaderNode();
-        content = new Home().getHome();
+        content = new Register().getRegisterForm();
         footer = new Footer().getFooterNode();
 
         mainLayout.setTop(header);

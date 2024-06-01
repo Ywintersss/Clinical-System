@@ -1,6 +1,4 @@
-ID1,Username1,Password1,Erica,erica@gmail.com,012-111 8888,12,FEMALE,image,134,67
-Username2,Password2,Eric,eric@gmail.com,012-111 9999,13,MAlE,image
-Username3,Password3,Elon,elon@gmail.com,012-111 1010,14,MAlE,image
-Username4,Password4,Erison,elon@gmail.com,012-111 1010,14,MAlE,image
-Username5,Password5,Erison,elon@gmail.com,012-111 1010,14,MAlE,image
-Username6,Password6,Erison,elon@gmail.com,012-111 1010,14,MAlE,image
+ID1,Username1,Password1,Erica,erica@gmail.com,012-111 8888,12,FEMALE,134,67
+Username2,Password2,Eric,eric@gmail.com,012-111 9999,13,MAlE,155, 54
+Username3,Password3,Elon,elon@gmail.com,012-111 1010,14,MAlE,188, 88
+Username4,Password4,Erison,elon@gmail.com,012-111 1010,14,MAlE,174, 86
