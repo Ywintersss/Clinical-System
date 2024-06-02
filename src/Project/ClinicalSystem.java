@@ -30,7 +30,8 @@ public class ClinicalSystem {
             } else if (user instanceof Doctor) {
                 Doctor doctor = (Doctor) user;
                 System.out.println(doctor.getPosition());
-                layout.setContent(new Test2().getTest2());
+                layout.setContent(new DoctorMainPage().getDoctorMainPage());
+                layout.setHeaderPopUp(new PopUpPatient());
             } else if (user instanceof Admin) {
                 Admin admin = (Admin) user;
                 layout.setContent(new AdminMainPage().getAdminMainPage());
