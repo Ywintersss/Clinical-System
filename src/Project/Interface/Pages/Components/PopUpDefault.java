@@ -41,7 +41,7 @@ public class PopUpDefault extends PopUp {
             passwordInput.clear();
         });
 
-        registerLabel = new Label("Don't have an account?");
+        registerLabel = new Label("No account?");
         registerLabel.setFont(Font.font(10));
         register = new Button("Register");
         register.setOnAction(e -> {

@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class DoctorMainPage {
 	private GridPane doctorMainPage;
@@ -20,7 +22,6 @@ public class DoctorMainPage {
 
 	private HBox quickNavContainer;
 	private Button AppointmentListButton;
-	private Button AddMedicalRecordButton;
 	private Button PatientMedicalRecordButton;
 
 
@@ -52,7 +53,8 @@ public class DoctorMainPage {
 
 		uploadScheduleButton = new Button("Upload Schedule");
 		uploadScheduleButton.setPrefWidth(95);
-		uploadScheduleButton.setStyle("-fx-font-weight: bold;-fx-font-size: 10px;-fx-underline: true;-fx-text-alignment: center;");
+		uploadScheduleButton.setPrefHeight(35);
+		uploadScheduleButton.setStyle("-fx-font-weight: bold;-fx-font-size: 10px;-fx-text-alignment: center;");
 
 		spacer = new Pane();
 		spacer.setPrefWidth(450);
@@ -64,28 +66,28 @@ public class DoctorMainPage {
 		titleContainer.setStyle("-fx-background-color: #C0C0C0;-fx-alignment: center;");
 
 		title = new Label("Daily Schedule");
-		title.setStyle("-fx-font-weight: bold;-fx-font-size: 16px;-fx-underline: true;-fx-text-alignment: center;-fx-alignment: center;");
+		title.setStyle("-fx-font-weight: bold;-fx-font-size: 20px;-fx-text-alignment: center;-fx-alignment: center;");
 
 		titleContainer.getChildren().add(title);
 
 		quickNavContainer = new HBox();
 		quickNavContainer.setStyle("-fx-alignment: center;");
 		quickNavContainer.setPrefWidth(dailyScheduleContainer.getPrefWidth());
-		quickNavContainer.setSpacing(50);
+		quickNavContainer.setSpacing(150);
 
 		AppointmentListButton = new Button("Appointment List");
-		AppointmentListButton.setStyle("-fx-font-weight: bold;-fx-font-size: 10px;-fx-underline: true;-fx-text-alignment: center;");
+		AppointmentListButton.setPrefWidth(220);
+		AppointmentListButton.setPrefHeight(50);
+		AppointmentListButton.setStyle("-fx-font-weight: bold;-fx-font-size: 15px;-fx-text-alignment: center;");
 		AppointmentListButton.setPadding(new Insets(10, 10, 10, 10));
 
-		AddMedicalRecordButton = new Button("Add Medical Record");
-		AddMedicalRecordButton.setStyle("-fx-font-weight: bold;-fx-font-size: 10px;-fx-underline: true;-fx-text-alignment: center;");
-		AddMedicalRecordButton.setPadding(new Insets(10, 10, 10, 10));
-
 		PatientMedicalRecordButton = new Button("Patient Medical Record");
-		PatientMedicalRecordButton.setStyle("-fx-font-weight: bold;-fx-font-size: 10px;-fx-underline: true;-fx-text-alignment: center;");
+		PatientMedicalRecordButton.setPrefWidth(220);
+		PatientMedicalRecordButton.setPrefHeight(50);
+		PatientMedicalRecordButton.setStyle("-fx-font-weight: bold;-fx-font-size: 15px;-fx-text-alignment: center;");
 		PatientMedicalRecordButton.setPadding(new Insets(10, 10, 10, 10));
 
-		quickNavContainer.getChildren().addAll(AppointmentListButton, AddMedicalRecordButton, PatientMedicalRecordButton);
+		quickNavContainer.getChildren().addAll(AppointmentListButton, PatientMedicalRecordButton);
 
 		dailyScheduleContainer.getChildren().addAll(titleContainer, scheduleContainer);
 		doctorMainPage.add(dailyScheduleContainer, 0, 0);

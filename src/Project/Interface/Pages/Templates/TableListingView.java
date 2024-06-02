@@ -10,7 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 
 public class TableListingView {
-        private VBox tableContainer;
+        protected VBox tableContainer;
         private Label tableLabel;
         private TableView table;
         private Button back;

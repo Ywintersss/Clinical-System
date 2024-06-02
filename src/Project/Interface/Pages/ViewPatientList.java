@@ -9,13 +9,14 @@ public class ViewPatientList extends TableListingView {
     public ViewPatientList(Parent prevPage) {
         super("Patient List", prevPage);
 
+
         addColumn("ID");
         addColumn("Name");
         addColumn("Age");
         addColumn("Gender");
         addColumn("Address");
         addColumn("Contact");
-        addColumn("Action");
+        addColumn("Email");
     }
 
     @Override

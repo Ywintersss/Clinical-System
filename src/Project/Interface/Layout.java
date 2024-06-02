@@ -1,18 +1,13 @@
 package Project.Interface;
 
-import Project.Interface.Pages.AdminMainPage;
+import Project.Interface.Pages.*;
 import Project.Interface.Pages.Components.PopUpPatient;
-import Project.Interface.Pages.Home;
-import Project.Interface.Pages.Header;
-import Project.Interface.Pages.Footer;
 import Project.Interface.Pages.Components.PopUpDefault;
 import Project.Interface.Pages.Templates.PopUp;
 import javafx.scene.Parent;
 import javafx.scene.layout.*;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
-
-import Project.Interface.Pages.DoctorMainPage;
 
 public class Layout{
     private BorderPane mainLayout;

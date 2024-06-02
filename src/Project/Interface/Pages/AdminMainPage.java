@@ -16,6 +16,7 @@ public class AdminMainPage {
     private HBox userAccContainer;
     private Button patientBtn;
     private Button doctorBtn;
+    private Button adminBtn;
 
     private VBox appointment;
     private Label appointmentLabel;
@@ -33,28 +34,23 @@ public class AdminMainPage {
     private HBox paymentRecordContainer;
     private Button viewPaymentRecordBtn;
 
-    private VBox doctor;
-    private Label doctorLabel;
-    private HBox doctorContainer;
-    private Button addDoctorBtn;
-    private Button scheduleBtn;
-
     public AdminMainPage() {
         adminMainPage = new GridPane();
-        adminMainPage.setHgap(15);
-        adminMainPage.setVgap(20);
-        adminMainPage.setPadding(new Insets(40, 10, 10, 10));
+        adminMainPage.setHgap(25);
+        adminMainPage.setVgap(35);
+        adminMainPage.setPadding(new Insets(50, 10, 10, 10));
         adminMainPage.setAlignment(Pos.TOP_CENTER);
         adminMainPage.getStylesheets().add("/Project/Interface/Assets/Styles/AdminMainPage.css");
 
         userAcc = new VBox();
         userAcc.getStyleClass().add("vbox");
-        userAcc.setPrefHeight(120);
+        userAcc.setPrefHeight(130);
         userAcc.setPrefWidth(280);
 
         userAccLabel = new Label("User Account Management");
 
         userAccContainer = new HBox();
+        userAccContainer.setPadding(new Insets(15, 0, 0, 0));
 
         patientBtn = new Button("Patients");
         patientBtn.setPrefHeight(30);
@@ -68,19 +64,24 @@ public class AdminMainPage {
         doctorBtn.setPrefHeight(30);
         doctorBtn.setPrefWidth(75);
 
+        adminBtn = new Button("Admins");
+        adminBtn.setPrefHeight(30);
+        adminBtn.setPrefWidth(75);
+
         userAccContainer.setAlignment(Pos.CENTER);
         userAccContainer.setSpacing(10);
-        userAccContainer.getChildren().addAll(patientBtn, doctorBtn);
+        userAccContainer.getChildren().addAll(patientBtn, doctorBtn, adminBtn);
         userAcc.getChildren().addAll(userAccLabel, userAccContainer);
 
 
         appointment = new VBox();
-        appointment.setPrefHeight(120);
+        appointment.setPrefHeight(130);
         appointment.setPrefWidth(280);
 
         appointmentLabel = new Label("Appointment Management");
 
         appointmentContainer = new HBox();
+        appointmentContainer.setPadding(new Insets(15, 0, 0, 0));
 
         addAppointmentBtn = new Button("Add");
         addAppointmentBtn.setPrefHeight(30);
@@ -97,12 +98,13 @@ public class AdminMainPage {
 
 
         medicalRecord = new VBox();
-        medicalRecord.setPrefHeight(120);
+        medicalRecord.setPrefHeight(130);
         medicalRecord.setPrefWidth(280);
 
         medicalRecordLabel = new Label("Medical Record Management");
 
         medicalRecordContainer = new HBox();
+        medicalRecordContainer.setPadding(new Insets(15, 0, 0, 0));
 
         updateMedicalRecordBtn = new Button("Update");
         updateMedicalRecordBtn.setPrefHeight(30);
@@ -115,12 +117,13 @@ public class AdminMainPage {
 
 
         paymentRecord = new VBox();
-        paymentRecord.setPrefHeight(120);
+        paymentRecord.setPrefHeight(130);
         paymentRecord.setPrefWidth(280);
 
         paymentRecordLabel = new Label("Payment Record Management");
 
         paymentRecordContainer = new HBox();
+        paymentRecordContainer.setPadding(new Insets(15, 0, 0, 0));
 
         viewPaymentRecordBtn = new Button("View");
         viewPaymentRecordBtn.setPrefHeight(30);
@@ -133,7 +136,7 @@ public class AdminMainPage {
 
 
 //        doctor = new VBox();
-//        doctor.setPrefHeight(120);
+//        doctor.setPrefHeight(130);
 //        doctor.setPrefWidth(280);
 //
 //        doctorLabel = new Label("Doctor Management");
