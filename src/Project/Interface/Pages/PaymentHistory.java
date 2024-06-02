@@ -51,7 +51,6 @@ public class PaymentHistory {
 
         paymentIDLabel = new Label("Payment ID");
         paymentID = new Label("10001");
-        paymentID.setStyle("-fx-background-color: white;");
 
         patientContainer = new HBox();
         patientContainer.setSpacing(20);
