@@ -9,6 +9,8 @@ import javafx.scene.layout.*;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 
+import Project.Interface.Pages.DoctorMainPage;
+
 public class Layout{
     private BorderPane mainLayout;
     private HBox header;
@@ -23,7 +25,7 @@ public class Layout{
 
         mainLayout = new BorderPane();
         header = new Header(popUpDefault).getHeaderNode();
-        content = new Home().getHome();
+        content = new DoctorMainPage().getPage();
         footer = new Footer().getFooterNode();
 
         mainLayout.setTop(header);
