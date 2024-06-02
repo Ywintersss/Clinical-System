@@ -13,8 +13,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class PopUpDefault extends PopUp {
-    private VBox popUpDefault;
-    private Image profileImage;
     private Label username;
     private TextField usernameInput;
     private Label password;
@@ -38,7 +36,7 @@ public class PopUpDefault extends PopUp {
         login = new Button("Login");
         login.setOnAction(e -> {
             ClinicalSystem.login(usernameInput.getText(), passwordInput.getText());
-            popUp.setVisible(false);
+            super.setVisible(false);
             usernameInput.clear();
             passwordInput.clear();
         });
@@ -48,7 +46,7 @@ public class PopUpDefault extends PopUp {
         register = new Button("Register");
         register.setOnAction(e -> {
             ClinicalSystem.getLayout().setContent(new Register().getRegisterForm());
-            popUp.setVisible(false);
+            super.setVisible(false);
             usernameInput.clear();
             passwordInput.clear();
         });

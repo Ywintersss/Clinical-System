@@ -4,6 +4,8 @@ import Project.Interface.Layout;
 import Project.Interface.Pages.*;
 
 import Project.Controller.userDataManager;
+import Project.Interface.Pages.Components.PopUpDefault;
+import Project.Interface.Pages.Components.PopUpPatient;
 import Project.Scheduler.Appointment;
 import Project.Scheduler.Schedule;
 import Project.Users.*;
@@ -15,6 +17,7 @@ import Project.Utilities.File;
 
 public class ClinicalSystem {
     private static Layout layout;
+    private static boolean loggedIn = false;
     public static void login(String username, String password) {
         //TODO validation
         User user = userDataManager.getUser(username, password);
@@ -22,7 +25,8 @@ public class ClinicalSystem {
             if (user instanceof Patient) {
                 Patient patient = (Patient) user;
                 System.out.println(patient.getGender());
-                layout.setContent(new Test1().getTest1());
+                layout.setContent(new Home().getHome());
+                layout.setHeaderPopUp(new PopUpPatient());
             } else if (user instanceof Doctor) {
                 Doctor doctor = (Doctor) user;
                 System.out.println(doctor.getPosition());
@@ -30,8 +34,15 @@ public class ClinicalSystem {
             } else if (user instanceof Admin) {
                 Admin admin = (Admin) user;
                 layout.setContent(new AdminMainPage().getAdminMainPage());
+                layout.setHeaderPopUp(new PopUpPatient());
             }
+            loggedIn = true;
         }
+    }
+
+    public static void logout() {
+        layout.setContent(new Home().getHome());
+        layout.setHeaderPopUp(new PopUpDefault());
     }
 
     public static void register(String username, String password) {
@@ -47,9 +58,9 @@ public class ClinicalSystem {
     public static void main(String[] args) {
         login("Username1", "Password1");
 
-        Doctor TTJ = new Doctor("Bloople", "password", "TTJ", "TTJ@gmail", "012-111 8888", 12, Gender.MALE, "", 10, "Cardiology", "Doctor");
+        Doctor TTJ = new Doctor("Bloople", "password", "TTJ", "TTJ@gmail", "012-111 8888", 12, Gender.MALE, 10, "Cardiology", "Doctor");
         Schedule TTJschedule = TTJ.getSchedule();
-        Patient patient = new Patient("wynter", "password", "Shawn", "Shawn@gmail", "012-111 8888", 12, Gender.MALE, "", 134, 40);
+        Patient patient = new Patient("wynter", "password", "Shawn", "Shawn@gmail", "012-111 8888", 12, Gender.MALE, 134, 40);
 
         Scheduler.makeAppointment(TTJ, patient, "description");
 
@@ -61,7 +72,6 @@ public class ClinicalSystem {
         Appointment appointments = TTJ.getSchedule().getAppointments().get(0);
         //Recorder.addRecord(patient, "Issue", "prescription", "followUpDate", appointments);
         Recorder.removeRecord(patient, new MedicalRecord("Issue", "prescription", "followUpDate", appointments));
-
 
     }
 }

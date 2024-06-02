@@ -8,12 +8,10 @@ public class ScreenTools {
 
     public static int getScreenHeight() {
         int height = (int) screen.getVisualBounds().getHeight();
-        System.out.println(height);
         return height;
     }
     public static int getScreenWidth() {
         int width = (int) screen.getVisualBounds().getWidth();
-        System.out.println(width);
         return width;
     }
 }

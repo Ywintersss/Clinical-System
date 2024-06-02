@@ -10,8 +10,8 @@ public class Doctor extends User {
     private String specialization;
     private String position;
     private Schedule schedule;
-    public Doctor(String username, String password, String name, String email, String phoneNo, int age, Gender gender, String image, int yearsOfExperience, String specialization, String position) {
-        super(username, password, name, email, phoneNo, age, gender, image);
+    public Doctor(String username, String password, String name, String email, String phoneNo, int age, Gender gender, int yearsOfExperience, String specialization, String position) {
+        super(username, password, name, email, phoneNo, age, gender);
         this.yearsOfExperience = yearsOfExperience;
         this.specialization = specialization;
         this.position = position;

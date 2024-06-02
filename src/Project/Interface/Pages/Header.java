@@ -1,5 +1,6 @@
 package Project.Interface.Pages;
 
+import Project.ClinicalSystem;
 import Project.Utilities.ScreenTools;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,15 +17,19 @@ public class Header{
     private Label clinicTitle;
     private Region spacer2;
     private Button logout;
+    private VBox popUp;
     public Header(VBox popUp) {
         header = new HBox();
+
+        this.popUp = popUp;
 
         profileBtn = new Button();
         profileBtn.setText("Profile");
 
         profileBtn.setOnAction(e -> {
-            popUp.setVisible(!popUp.isVisible());
+            this.popUp.setVisible(!this.popUp.isVisible());
         });
+
         profileBtn.setPadding(new Insets(10, 10, 10, 10));
         HBox.setMargin(profileBtn, new Insets(5, 0, 5, 10));
 
@@ -41,7 +46,12 @@ public class Header{
         logout.setPadding(new Insets(10, 10, 10, 10));
         HBox.setMargin(logout, new Insets(5, 10, 5, 0));
 
-        //header.setSpacing(ScreenTools.getScreenWidth() * 0.25);
+        logout.setOnAction(e -> {
+            ClinicalSystem.logout();
+        });
+
+        logout.setVisible(false);
+
         header.setAlignment(Pos.CENTER);
         header.getChildren().addAll(profileBtn, spacer1, clinicTitle, spacer2, logout);
         header.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1, 0,2,0))));
@@ -51,5 +61,17 @@ public class Header{
     }
     public HBox getHeaderNode() {
         return this.header;
+    }
+
+    public void setPopUp(VBox popUp) {
+        this.popUp = popUp;
+    }
+
+    public void addLogout() {
+        logout.setVisible(true);
+    }
+
+    public void removeLogout() {
+        logout.setVisible(false);
     }
 }

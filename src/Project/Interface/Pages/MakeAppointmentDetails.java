@@ -9,8 +9,8 @@ public class MakeAppointmentDetails extends DetailView {
     private Label doctorSpecialization;
     private Label doctorPosition;
     private Label consultationFees;
-    public MakeAppointmentDetails(String title) {
-        super(title);
+    public MakeAppointmentDetails() {
+        super("Appointment Details");
 
         doctorName = new Label("Kelly");
         doctorSpecialization = new Label("Dermatologist");

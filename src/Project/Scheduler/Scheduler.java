@@ -21,6 +21,7 @@ public class Scheduler {
         doctor.getSchedule().addAppointments(appointment);
 
         patient.addAppointment(appointment);
+
         //Write to appointment file
         String appointmentData = File.formatData(appointment.getPatient().getUsername(), appointment.getDoctor().getUsername(), appointment.getDescription());
         try {

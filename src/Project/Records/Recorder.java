@@ -39,7 +39,7 @@ public class Recorder {
     }
 
     public static void main(String[] args) {
-        Patient bloople = new Patient("bloople", "password", "Shawn", "Shawn@gmail", "012-111 8888", 22, Gender.MALE, "image", 168, 58.9);
+        Patient bloople = new Patient("bloople", "password", "Shawn", "Shawn@gmail", "012-111 8888", 22, Gender.MALE,  168, 58.9);
         addRecord(bloople, "Issue", "prescription", "followUpDate", null);
         removeRecord(bloople, bloople.getMedicalRecords().get(0));
     }

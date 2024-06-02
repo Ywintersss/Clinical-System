@@ -12,8 +12,8 @@ public class Patient extends User {
 
     private ArrayList<Payment> paymentHistory;
 
-    public Patient(String username, String password, String name, String email, String phoneNo, int age, Gender gender, String image, double height, double weight) {
-        super(username, password, name, email, phoneNo, age, gender, image);
+    public Patient(String username, String password, String name, String email, String phoneNo, int age, Gender gender, double height, double weight) {
+        super(username, password, name, email, phoneNo, age, gender);
         this.height = height;
         this.weight = weight;
         this.appointments = new ArrayList<>();

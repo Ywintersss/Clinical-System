@@ -39,13 +39,11 @@ public class Home {
         aboutUsDoctorListContainer.widthProperty().addListener((observable, oldValue, newValue) -> {
            aboutUs.setPrefWidth(aboutUsDoctorListContainer.widthProperty().getValue());
            doctorList.setPrefWidth(aboutUsDoctorListContainer.widthProperty().getValue());
-            System.out.println(newValue);
         });
 
         aboutUsDoctorListContainer.heightProperty().addListener((observable, oldValue, newValue) -> {
             aboutUs.setPrefHeight(aboutUsDoctorListContainer.heightProperty().getValue() * 0.8);
             doctorList.setPrefHeight(aboutUsDoctorListContainer.heightProperty().getValue() * 0.2);
-            System.out.println(newValue);
         });
 
         aboutUsDoctorListContainer.getChildren().addAll(aboutUs, doctorList);

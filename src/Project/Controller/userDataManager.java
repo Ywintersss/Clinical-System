@@ -63,13 +63,13 @@ public class userDataManager {
                         //create user based on user type
                         if(file.contains("Patient")){
                             return new Patient(dataArray[1], dataArray[2], dataArray[3], dataArray[4], dataArray[5],
-                                    Integer.parseInt(dataArray[6]), Gender.valueOf(dataArray[7]), dataArray[8],
-                                    Double.parseDouble(dataArray[9]), Double.parseDouble(dataArray[10]));
+                                    Integer.parseInt(dataArray[6]), Gender.valueOf(dataArray[7]),
+                                    Double.parseDouble(dataArray[8]), Double.parseDouble(dataArray[9]));
                         }
                         else if(file.contains("Doctor")){
                             return new Doctor(dataArray[1], dataArray[2], dataArray[3], dataArray[4], dataArray[5],
-                                    Integer.parseInt(dataArray[6]), Gender.valueOf(dataArray[7]), dataArray[8],
-                                    Integer.parseInt(dataArray[9]), dataArray[10], dataArray[11]);
+                                    Integer.parseInt(dataArray[6]), Gender.valueOf(dataArray[7]),
+                                    Integer.parseInt(dataArray[8]), dataArray[9], dataArray[10]);
                         } else if (file.contains("Admin")) {
                             return new Admin(dataArray[1], dataArray[2]);
                         }

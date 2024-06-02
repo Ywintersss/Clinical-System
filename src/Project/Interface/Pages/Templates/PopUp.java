@@ -1,5 +1,6 @@
 package Project.Interface.Pages.Templates;
 
+import Project.Utilities.ScreenTools;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -9,7 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 public class PopUp {
-    protected VBox popUp;
+    private VBox popUp;
     private Image profileImage;
     public PopUp() {
         popUp = new VBox();
@@ -21,6 +22,7 @@ public class PopUp {
         profileImageView.setPreserveRatio(true);
 
         popUp.getChildren().add(profileImageView);
+        popUp.setPrefWidth(ScreenTools.getScreenWidth() * 0.125);
         popUp.setSpacing(10);
         popUp.setAlignment(Pos.CENTER);
         popUp.setPadding(new Insets(10, 20, 10, 20));
@@ -36,5 +38,8 @@ public class PopUp {
         for (Node node : content) {
             popUp.getChildren().add(node);
         }
+    }
+    public void setVisible(boolean visible) {
+        popUp.setVisible(visible);
     }
 }

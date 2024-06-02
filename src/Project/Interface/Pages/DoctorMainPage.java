@@ -72,7 +72,6 @@ public class DoctorMainPage {
 		quickNavContainer.setStyle("-fx-alignment: center;");
 		quickNavContainer.setPrefWidth(dailyScheduleContainer.getPrefWidth());
 		quickNavContainer.setSpacing(50);
-		quickNavContainer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
 		AppointmentListButton = new Button("Appointment List");
 		AppointmentListButton.setStyle("-fx-font-weight: bold;-fx-font-size: 10px;-fx-underline: true;-fx-text-alignment: center;");
@@ -86,18 +85,14 @@ public class DoctorMainPage {
 		PatientMedicalRecordButton.setStyle("-fx-font-weight: bold;-fx-font-size: 10px;-fx-underline: true;-fx-text-alignment: center;");
 		PatientMedicalRecordButton.setPadding(new Insets(10, 10, 10, 10));
 
-		quickNavContainer.getChildren().add(AppointmentListButton);
-		quickNavContainer.getChildren().add(AddMedicalRecordButton);
-		quickNavContainer.getChildren().add(PatientMedicalRecordButton);
+		quickNavContainer.getChildren().addAll(AppointmentListButton, AddMedicalRecordButton, PatientMedicalRecordButton);
 
-		dailyScheduleContainer.getChildren().add(titleContainer);
-		dailyScheduleContainer.getChildren().add(scheduleContainer);
+		dailyScheduleContainer.getChildren().addAll(titleContainer, scheduleContainer);
 		doctorMainPage.add(dailyScheduleContainer, 0, 0);
 		doctorMainPage.add(quickNavContainer, 0, 1);
-
 	}
 
-	public GridPane getPage() {
+	public GridPane getDoctorMainPage() {
 		return doctorMainPage;
 	}
 }
