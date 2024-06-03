@@ -1,5 +1,6 @@
 package Project.Interface.Pages;
 
+import Project.ClinicalSystem;
 import Project.Utilities.ScreenTools;
 import javafx.geometry.Insets;
 
@@ -11,7 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 
-public class Register {
+public class PatientRegister {
     private VBox registerForm;
     private Label registerTitle;
 
@@ -51,7 +52,7 @@ public class Register {
     private Button register;
     private Button back;
 
-    public Register() {
+    public PatientRegister() {
         registerForm = new VBox();
         registerForm.setSpacing(25);
         registerForm.setPadding(new Insets(10, 10, 10, 10));
@@ -150,6 +151,10 @@ public class Register {
         register = new Button("Register");
         register.setPrefHeight(40);
         register.setPrefWidth(100);
+
+        register.setOnAction(e ->{
+            //ClinicalSystem.register(username.getText(), password.getText(), name.getText(), email.getText(), phoneNumber.getText(), gender.getText(), height.getText(), weight.getText());
+        });
 
         back = new Button("Back");
         back.setPrefHeight(40);

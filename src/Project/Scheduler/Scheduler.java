@@ -25,7 +25,7 @@ public class Scheduler {
         //Write to appointment file
         String appointmentData = File.formatData(appointment.getPatient().getUsername(), appointment.getDoctor().getUsername(), appointment.getDescription());
         try {
-            File.writeToFile("\\schedules\\appointments.txt", appointmentData);
+            File.writeToFile("\\schedules\\appointments.txt", appointmentData, true);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

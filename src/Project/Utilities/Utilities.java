@@ -10,13 +10,16 @@ public class Utilities {
         try {
             ArrayList<String> data = File.readFile(objPath);
             ArrayList<String[]> parsedData = File.parseData(data);
+            ArrayList<Integer> IDList = new ArrayList<>();
             int IDIndex = 1;
             for (String[] dataArray : parsedData) {
-                ID = dataArray[0];
-                int IDnumber = Integer.parseInt(ID.substring(2));
-                if (IDnumber != IDIndex) {
-                    return "ID" + IDIndex;
+                if (dataArray.length == 1) {
+                    break;
                 }
+                ID = dataArray[0];
+                IDList.add(Integer.parseInt(ID.substring(2)));
+            }
+            for (Integer i : IDList) {
                 IDIndex++;
             }
             return "ID" + IDIndex;
@@ -27,6 +30,6 @@ public class Utilities {
     }
 
     public static void main(String[] args) {
-        System.out.println(generateID("src\\db\\Doctors.txt"));
+        System.out.println(generateID("\\users\\Patient.txt"));
     }
 }

@@ -57,6 +57,7 @@ public class AdminMainPage {
         patientBtn.setPrefWidth(85);
 
         patientBtn.setOnAction(e -> {
+
             ClinicalSystem.getLayout().setContent(new ViewPatientList(new AdminMainPage().getAdminMainPage()).getTable());
         });
 

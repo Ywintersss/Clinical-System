@@ -9,17 +9,23 @@ import Project.Interface.Pages.Components.PopUpDefault;
 import Project.Interface.Pages.Components.PopUpDoctor;
 import Project.Interface.Pages.Components.PopUpPatient;
 import Project.Scheduler.Appointment;
+import Project.Scheduler.Scheduler;
 import Project.Scheduler.Schedule;
 import Project.Users.*;
 import Project.Records.MedicalRecord;
 import Project.Records.Recorder;
 import Project.Scheduler.Scheduler;
 import Project.Utilities.File;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
 
 
 public class ClinicalSystem {
     private static Layout layout;
     private static boolean loggedIn = false;
+    private static int role = 0;
     public static void login(String username, String password) {
         //TODO validation
         User user = userDataManager.getUser(username, password);
@@ -29,15 +35,18 @@ public class ClinicalSystem {
                 System.out.println(patient.getGender());
                 layout.setContent(new Home().getHome());
                 layout.setHeaderPopUp(new PopUpPatient());
+                role = 1;
             } else if (user instanceof Doctor) {
                 Doctor doctor = (Doctor) user;
                 System.out.println(doctor.getPosition());
                 layout.setContent(new DoctorMainPage().getDoctorMainPage());
                 layout.setHeaderPopUp(new PopUpDoctor());
+                role = 2;
             } else if (user instanceof Admin) {
                 Admin admin = (Admin) user;
                 layout.setContent(new AdminMainPage().getAdminMainPage());
                 layout.setHeaderPopUp(new PopUpAdmin());
+                role = 3;
             }
             loggedIn = true;
         }
@@ -48,9 +57,14 @@ public class ClinicalSystem {
         layout.setHeaderPopUp(new PopUpDefault());
     }
 
-    public static void register(String username, String password) {
-        //
-        return;
+    public static void register(int flag, String ...args) {
+        if (flag == 1) {
+            userDataManager.addPatient(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
+        } else if (flag == 2) {
+            //userDataManager.addAdmin();
+        } else if (flag == 3) {
+            //userDataManager.addDoctor();
+        }
     }
     public static Layout getLayout() {
         if (layout == null) {
@@ -58,23 +72,19 @@ public class ClinicalSystem {
         }
         return layout;
     }
+
+    public static ObservableList<Patient> getAllPatients() {
+        ArrayList<String[]> patientData = userDataManager.getAllPatients();
+
+        ObservableList<Patient> FXpatientData = FXCollections.observableArrayList();
+        for (String[] data : patientData) {
+            FXpatientData.add(new Patient(data[0], data[1], data[2], data[3], data[4], data[5],
+                    Integer.parseInt(data[6]),Gender.valueOf(data[7]), Integer.parseInt(data[8]), Integer.parseInt(data[9])));
+        }
+
+        return FXpatientData;
+    }
     public static void main(String[] args) {
-        login("Username1", "Password1");
-
-        Doctor TTJ = new Doctor("Bloople", "password", "TTJ", "TTJ@gmail", "012-111 8888", 12, Gender.MALE, 10, "Cardiology", "Doctor");
-        Schedule TTJschedule = TTJ.getSchedule();
-        Patient patient = new Patient("wynter", "password", "Shawn", "Shawn@gmail", "012-111 8888", 12, Gender.MALE, 134, 40);
-
-        Scheduler.makeAppointment(TTJ, patient, "description");
-
-        System.out.println("2" + TTJ.getSchedule().getAppointments().get(0));
-        Scheduler.cancelAppointment(TTJ, patient, TTJschedule.getAppointments().get(0));
-
-        //System.out.println(TTJ.getSchedule().getAppointments());
-        Scheduler.makeAppointment(TTJ, patient, "description");
-        Appointment appointments = TTJ.getSchedule().getAppointments().get(0);
-        //Recorder.addRecord(patient, "Issue", "prescription", "followUpDate", appointments);
-        Recorder.removeRecord(patient, new MedicalRecord("Issue", "prescription", "followUpDate", appointments));
 
     }
 }

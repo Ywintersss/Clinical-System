@@ -3,7 +3,9 @@ package Project.Interface.Pages.Templates;
 import Project.Utilities.ScreenTools;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -62,18 +64,17 @@ public class DetailView {
     public void addContent(String labelTitle, Node content) {
         VBox contentBox = new VBox();
 
-
         Label Title = new Label(labelTitle);
         Title.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        Background background = new Background(new BackgroundFill(Color.WHITE, borderRadius, Insets.EMPTY));
 
-        if (content instanceof Label) {
-            Label contentLabel = (Label) content;
-
-            contentLabel.setBackground(new Background(new BackgroundFill(Color.WHITE, borderRadius, Insets.EMPTY)));
-            //contentLabel.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, borderRadius, BorderWidths.DEFAULT)));
-            contentLabel.prefWidthProperty().bind(contentContainer.widthProperty());
-            contentLabel.setPadding(new Insets(4, 4, 4, 4));
+        if (!(content instanceof Label) && !(content instanceof TextField)) {
+            return;
         }
+
+        ((Control) content).setBackground(background);
+        ((Control) content).setPadding(new Insets(4, 4, 4, 4));
+        ((Control) content).prefWidthProperty().bind(contentContainer.widthProperty());
 
         contentBox.setAlignment(Pos.CENTER_LEFT);
         contentBox.setSpacing(2);

@@ -25,7 +25,7 @@ public class Layout{
 
         mainLayout = new BorderPane();
         header = new Header(popUp).getHeaderNode();
-        content = new Home().getHome();
+        content = new ViewPatientList(new Home().getHome()).getTable();
         footer = new Footer().getFooterNode();
 
         mainLayout.setTop(header);

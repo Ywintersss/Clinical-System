@@ -1,20 +1,22 @@
 package Project.Users;
 public class User {
+    private String ID;
     private String name;
     private String email;
-    private String phoneNo;
+    private String contact;
     private String username;
     private String password;
     private int Age;
     private Gender gender;
     private String image;
 
-    public User(String username, String password, String name, String email, String phoneNo, int age, Gender gender) {
+    public User(String ID, String username, String password, String name, String email, String contact, int age, Gender gender) {
+        this.ID = ID;
         this.username = username;
         this.password = password;
         this.name = name;
         this.email = email;
-        this.phoneNo = phoneNo;
+        this.contact = contact;
         this.Age = age;
         this.gender = gender;
     }
@@ -22,6 +24,10 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public String getID() {
+        return ID;
     }
 
     public String getName() {
@@ -32,8 +38,8 @@ public class User {
         return email;
     }
 
-    public String getPhoneNo() {
-        return phoneNo;
+    public String getContact() {
+        return contact;
     }
 
     public int getAge() {
@@ -71,8 +77,8 @@ public class User {
             this.email = email;
     }
 
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
     public void setAge(int age) {
