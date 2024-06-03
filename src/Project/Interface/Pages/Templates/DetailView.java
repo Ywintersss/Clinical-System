@@ -21,6 +21,8 @@ public class DetailView {
     public DetailView(String title) {
 
         details = new VBox();
+        details.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");
+
 
         this.Title = new Label(title);
         Title.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
@@ -49,6 +51,7 @@ public class DetailView {
         details.setSpacing(20);
         details.setAlignment(Pos.TOP_CENTER);
         details.setPadding(new Insets(30, 20, 10, 20));
+        details.setPrefHeight(ScreenTools.getScreenHeight() * 0.8);
         details.getChildren().addAll(contentContainer, buttonContainer);
     }
 
@@ -83,5 +86,13 @@ public class DetailView {
         Button button = new Button(buttonLabel);
 
         this.buttonContainer.getChildren().add(button);
+    }
+
+    public VBox getContentContainer() {
+        return contentContainer;
+    }
+
+    public HBox getButtonContainer() {
+        return buttonContainer;
     }
 }

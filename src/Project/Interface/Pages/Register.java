@@ -57,6 +57,7 @@ public class Register {
         registerForm.setPadding(new Insets(10, 10, 10, 10));
         registerForm.setPrefWidth(ScreenTools.getScreenWidth() * 0.3);
         registerForm.setPrefHeight(ScreenTools.getScreenHeight() * 0.8);
+        registerForm.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");
 
         registerTitle = new Label("Register Form");
         registerTitle.setFont(Font.font("Verdana", FontWeight.BOLD, 25));
@@ -147,12 +148,10 @@ public class Register {
         registerForm.getChildren().addAll(usernameContainer, passwordContainer, nameContainer, emailContainer, phoneNumberContainer, genderContainer, heightContainer, weightContainer);
 
         register = new Button("Register");
-        register.setStyle("-fx-background-color: #fa8fb1; -fx-text-fill: #FFFFFF;-fx-font-size: 16;-fx-font-weight: bold;");
         register.setPrefHeight(40);
         register.setPrefWidth(100);
 
         back = new Button("Back");
-        back.setStyle("-fx-background-color: #fa8fb1; -fx-text-fill: #FFFFFF;-fx-font-size: 16;-fx-font-weight: bold;");
         back.setPrefHeight(40);
         back.setPrefWidth(100);
 

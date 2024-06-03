@@ -44,8 +44,8 @@ public class AdminMainPage {
 
         userAcc = new VBox();
         userAcc.getStyleClass().add("vbox");
-        userAcc.setPrefHeight(130);
-        userAcc.setPrefWidth(280);
+        userAcc.setPrefHeight(140);
+        userAcc.setPrefWidth(300);
 
         userAccLabel = new Label("User Account Management");
 
@@ -54,7 +54,7 @@ public class AdminMainPage {
 
         patientBtn = new Button("Patients");
         patientBtn.setPrefHeight(30);
-        patientBtn.setPrefWidth(75);
+        patientBtn.setPrefWidth(85);
 
         patientBtn.setOnAction(e -> {
             ClinicalSystem.getLayout().setContent(new ViewPatientList(new AdminMainPage().getAdminMainPage()).getTable());
@@ -62,11 +62,11 @@ public class AdminMainPage {
 
         doctorBtn = new Button("Doctors");
         doctorBtn.setPrefHeight(30);
-        doctorBtn.setPrefWidth(75);
+        doctorBtn.setPrefWidth(85);
 
         adminBtn = new Button("Admins");
         adminBtn.setPrefHeight(30);
-        adminBtn.setPrefWidth(75);
+        adminBtn.setPrefWidth(85);
 
         userAccContainer.setAlignment(Pos.CENTER);
         userAccContainer.setSpacing(10);
@@ -75,8 +75,8 @@ public class AdminMainPage {
 
 
         appointment = new VBox();
-        appointment.setPrefHeight(130);
-        appointment.setPrefWidth(280);
+        appointment.setPrefHeight(140);
+        appointment.setPrefWidth(300);
 
         appointmentLabel = new Label("Appointment Management");
 
@@ -85,11 +85,11 @@ public class AdminMainPage {
 
         addAppointmentBtn = new Button("Add");
         addAppointmentBtn.setPrefHeight(30);
-        addAppointmentBtn.setPrefWidth(75);
+        addAppointmentBtn.setPrefWidth(85);
 
         approveAppointmentBtn = new Button("Approve");
         approveAppointmentBtn.setPrefHeight(30);
-        approveAppointmentBtn.setPrefWidth(75);
+        approveAppointmentBtn.setPrefWidth(85);
 
         appointmentContainer.setAlignment(Pos.CENTER);
         appointmentContainer.setSpacing(10);
@@ -98,8 +98,8 @@ public class AdminMainPage {
 
 
         medicalRecord = new VBox();
-        medicalRecord.setPrefHeight(130);
-        medicalRecord.setPrefWidth(280);
+        medicalRecord.setPrefHeight(140);
+        medicalRecord.setPrefWidth(300);
 
         medicalRecordLabel = new Label("Medical Record Management");
 
@@ -108,7 +108,7 @@ public class AdminMainPage {
 
         updateMedicalRecordBtn = new Button("Update");
         updateMedicalRecordBtn.setPrefHeight(30);
-        updateMedicalRecordBtn.setPrefWidth(75);
+        updateMedicalRecordBtn.setPrefWidth(85);
 
         medicalRecordContainer.setAlignment(Pos.CENTER);
         medicalRecordContainer.setSpacing(10);
@@ -117,8 +117,8 @@ public class AdminMainPage {
 
 
         paymentRecord = new VBox();
-        paymentRecord.setPrefHeight(130);
-        paymentRecord.setPrefWidth(280);
+        paymentRecord.setPrefHeight(140);
+        paymentRecord.setPrefWidth(300);
 
         paymentRecordLabel = new Label("Payment Record Management");
 
@@ -127,35 +127,12 @@ public class AdminMainPage {
 
         viewPaymentRecordBtn = new Button("View");
         viewPaymentRecordBtn.setPrefHeight(30);
-        viewPaymentRecordBtn.setPrefWidth(75);
+        viewPaymentRecordBtn.setPrefWidth(85);
 
         paymentRecordContainer.setAlignment(Pos.CENTER);
         paymentRecordContainer.setSpacing(10);
         paymentRecordContainer.getChildren().addAll(viewPaymentRecordBtn);
         paymentRecord.getChildren().addAll(paymentRecordLabel, paymentRecordContainer);
-
-
-//        doctor = new VBox();
-//        doctor.setPrefHeight(130);
-//        doctor.setPrefWidth(280);
-//
-//        doctorLabel = new Label("Doctor Management");
-//
-//        doctorContainer = new HBox();
-//
-//        addDoctorBtn = new Button("Add");
-//        addDoctorBtn.setPrefHeight(30);
-//        addDoctorBtn.setPrefWidth(75);
-//
-//        scheduleBtn = new Button("Schedule");
-//        scheduleBtn.setPrefHeight(30);
-//        scheduleBtn.setPrefWidth(75);
-//
-//        doctorContainer.setAlignment(Pos.CENTER);
-//        doctorContainer.setSpacing(10);
-//        doctorContainer.getChildren().addAll(addDoctorBtn, scheduleBtn);
-//        doctor.getChildren().addAll(doctorLabel, doctorContainer);
-
 
         adminMainPage.add(userAcc, 0, 0);
         adminMainPage.add(appointment, 1, 0);

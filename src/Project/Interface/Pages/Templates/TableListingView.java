@@ -23,6 +23,8 @@ public class TableListingView {
             tableLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 25));
 
             back = new Button("Back");
+            back.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");
+
             back.setAlignment(Pos.BOTTOM_LEFT);
 
             back.setOnAction(e ->{

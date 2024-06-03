@@ -7,7 +7,6 @@ public class Appointment extends TableListingView {
     public Appointment(Parent prevPage) {
         super("Appointment History", prevPage);
 
-        addColumn("Patient");
         addColumn("Doctor");
         addColumn("Date Time");
         addColumn("Description");

@@ -1,3 +1,6 @@
-* {
-    -fx-font-family:;
+Button {
+    -fx-background-color: #fa8fb1;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
 }

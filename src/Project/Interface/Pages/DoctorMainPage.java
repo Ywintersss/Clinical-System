@@ -1,5 +1,6 @@
 package Project.Interface.Pages;
 
+import Project.ClinicalSystem;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -78,6 +79,9 @@ public class DoctorMainPage {
 		AppointmentListButton.setPrefHeight(50);
 		AppointmentListButton.setStyle("-fx-font-weight: bold;-fx-font-size: 15px;-fx-text-alignment: center;");
 		AppointmentListButton.setPadding(new Insets(10, 10, 10, 10));
+		AppointmentListButton.setOnAction(e -> {
+			ClinicalSystem.getLayout().setContent(new AppointmentList(new DoctorMainPage().getDoctorMainPage()).getTable());
+		});
 
 		PatientMedicalRecordButton = new Button("Patient Medical Record");
 		PatientMedicalRecordButton.setPrefWidth(220);

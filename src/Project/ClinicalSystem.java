@@ -4,7 +4,9 @@ import Project.Interface.Layout;
 import Project.Interface.Pages.*;
 
 import Project.Controller.userDataManager;
+import Project.Interface.Pages.Components.PopUpAdmin;
 import Project.Interface.Pages.Components.PopUpDefault;
+import Project.Interface.Pages.Components.PopUpDoctor;
 import Project.Interface.Pages.Components.PopUpPatient;
 import Project.Scheduler.Appointment;
 import Project.Scheduler.Schedule;
@@ -31,11 +33,11 @@ public class ClinicalSystem {
                 Doctor doctor = (Doctor) user;
                 System.out.println(doctor.getPosition());
                 layout.setContent(new DoctorMainPage().getDoctorMainPage());
-                layout.setHeaderPopUp(new PopUpPatient());
+                layout.setHeaderPopUp(new PopUpDoctor());
             } else if (user instanceof Admin) {
                 Admin admin = (Admin) user;
                 layout.setContent(new AdminMainPage().getAdminMainPage());
-                layout.setHeaderPopUp(new PopUpPatient());
+                layout.setHeaderPopUp(new PopUpAdmin());
             }
             loggedIn = true;
         }
