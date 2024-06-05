@@ -15,7 +15,7 @@ public class ViewAdminList extends TableListingView {
     public ViewAdminList(Parent previousPage) {
         super("Admin List", previousPage);
 
-        admin = ClinicalSystem.getAllAdmins();
+        admin = ClinicalSystem.getUserDataManager().getAllAdmins();
 
         addColumn("ID");
         addColumn("Username");

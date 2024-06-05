@@ -10,14 +10,14 @@ import javafx.scene.layout.VBox;
 
 
 public class ViewDoctorList extends TableListingView {
-    private ObservableList<Doctor> doctor;
+    private ObservableList<Doctor> doctors;
     private final Button addDoctor;
     private Button updateDoctor;
 
     public ViewDoctorList(Parent previousPage) {
         super("Doctor List", previousPage);
 
-        doctor = ClinicalSystem.getAllDoctors();
+        doctors = ClinicalSystem.getUserDataManager().getAllDoctors();
 
         addColumn("ID");
         addColumn("Username");
@@ -29,7 +29,7 @@ public class ViewDoctorList extends TableListingView {
 
         evenWidth();
 
-        initTableData(doctor);
+        initTableData(doctors);
 
         updateDoctor = new Button("Update");
         updateDoctor.setOnAction(e -> {

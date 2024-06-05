@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-public class PopUp {
+public abstract class PopUp {
     private VBox popUp;
     private Image profileImage;
     public PopUp() {

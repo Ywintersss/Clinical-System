@@ -6,17 +6,16 @@ import Project.Users.Patient;
 import javafx.collections.ObservableList;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
 public class ViewPatientList extends TableListingView {
     private ObservableList<Patient> patients;
     private final Button addPatient;
-    private Button updatePatient;
+    private final Button updatePatient;
     public ViewPatientList(Parent previousPage) {
         super("Patient List", previousPage);
 
-        patients = ClinicalSystem.getAllPatients();
+        patients = ClinicalSystem.getUserDataManager().getAllPatients();
 
         addColumn("ID");
         addColumn("Name");

@@ -3,16 +3,17 @@ package Project;
 import Project.Interface.Layout;
 import Project.Interface.Pages.*;
 
-import Project.Controller.userDataManager;
+
 import Project.Interface.Pages.Components.*;
 import Project.Scheduler.Appointment;
 import Project.Scheduler.Scheduler;
 import Project.Scheduler.Schedule;
+import Project.Controller.UserDataManager;
+import Project.Interface.Pages.Components.PopUpAdmin;
+import Project.Interface.Pages.Components.PopUpDefault;
+import Project.Interface.Pages.Components.PopUpDoctor;
+import Project.Interface.Pages.Components.PopUpPatient;
 import Project.Users.*;
-import Project.Records.MedicalRecord;
-import Project.Records.Recorder;
-import Project.Scheduler.Scheduler;
-import Project.Utilities.File;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 
 public class ClinicalSystem {
     private static Layout layout;
+    private static UserDataManager userDataManager = UserDataManager.getInstance();
     private static boolean loggedIn = false;
     private static int role = 0;
     public static void login(String username, String password) {
@@ -74,39 +76,12 @@ public class ClinicalSystem {
         return layout;
     }
 
-    public static ObservableList<Patient> getAllPatients() {
-        ArrayList<String[]> patientData = userDataManager.getAllPatients();
-
-        ObservableList<Patient> FXpatientData = FXCollections.observableArrayList();
-        for (String[] data : patientData) {
-            FXpatientData.add(new Patient(data[0], data[1], data[2], data[3], data[4], data[5],
-                    Integer.parseInt(data[6]),Gender.valueOf(data[7]), Integer.parseInt(data[8]), Integer.parseInt(data[9])));
-        }
-
-        return FXpatientData;
+    public static UserDataManager getUserDataManager() {
+        return userDataManager;
     }
 
-    public static ObservableList<Admin> getAllAdmins() {
-        ArrayList<String[]> adminData = userDataManager.getAllAdmins();
-
-        ObservableList<Admin> FXadminData = FXCollections.observableArrayList();
-        for (String[] data : adminData) {
-            FXadminData.add(new Admin(data[0], data[1], data[2]));
-        }
-
-        return FXadminData;
-    }
-
-    public static ObservableList<Doctor> getAllDoctors() {
-        ArrayList<String[]> doctorData = userDataManager.getAllDoctors();
-
-        ObservableList<Doctor> FXadminData = FXCollections.observableArrayList();
-        for (String[] data : doctorData) {
-            FXadminData.add(new Doctor(data[0], data[1], data[2],data[3],data[4],data[5],Integer.parseInt(data[6]),
-                    Gender.valueOf(data[7]), Integer.parseInt(data[8]),data[9],data[10]));
-        }
-
-        return FXadminData;
+    public static boolean isLoggedIn() {
+        return loggedIn;
     }
 
     public static void main(String[] args) {
