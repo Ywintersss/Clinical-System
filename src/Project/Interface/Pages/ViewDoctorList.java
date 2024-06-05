@@ -50,7 +50,7 @@ public class ViewDoctorList extends TableListingView {
 
         addDoctor = new Button("Add");
         addDoctor.setOnAction(e -> {
-            ClinicalSystem.getLayout().setContent(new PatientRegister(new ViewDoctorList(previousPage).getTable()).getRegisterForm());
+            ClinicalSystem.getLayout().setContent(new DoctorRegister(new ViewDoctorList(previousPage).getTable()).getRegisterForm());
         });
 
         addFunctionalButton(addDoctor);

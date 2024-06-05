@@ -85,6 +85,30 @@ public class ClinicalSystem {
 
         return FXpatientData;
     }
+
+    public static ObservableList<Admin> getAllAdmins() {
+        ArrayList<String[]> adminData = userDataManager.getAllAdmins();
+
+        ObservableList<Admin> FXadminData = FXCollections.observableArrayList();
+        for (String[] data : adminData) {
+            FXadminData.add(new Admin(data[0], data[1], data[2]));
+        }
+
+        return FXadminData;
+    }
+
+    public static ObservableList<Doctor> getAllDoctors() {
+        ArrayList<String[]> doctorData = userDataManager.getAllDoctors();
+
+        ObservableList<Doctor> FXadminData = FXCollections.observableArrayList();
+        for (String[] data : doctorData) {
+            FXadminData.add(new Doctor(data[0], data[1], data[2],data[3],data[4],data[5],Integer.parseInt(data[6]),
+                    Gender.valueOf(data[7]), Integer.parseInt(data[8]),data[9],data[10]));
+        }
+
+        return FXadminData;
+    }
+
     public static void main(String[] args) {
 
     }

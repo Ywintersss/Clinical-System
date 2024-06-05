@@ -33,13 +33,12 @@ public class ViewAdminList extends TableListingView {
 
         addAdmin = new Button("Add");
         addAdmin.setOnAction(e -> {
-            ClinicalSystem.getLayout().setContent(new PatientRegister(new ViewAdminList(previousPage).getTable()).getRegisterForm());
+            ClinicalSystem.getLayout().setContent(new AdminRegister(new ViewAdminList(previousPage).getTable()).getRegisterForm());
         });
 
         addFunctionalButton(addAdmin);
 
     }
-
 
     @Override
     public VBox getTable() {

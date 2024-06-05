@@ -77,7 +77,7 @@ public class userDataManager {
                                     Integer.parseInt(dataArray[6]), Gender.valueOf(dataArray[7]),
                                     Integer.parseInt(dataArray[8]), dataArray[9], dataArray[10]);
                         } else if (file.contains("Admin")) {
-                            return new Admin(dataArray[1], dataArray[2]);
+                            return new Admin(dataArray[0],dataArray[1], dataArray[2]);
                         }
                     }
                 }
@@ -91,6 +91,24 @@ public class userDataManager {
     public static ArrayList<String[]> getAllPatients() {
         try {
             ArrayList<String> userData = File.readFile("\\users\\Patient.txt");
+            return File.parseData(userData);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static ArrayList<String[]> getAllDoctors() {
+        try {
+            ArrayList<String> userData = File.readFile("\\users\\Doctor.txt");
+            return File.parseData(userData);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static ArrayList<String[]> getAllAdmins() {
+        try {
+            ArrayList<String> userData = File.readFile("\\users\\Admin.txt");
             return File.parseData(userData);
         } catch (IOException e) {
             throw new RuntimeException(e);

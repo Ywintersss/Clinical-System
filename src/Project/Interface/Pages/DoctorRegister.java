@@ -4,10 +4,10 @@ import Project.Interface.Pages.Templates.Register;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
 
-public class PatientRegister extends Register {
+public class DoctorRegister extends Register {
 
-    public PatientRegister(Parent previousPage) {
-        super("Register Patient",  previousPage);
+    public DoctorRegister(Parent previousPage) {
+        super("Register Doctor",  previousPage);
 
         addContentContainer("Username");
         addContentContainer("Password");
@@ -16,10 +16,11 @@ public class PatientRegister extends Register {
         addContentContainer("Phone Number");
         addContentContainer("Age");
         addContentContainer("Gender");
-        addContentContainer("Height");
-        addContentContainer("Weight");
+        addContentContainer("Years Of Experience");
+        addContentContainer("Specialization");
+        addContentContainer("Position");
 
-        addButtonContainer(new ViewPatientList(previousPage).getTable());
+        addButtonContainer(new ViewDoctorList(previousPage).getTable());
     }
 
     @Override
