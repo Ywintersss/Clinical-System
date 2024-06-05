@@ -26,7 +26,7 @@ public class PopUpDefault extends PopUp {
         usernameInput = new TextField();
         usernameInput.setPromptText("Username");
 
-        password = new Label("Password:");
+        password = new Label("Password");
 
         passwordInput = new TextField();
         passwordInput.setPromptText("Password");

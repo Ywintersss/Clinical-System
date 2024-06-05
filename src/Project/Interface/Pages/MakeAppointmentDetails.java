@@ -23,6 +23,7 @@ public class MakeAppointmentDetails extends DetailView {
         addContent("Fees", consultationFees);
 
         addButtonIntoContainer("Make Appointment");
+
     }
     @Override
     public VBox getDetails() {

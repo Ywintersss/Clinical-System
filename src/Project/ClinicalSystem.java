@@ -4,10 +4,7 @@ import Project.Interface.Layout;
 import Project.Interface.Pages.*;
 
 import Project.Controller.userDataManager;
-import Project.Interface.Pages.Components.PopUpAdmin;
-import Project.Interface.Pages.Components.PopUpDefault;
-import Project.Interface.Pages.Components.PopUpDoctor;
-import Project.Interface.Pages.Components.PopUpPatient;
+import Project.Interface.Pages.Components.*;
 import Project.Scheduler.Appointment;
 import Project.Scheduler.Scheduler;
 import Project.Scheduler.Schedule;
@@ -30,6 +27,7 @@ public class ClinicalSystem {
         //TODO validation
         User user = userDataManager.getUser(username, password);
         if (user != null) {
+            Notification.information("Login Successful");
             if (user instanceof Patient) {
                 Patient patient = (Patient) user;
                 System.out.println(patient.getGender());
@@ -49,6 +47,9 @@ public class ClinicalSystem {
                 role = 3;
             }
             loggedIn = true;
+            Notification.information("Login Successful");
+        } else {
+            Notification.error("Login Failed");
         }
     }
 

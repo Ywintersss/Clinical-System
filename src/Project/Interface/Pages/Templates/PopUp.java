@@ -22,7 +22,9 @@ public class PopUp {
         profileImageView.setPreserveRatio(true);
 
         popUp.getChildren().add(profileImageView);
-        popUp.setPrefWidth(ScreenTools.getScreenWidth() * 0.110);
+        popUp.setMinWidth(ScreenTools.getScreenWidth() * 0.110);
+        popUp.setMaxWidth(ScreenTools.getScreenWidth() * 0.1195);
+
         popUp.setSpacing(10);
         popUp.setAlignment(Pos.CENTER);
         popUp.setPadding(new Insets(10, 20, 10, 20));

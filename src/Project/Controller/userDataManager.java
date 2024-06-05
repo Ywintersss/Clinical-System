@@ -52,7 +52,7 @@ public class userDataManager {
      */
 
     // Read and Gets user from txt file with username and password
-    public static User getUser(String username, String password) {
+    public static User getUser(String username, String password){
         try {
             //get all user files from user directory and iterate through them
             for (String file : File.getAllDbFilesFromDirectory("\\users\\")) {
@@ -79,7 +79,6 @@ public class userDataManager {
                         } else if (file.contains("Admin")) {
                             return new Admin(dataArray[1], dataArray[2]);
                         }
-                        System.out.println(file + " OK");
                     }
                 }
             }

@@ -23,7 +23,7 @@ public class DoctorEditProfile extends DetailView {
         super("Edit Profile", new DoctorMainPage().getDoctorMainPage());
 
         profileScroll = new ScrollPane();
-        getButtonContainer().getStylesheets().add("/Project/Interface/Assets/Styles/doctorStyle.css");
+        getButtonContainer().getStylesheets().add("/Project/Interface/Assets/Styles/Styles.css");
 
         username = new TextField("Elon");
         password = new TextField("1234");
