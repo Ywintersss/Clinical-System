@@ -13,7 +13,7 @@ public class AdminEditProfile extends DetailView {
     private TextField password;
 
     public AdminEditProfile() {
-        super("Edit Profile");
+        super("Edit Profile", new AdminMainPage().getAdminMainPage());
 
         profileScroll = new ScrollPane();
         getButtonContainer().getStylesheets().add("/Project/Interface/Assets/Styles/adminStyle.css");

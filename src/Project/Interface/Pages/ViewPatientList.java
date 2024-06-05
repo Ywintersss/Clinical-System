@@ -11,8 +11,10 @@ import javafx.scene.layout.VBox;
 
 public class ViewPatientList extends TableListingView {
     private ObservableList<Patient> patients;
-    public ViewPatientList(Parent prevPage) {
-        super("Patient List", prevPage);
+    private final Button addPatient;
+    private Button updatePatient;
+    public ViewPatientList(Parent previousPage) {
+        super("Patient List", previousPage);
 
         patients = ClinicalSystem.getAllPatients();
 
@@ -23,9 +25,34 @@ public class ViewPatientList extends TableListingView {
         addColumn("Contact");
         addColumn("Email");
 
-        evenWidth();
 
         initTableData(patients);
+
+        updatePatient = new Button("Update");
+        updatePatient.setOnAction(e -> {
+            //TODO get patient
+            UserEditProfile userEditProfile = new UserEditProfile(new ViewPatientList(previousPage).getTable());
+
+            Button deleteButton = new Button("Delete");
+            deleteButton.setOnAction(event -> {
+                //TODO delete patient
+            });
+
+            userEditProfile.addButtonIntoContainer(deleteButton);
+
+            ClinicalSystem.getLayout().setContent(userEditProfile.getDetails());
+        });
+
+        addColumnButtons(updatePatient);
+
+        evenWidth();
+
+        addPatient = new Button("Add");
+        addPatient.setOnAction(e -> {
+            ClinicalSystem.getLayout().setContent(new PatientRegister(new ViewPatientList(previousPage).getTable()).getRegisterForm());
+        });
+
+        addFunctionalButton(addPatient);
     }
 
     @Override

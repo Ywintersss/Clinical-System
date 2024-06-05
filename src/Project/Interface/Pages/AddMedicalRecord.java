@@ -11,7 +11,7 @@ public class AddMedicalRecord extends DetailView {
     private TextField followUpDate;
 
     public AddMedicalRecord() {
-        super("Add Medical Record");
+        super("Add Medical Record", new Home().getHome());
 
         patient = new TextField();
         patient.setPromptText("Enter Patient's Name...");

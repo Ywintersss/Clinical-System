@@ -1,6 +1,7 @@
 package Project.Interface.Pages.Components;
 
 import Project.ClinicalSystem;
+import Project.Interface.Pages.Home;
 import Project.Interface.Pages.PatientRegister;
 import Project.Interface.Pages.Templates.PopUp;
 import javafx.geometry.Insets;
@@ -42,7 +43,7 @@ public class PopUpDefault extends PopUp {
         registerLabel.setFont(Font.font(10));
         register = new Button("Register");
         register.setOnAction(e -> {
-            ClinicalSystem.getLayout().setContent(new PatientRegister().getRegisterForm());
+            ClinicalSystem.getLayout().setContent(new PatientRegister(new Home().getHome()).getRegisterForm());
             super.setVisible(false);
             usernameInput.clear();
             passwordInput.clear();

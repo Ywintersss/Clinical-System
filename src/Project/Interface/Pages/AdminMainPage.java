@@ -43,7 +43,7 @@ public class AdminMainPage {
         adminMainPage.getStylesheets().add("/Project/Interface/Assets/Styles/AdminMainPage.css");
 
         userAcc = new VBox();
-        userAcc.getStyleClass().add("vbox");
+        //userAcc.getStyleClass().add("vbox");
         userAcc.setPrefHeight(140);
         userAcc.setPrefWidth(300);
 
@@ -54,20 +54,19 @@ public class AdminMainPage {
 
         patientBtn = new Button("Patients");
         patientBtn.setPrefHeight(30);
-        patientBtn.setPrefWidth(85);
+        patientBtn.setPrefWidth(90);
 
         patientBtn.setOnAction(e -> {
-
             ClinicalSystem.getLayout().setContent(new ViewPatientList(new AdminMainPage().getAdminMainPage()).getTable());
         });
 
         doctorBtn = new Button("Doctors");
         doctorBtn.setPrefHeight(30);
-        doctorBtn.setPrefWidth(85);
+        doctorBtn.setPrefWidth(90);
 
         adminBtn = new Button("Admins");
         adminBtn.setPrefHeight(30);
-        adminBtn.setPrefWidth(85);
+        adminBtn.setPrefWidth(90);
 
         userAccContainer.setAlignment(Pos.CENTER);
         userAccContainer.setSpacing(10);
@@ -86,11 +85,11 @@ public class AdminMainPage {
 
         addAppointmentBtn = new Button("Add");
         addAppointmentBtn.setPrefHeight(30);
-        addAppointmentBtn.setPrefWidth(85);
+        addAppointmentBtn.setPrefWidth(90);
 
         approveAppointmentBtn = new Button("Approve");
         approveAppointmentBtn.setPrefHeight(30);
-        approveAppointmentBtn.setPrefWidth(85);
+        approveAppointmentBtn.setPrefWidth(90);
 
         appointmentContainer.setAlignment(Pos.CENTER);
         appointmentContainer.setSpacing(10);
@@ -109,7 +108,7 @@ public class AdminMainPage {
 
         updateMedicalRecordBtn = new Button("Update");
         updateMedicalRecordBtn.setPrefHeight(30);
-        updateMedicalRecordBtn.setPrefWidth(85);
+        updateMedicalRecordBtn.setPrefWidth(90);
 
         medicalRecordContainer.setAlignment(Pos.CENTER);
         medicalRecordContainer.setSpacing(10);
@@ -128,7 +127,7 @@ public class AdminMainPage {
 
         viewPaymentRecordBtn = new Button("View");
         viewPaymentRecordBtn.setPrefHeight(30);
-        viewPaymentRecordBtn.setPrefWidth(85);
+        viewPaymentRecordBtn.setPrefWidth(90);
 
         paymentRecordContainer.setAlignment(Pos.CENTER);
         paymentRecordContainer.setSpacing(10);

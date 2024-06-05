@@ -4,6 +4,8 @@ import Project.ClinicalSystem;
 import Project.Utilities.ScreenTools;
 import javafx.geometry.Insets;
 
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -52,7 +54,7 @@ public class PatientRegister {
     private Button register;
     private Button back;
 
-    public PatientRegister() {
+    public PatientRegister(Parent previousPage) {
         registerForm = new VBox();
         registerForm.setSpacing(25);
         registerForm.setPadding(new Insets(10, 10, 10, 10));
@@ -159,6 +161,9 @@ public class PatientRegister {
         back = new Button("Back");
         back.setPrefHeight(40);
         back.setPrefWidth(100);
+        back.setOnAction(e ->{
+            ClinicalSystem.getLayout().setContent(previousPage);
+        });
 
         buttonContainer = new HBox();
         VBox.setMargin(buttonContainer, new Insets(0, 0, 0, 210));

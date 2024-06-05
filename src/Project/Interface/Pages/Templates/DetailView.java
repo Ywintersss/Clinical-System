@@ -1,7 +1,9 @@
 package Project.Interface.Pages.Templates;
 
+import Project.ClinicalSystem;
 import Project.Utilities.ScreenTools;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
@@ -12,7 +14,7 @@ import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 
-public class DetailView {
+public abstract class DetailView {
     private VBox details;
     private Label Title;
     private VBox contentContainer;
@@ -20,13 +22,12 @@ public class DetailView {
     private Region containerSpacer;
     private Button back;
     private CornerRadii borderRadius = new CornerRadii(4);
-    public DetailView(String title) {
-
+    public DetailView(String title, Parent previousPage) {
         details = new VBox();
         details.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");
 
 
-        this.Title = new Label(title);
+        Title = new Label(title);
         Title.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         Title.setPadding(new Insets(0, 10, 20, 10));
 
@@ -45,10 +46,11 @@ public class DetailView {
 
         back = new Button("Back");
         back.setOnAction(e -> {
-
+            ClinicalSystem.getLayout().setContent(previousPage);
         });
 
         buttonContainer.getChildren().addAll(back, containerSpacer);
+        buttonContainer.setSpacing(10);
 
         details.setSpacing(20);
         details.setAlignment(Pos.TOP_CENTER);
@@ -80,13 +82,17 @@ public class DetailView {
         contentBox.setSpacing(2);
         contentBox.getChildren().addAll(Title,(content));
 
-        this.contentContainer.getChildren().add(contentBox);
+        contentContainer.getChildren().add(contentBox);
     }
 
     public void addButtonIntoContainer(String buttonLabel) {
         Button button = new Button(buttonLabel);
 
-        this.buttonContainer.getChildren().add(button);
+        buttonContainer.getChildren().add(button);
+    }
+
+    public void addButtonIntoContainer(Button FuncButton) {
+        buttonContainer.getChildren().add(FuncButton);
     }
 
     public VBox getContentContainer() {

@@ -2,6 +2,7 @@ package Project.Interface.Pages;
 
 import Project.Interface.Pages.Templates.DetailView;
 import Project.Utilities.ScreenTools;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -19,8 +20,8 @@ public class UserEditProfile extends DetailView {
     private TextField height;
     private TextField weight;
 
-    public UserEditProfile() {
-        super("Edit Profile");
+    public UserEditProfile(Parent previousPage) {
+        super("Edit Profile", previousPage);
 
         profileScroll = new ScrollPane();
 

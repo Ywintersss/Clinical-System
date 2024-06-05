@@ -22,7 +22,6 @@ public abstract class TableListingView {
 
         public TableListingView(String title, Parent previousPage) {
             table = new TableView();
-            //table.setPrefSize(ScreenTools.getScreenWidth() * 0.2, ScreenTools.getScreenHeight() * 0.8);
 
             tableLabel = new Label(title);
             tableLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 25));
@@ -65,19 +64,32 @@ public abstract class TableListingView {
             newColumn.setCellValueFactory(new PropertyValueFactory<>(property));
             addColumn(newColumn);
         }
-        public void addColumnButtons(){
-            TableColumn<Object,?> btnColumn = new TableColumn<>("Actions");
-//            btnColumn.setCellFactory(col -> new TableCell<Object, void>(){
-//
-//            });
+        public void addColumnButtons(Button button) {
+            TableColumn<Object, Void> btnColumn = new TableColumn<>("");
+            btnColumn.setCellFactory(col -> new TableCell<Object, Void>(){
+                private final Button btn = new Button(button.getText());
+
+                private final StackPane btnContainer = new StackPane();
+
+                {
+                    btnContainer.setAlignment(Pos.CENTER);
+                    btnContainer.getChildren().add(btn);
+                    btn.setOnAction(button.getOnAction());
+                }
+
+                @Override
+                protected void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setGraphic(empty ? null : btnContainer);
+                }
+            });
             btnColumn.setSortable(false);
-            btnColumn.setMinWidth(150);
             addColumn(btnColumn);
         }
 
         public void evenWidth() {
             table.widthProperty().addListener((observable, oldValue, newValue) -> {
-                double width = (newValue.doubleValue() / table.getColumns().size()) - 2;
+                double width = (newValue.doubleValue() / table.getColumns().size());
                 System.out.println(width);
                 for (Object column: table.getColumns()) {
                     ((TableColumn) column).setPrefWidth(width);
@@ -88,11 +100,9 @@ public abstract class TableListingView {
         public void initTableData(ObservableList data) {
             table.setItems(data);
         }
-        public void addNavButton(String text) {
-            System.out.println("hi");
+        public void addFunctionalButton(Button FuncButton) {
             Region spacer = new Region();
             HBox.setHgrow(spacer, Priority.ALWAYS);
-            buttonContainer.getChildren().addAll(spacer, new Button(text));
+            buttonContainer.getChildren().addAll(spacer, FuncButton);
         }
-
 }
