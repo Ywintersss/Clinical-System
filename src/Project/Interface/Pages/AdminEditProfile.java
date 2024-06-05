@@ -1,6 +1,7 @@
 package Project.Interface.Pages;
 
 import Project.Interface.Pages.Templates.DetailView;
+import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -10,8 +11,8 @@ public class AdminEditProfile extends DetailView {
     private TextField username;
     private TextField password;
 
-    public AdminEditProfile() {
-        super("Edit Profile", new AdminMainPage().getAdminMainPage());
+    public AdminEditProfile(Parent previousPage) {
+        super("Edit Profile", previousPage);
 
         profileScroll = new ScrollPane();
         getButtonContainer().getStylesheets().add("/Project/Interface/Assets/Styles/Styles.css");

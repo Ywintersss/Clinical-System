@@ -2,6 +2,7 @@ package Project.Interface.Pages.Components;
 
 import Project.ClinicalSystem;
 import Project.Interface.Pages.AdminEditProfile;
+import Project.Interface.Pages.Home;
 import Project.Interface.Pages.Templates.PopUp;
 import Project.Interface.Pages.UserEditProfile;
 import javafx.scene.control.Button;
@@ -12,7 +13,7 @@ public class PopUpAdmin extends PopUp {
     public PopUpAdmin() {
         editProfile = new Button("Edit Profile");
         editProfile.setOnAction(e -> {
-            ClinicalSystem.getLayout().setContent(new AdminEditProfile().getDetails());
+            ClinicalSystem.getLayout().setContent(new AdminEditProfile(new Home().getHome()).getDetails());
         });
 
         addContent(editProfile);

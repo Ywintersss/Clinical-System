@@ -21,7 +21,8 @@ public class User {
         this.gender = gender;
     }
 
-    public User(String username, String password) {
+    public User(String ID,String username, String password) {
+        this.ID = ID;
         this.username = username;
         this.password = password;
     }

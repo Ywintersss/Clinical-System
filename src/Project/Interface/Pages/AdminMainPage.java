@@ -64,9 +64,17 @@ public class AdminMainPage {
         doctorBtn.setPrefHeight(30);
         doctorBtn.setPrefWidth(90);
 
+        doctorBtn.setOnAction(e -> {
+            ClinicalSystem.getLayout().setContent(new ViewDoctorList(new AdminMainPage().getAdminMainPage()).getTable());
+        });
+
         adminBtn = new Button("Admins");
         adminBtn.setPrefHeight(30);
         adminBtn.setPrefWidth(90);
+
+        adminBtn.setOnAction(e -> {
+            ClinicalSystem.getLayout().setContent(new ViewAdminList(new AdminMainPage().getAdminMainPage()).getTable());
+        });
 
         userAccContainer.setAlignment(Pos.CENTER);
         userAccContainer.setSpacing(10);

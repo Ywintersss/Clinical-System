@@ -2,6 +2,7 @@ package Project.Interface.Pages;
 
 import Project.Interface.Pages.Templates.DetailView;
 import Project.Utilities.ScreenTools;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -19,8 +20,8 @@ public class DoctorEditProfile extends DetailView {
     private TextField specialization;
     private TextField position;
 
-    public DoctorEditProfile() {
-        super("Edit Profile", new DoctorMainPage().getDoctorMainPage());
+    public DoctorEditProfile(Parent previousPage) {
+        super("Edit Profile",  previousPage);
 
         profileScroll = new ScrollPane();
         getButtonContainer().getStylesheets().add("/Project/Interface/Assets/Styles/Styles.css");

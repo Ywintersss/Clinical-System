@@ -64,6 +64,7 @@ public abstract class TableListingView {
             newColumn.setCellValueFactory(new PropertyValueFactory<>(property));
             addColumn(newColumn);
         }
+
         public void addColumnButtons(Button button) {
             TableColumn<Object, Void> btnColumn = new TableColumn<>("");
             btnColumn.setCellFactory(col -> new TableCell<Object, Void>(){
