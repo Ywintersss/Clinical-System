@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class ClinicalSystem {
     private static Layout layout;
     private static UserDataManager userDataManager = UserDataManager.getInstance();
-    private static boolean loggedIn = false;
     private static int role = 0;
     public static void login(String username, String password) {
         //TODO validation
@@ -48,7 +47,7 @@ public class ClinicalSystem {
                 layout.setHeaderPopUp(new PopUpAdmin());
                 role = 3;
             }
-            loggedIn = true;
+            UserSession.getInstance().setCurrentUser(user);
             Notification.information("Login Successful");
         } else {
             Notification.error("Login Failed");
@@ -58,6 +57,7 @@ public class ClinicalSystem {
     public static void logout() {
         layout.setContent(new Home().getHome());
         layout.setHeaderPopUp(new PopUpDefault());
+        UserSession.getInstance().clearSession();
     }
 
     public static void register(int flag, String ...args) {
@@ -78,10 +78,6 @@ public class ClinicalSystem {
 
     public static UserDataManager getUserDataManager() {
         return userDataManager;
-    }
-
-    public static boolean isLoggedIn() {
-        return loggedIn;
     }
 
     public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package Project.Interface.Pages;
 
+import Project.ClinicalSystem;
 import Project.Utilities.ScreenTools;
 import Project.Interface.Pages.Components.AboutUs;
 import Project.Interface.Pages.Components.DoctorListing;
