@@ -87,7 +87,7 @@ public class UserEditProfile extends DetailView {
                 oldPatientData.setEmail(email.getText());
                 oldPatientData.setContact(contact.getText());
                 oldPatientData.setAge(Integer.parseInt(age.getText()));
-                oldPatientData.setGender(Gender.MALE);
+                oldPatientData.setGender(genderField);
                 oldPatientData.setHeight(Double.parseDouble(height.getText()));
                 oldPatientData.setWeight(Double.parseDouble(weight.getText()));
 
