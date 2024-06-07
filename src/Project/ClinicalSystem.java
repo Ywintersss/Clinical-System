@@ -24,6 +24,7 @@ public class ClinicalSystem {
     private static Layout layout;
     private static UserDataManager userDataManager = UserDataManager.getInstance();
     private static int role = 0;
+
     public static void login(String username, String password) {
         //TODO validation
         User user = userDataManager.getUser(username, password);
@@ -31,10 +32,11 @@ public class ClinicalSystem {
             Notification.information("Login Successful");
             if (user instanceof Patient) {
                 Patient patient = (Patient) user;
-                System.out.println(patient.getGender());
                 layout.setContent(new Home().getHome());
                 layout.setHeaderPopUp(new PopUpPatient());
                 role = 1;
+                System.out.println(((Patient) user).getWeight());
+                UserSession.getInstance().setCurrentUser(patient);
             } else if (user instanceof Doctor) {
                 Doctor doctor = (Doctor) user;
                 System.out.println(doctor.getPosition());
@@ -47,7 +49,6 @@ public class ClinicalSystem {
                 layout.setHeaderPopUp(new PopUpAdmin());
                 role = 3;
             }
-            UserSession.getInstance().setCurrentUser(user);
             Notification.information("Login Successful");
         } else {
             Notification.error("Login Failed");

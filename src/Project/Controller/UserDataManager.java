@@ -152,6 +152,14 @@ public class UserDataManager {
         }
     }
 
+    public static void updateUser(String[] data) {
+        try {
+            File.updatePatientFile("\\users\\Patient.txt", data);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
         //addPatient("test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test");
     }
