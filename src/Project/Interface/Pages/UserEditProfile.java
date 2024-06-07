@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import Project.UserSession;
 
 public class UserEditProfile extends DetailView {
     private ScrollPane profileScroll;
@@ -20,8 +21,10 @@ public class UserEditProfile extends DetailView {
     private TextField height;
     private TextField weight;
 
-    public UserEditProfile(Parent previousPage) {
+	public UserEditProfile(Parent previousPage) {
         super("Edit Profile", previousPage);
+
+		UserSession userSession = new UserSession();
 
         profileScroll = new ScrollPane();
 
@@ -52,8 +55,9 @@ public class UserEditProfile extends DetailView {
 
         addButtonIntoContainer("Done");
 
-        getDetails().getChildren().removeLast();
-        getDetails().getChildren().removeLast();
+
+        getDetails().getChildren().removeAll();
+        getDetails().getChildren().remove(getButtonContainer());
         getDetails().getChildren().add(profileScroll);
         getDetails().getChildren().add(getButtonContainer());
 

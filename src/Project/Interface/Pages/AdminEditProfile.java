@@ -6,6 +6,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
+
 public class AdminEditProfile extends DetailView {
     private ScrollPane profileScroll;
     private TextField username;
@@ -30,8 +31,8 @@ public class AdminEditProfile extends DetailView {
 
         addButtonIntoContainer("Done");
 
-        getDetails().getChildren().removeLast();
-        getDetails().getChildren().removeLast();
+        getDetails().getChildren().removeAll();
+        getDetails().getChildren().remove(getButtonContainer());
         getDetails().getChildren().add(profileScroll);
         getDetails().getChildren().add(getButtonContainer());
 

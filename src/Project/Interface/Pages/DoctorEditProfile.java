@@ -53,8 +53,8 @@ public class DoctorEditProfile extends DetailView {
 
         addButtonIntoContainer("Done");
 
-        getDetails().getChildren().removeLast();
-        getDetails().getChildren().removeLast();
+        getDetails().getChildren().removeAll();
+        getDetails().getChildren().remove(getButtonContainer());
         getDetails().getChildren().add(profileScroll);
         getDetails().getChildren().add(getButtonContainer());
 
