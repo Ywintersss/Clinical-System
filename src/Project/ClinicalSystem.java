@@ -14,12 +14,15 @@ import Project.Interface.Pages.Components.PopUpDefault;
 import Project.Interface.Pages.Components.PopUpDoctor;
 import Project.Interface.Pages.Components.PopUpPatient;
 import Project.Users.*;
+import javafx.scene.Parent;
+import java.util.Stack;
+
 
 
 public class ClinicalSystem {
+    private static final Stack<Parent> pageStack = new Stack<>();
+    private static final UserDataManager userDataManager = UserDataManager.getInstance();
     private static Layout layout;
-    private static UserDataManager userDataManager = UserDataManager.getInstance();
-    private static int role = 0;
 
     public static void login(String username, String password) {
         //TODO validation
@@ -28,22 +31,18 @@ public class ClinicalSystem {
             Notification.information("Login Successful");
             if (user instanceof Patient) {
                 Patient patient = (Patient) user;
-                layout.setContent(new Home().getHome());
+                navigateTo(new Home().getHome());
                 layout.setHeaderPopUp(new PopUpPatient());
-                role = 1;
-                System.out.println(((Patient) user).getWeight());
                 UserSession.getInstance().setCurrentUser(patient);
             } else if (user instanceof Doctor) {
                 Doctor doctor = (Doctor) user;
                 System.out.println(doctor.getPosition());
-                layout.setContent(new DoctorMainPage().getDoctorMainPage());
+                navigateTo(new DoctorMainPage().getDoctorMainPage());
                 layout.setHeaderPopUp(new PopUpDoctor());
-                role = 2;
             } else if (user instanceof Admin) {
                 Admin admin = (Admin) user;
-                layout.setContent(new AdminMainPage().getAdminMainPage());
+                navigateTo(new AdminMainPage().getAdminMainPage());
                 layout.setHeaderPopUp(new PopUpAdmin());
-                role = 3;
             }
             Notification.information("Login Successful");
         } else {
@@ -55,6 +54,8 @@ public class ClinicalSystem {
         layout.setContent(new Home().getHome());
         layout.setHeaderPopUp(new PopUpDefault());
         UserSession.getInstance().clearSession();
+        pageStack.clear();
+        pageStack.push(new Home().getHome());
     }
 
     public static void register(int flag, String ...args) {
@@ -75,6 +76,26 @@ public class ClinicalSystem {
 
     public static UserDataManager getUserDataManager() {
         return userDataManager;
+    }
+
+    public static void navigateTo(Parent newPage) {
+        if (!pageStack.isEmpty() && newPage.equals(pageStack.peek())) {
+            System.out.println("Already on that page");
+            return;
+        }
+
+        pageStack.push(newPage);
+        System.out.println(pageStack);
+        getLayout().setContent(newPage);
+    }
+
+    public static void back() {
+        pageStack.pop();
+        System.out.println(pageStack);
+        getLayout().setContent(pageStack.peek());
+    }
+    public static Stack<Parent> getPageStack() {
+        return pageStack;
     }
 
     public static void main(String[] args) {

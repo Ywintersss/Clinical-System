@@ -6,8 +6,8 @@ import javafx.scene.layout.VBox;
 
 public class PatientRegister extends Register {
 
-    public PatientRegister(Parent previousPage) {
-        super("Register Patient",  previousPage);
+    public PatientRegister() {
+        super("Register Patient");
 
         addContentContainer("Username");
         addContentContainer("Password");
@@ -19,7 +19,7 @@ public class PatientRegister extends Register {
         addContentContainer("Height");
         addContentContainer("Weight");
 
-        addButtonContainer(new ViewPatientList(previousPage).getTable());
+        addButtonContainer();
     }
 
     @Override

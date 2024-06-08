@@ -12,8 +12,8 @@ public class AdminEditProfile extends DetailView {
     private TextField username;
     private TextField password;
 
-    public AdminEditProfile(Parent previousPage) {
-        super("Edit Profile", previousPage);
+    public AdminEditProfile() {
+        super("Edit Profile");
 
         profileScroll = new ScrollPane();
         getButtonContainer().getStylesheets().add("/Project/Interface/Assets/Styles/Styles.css");

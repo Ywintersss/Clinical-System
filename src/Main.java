@@ -1,5 +1,6 @@
 
 import Project.ClinicalSystem;
+import Project.Interface.Pages.Home;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -7,6 +8,8 @@ import javafx.stage.Stage;
 public class Main extends Application{
     @Override
     public void start(Stage stage) throws Exception {
+        ClinicalSystem.navigateTo(new Home().getHome());
+
         stage.setScene(ClinicalSystem.getLayout().getScene());
 
         stage.setMinWidth(1080);

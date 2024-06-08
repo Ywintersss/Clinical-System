@@ -12,8 +12,8 @@ public class ViewAdminList extends TableListingView {
     private ObservableList<Admin> admin;
     private final Button addAdmin;
     private Button deleteAdmin;
-    public ViewAdminList(Parent previousPage) {
-        super("Admin List", previousPage);
+    public ViewAdminList() {
+        super("Admin List");
 
         admin = ClinicalSystem.getUserDataManager().getAllAdmins();
 
@@ -33,7 +33,7 @@ public class ViewAdminList extends TableListingView {
 
         addAdmin = new Button("Add");
         addAdmin.setOnAction(e -> {
-            ClinicalSystem.getLayout().setContent(new AdminRegister(new ViewAdminList(previousPage).getTable()).getRegisterForm());
+            ClinicalSystem.navigateTo(new AdminRegister().getRegisterForm());
         });
 
         addFunctionalButton(addAdmin);

@@ -24,7 +24,7 @@ public abstract class Register {
     private Button register;
     private Button back;
 
-    public Register(String title,Parent previousPage) {
+    public Register(String title) {
         registerForm = new VBox();
         registerForm.setSpacing(25);
         registerForm.setPadding(new Insets(10, 10, 10, 10));
@@ -59,7 +59,7 @@ public abstract class Register {
         contentContainer.getChildren().addAll(contentLabel, contentField);
     }
 
-    public void addButtonContainer(Parent previousPage){
+    public void addButtonContainer(){
         register = new Button("Register");
         register.setPrefHeight(40);
         register.setPrefWidth(100);
@@ -72,7 +72,7 @@ public abstract class Register {
         back.setPrefHeight(40);
         back.setPrefWidth(100);
         back.setOnAction(e ->{
-            ClinicalSystem.getLayout().setContent(previousPage);
+            ClinicalSystem.back();
         });
 
         buttonContainer = new HBox();

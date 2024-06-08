@@ -1,7 +1,6 @@
 package Project.Interface;
 
 import Project.Interface.Pages.*;
-import Project.Interface.Pages.Components.PopUpPatient;
 import Project.Interface.Pages.Components.PopUpDefault;
 import Project.Interface.Pages.Templates.PopUp;
 import javafx.scene.Parent;
@@ -40,6 +39,9 @@ public class Layout{
         return new Scene(mainLayout, 1080, 720, Color.SKYBLUE);
     }
 
+    public Parent getContent() {
+        return content;
+    }
     public void setContent(Parent content) {
         this.content = content;
         mainLayout.setCenter(content);

@@ -12,8 +12,8 @@ public class ViewPatientList extends TableListingView {
     private ObservableList<Patient> patients;
     private final Button addPatient;
     private final Button updatePatient;
-    public ViewPatientList(Parent previousPage) {
-        super("Patient List", previousPage);
+    public ViewPatientList() {
+        super("Patient List");
 
         patients = ClinicalSystem.getUserDataManager().getAllPatients();
 
@@ -30,7 +30,7 @@ public class ViewPatientList extends TableListingView {
         updatePatient = new Button("Update");
         updatePatient.setOnAction(e -> {
             //TODO get patient
-            UserEditProfile userEditProfile = new UserEditProfile(new ViewPatientList(previousPage).getTable());
+            UserEditProfile userEditProfile = new UserEditProfile();
 
             Button deleteButton = new Button("Delete");
             deleteButton.setOnAction(event -> {
@@ -39,7 +39,7 @@ public class ViewPatientList extends TableListingView {
 
             userEditProfile.addButtonIntoContainer(deleteButton);
 
-            ClinicalSystem.getLayout().setContent(userEditProfile.getDetails());
+            ClinicalSystem.navigateTo(userEditProfile.getDetails());
         });
 
         addColumnButtons(updatePatient);
@@ -48,7 +48,7 @@ public class ViewPatientList extends TableListingView {
 
         addPatient = new Button("Add");
         addPatient.setOnAction(e -> {
-            ClinicalSystem.getLayout().setContent(new PatientRegister(new ViewPatientList(previousPage).getTable()).getRegisterForm());
+            ClinicalSystem.navigateTo(new PatientRegister().getRegisterForm());
         });
 
         addFunctionalButton(addPatient);

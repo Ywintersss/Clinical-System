@@ -1,21 +1,21 @@
 package Project.Interface.Pages;
 
+import Project.ClinicalSystem;
 import Project.Utilities.ScreenTools;
 import Project.Interface.Pages.Components.AboutUs;
 import Project.Interface.Pages.Components.MakeAppointmentBox;
-import Project.Interface.Pages.Components.Schedule;
+import Project.Interface.Pages.Components.DoctorListing;
 import javafx.geometry.*;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 
 public class Home {
-
     private HBox home;
     private VBox aboutUsMakeAppointmentContainer;
     private ScrollPane aboutUs;
     private VBox makeAppointmentBox;
-    private VBox scheduleContainer;
-    private VBox schedule;
+    private VBox doctorContainer;
+    private VBox doctor;
     public Home() {
         home = new HBox();
         home.setSpacing(10);
@@ -44,17 +44,17 @@ public class Home {
 
         aboutUsMakeAppointmentContainer.getChildren().addAll(aboutUs, makeAppointmentBox);
 
-        scheduleContainer = new VBox();
-        scheduleContainer.setAlignment(Pos.CENTER);
+        doctorContainer = new VBox();
+        doctorContainer.setAlignment(Pos.CENTER);
 
         //right side
-        schedule = new Schedule().getSchedule();
-        schedule.setPrefWidth(ScreenTools.getScreenWidth() * 0.2);
+        doctor = new DoctorListing().getDoctorListing();
+        doctor.setPrefWidth(ScreenTools.getScreenWidth() * 0.2);
 
-        scheduleContainer.setPadding(new Insets(10, 0, 10, 0));
-        scheduleContainer.getChildren().add(schedule);
+        doctorContainer.setPadding(new Insets(10, 0, 10, 0));
+        doctorContainer.getChildren().add(doctor);
 
-        home.getChildren().addAll(aboutUsMakeAppointmentContainer, scheduleContainer);
+        home.getChildren().addAll(aboutUsMakeAppointmentContainer, doctorContainer);
     }
 
     public HBox getHome() {

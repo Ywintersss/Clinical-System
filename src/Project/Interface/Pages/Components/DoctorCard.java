@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-public class ScheduleCard {
+public class DoctorCard {
     private HBox doctorCard;
     private Image doctorImage;
     private VBox doctorDetails;
@@ -14,7 +14,7 @@ public class ScheduleCard {
     private Label doctorNameLabel;
     private Label experienceLabel;
     private Label timeLabel;
-    public ScheduleCard(String specialization, String doctorName, String experience, String time) {
+    public DoctorCard(String specialization, String doctorName, String experience, String time) {
         doctorCard = new HBox();
         doctorCard.setSpacing(10);
 
@@ -40,7 +40,7 @@ public class ScheduleCard {
         doctorCard.getChildren().addAll(doctorDetails);
     }
 
-    public HBox getScheduleCard() {
+    public HBox getDoctorCard() {
         return this.doctorCard;
     }
 }

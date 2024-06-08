@@ -7,8 +7,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class AppointmentList extends TableListingView {
-    public AppointmentList(Parent prevPage) {
-        super("Appointment List", prevPage);
+    public AppointmentList() {
+        super("Appointment List");
 
         addColumn("Patient");
         addColumn("Doctor");

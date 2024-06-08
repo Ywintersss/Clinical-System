@@ -80,7 +80,7 @@ public class DoctorMainPage {
 		AppointmentListButton.setStyle("-fx-font-weight: bold;-fx-font-size: 15px;-fx-text-alignment: center;");
 		AppointmentListButton.setPadding(new Insets(10, 10, 10, 10));
 		AppointmentListButton.setOnAction(e -> {
-			ClinicalSystem.getLayout().setContent(new AppointmentList(new DoctorMainPage().getDoctorMainPage()).getTable());
+			ClinicalSystem.navigateTo(new AppointmentList().getTable());
 		});
 
 		PatientMedicalRecordButton = new Button("Patient Medical Record");

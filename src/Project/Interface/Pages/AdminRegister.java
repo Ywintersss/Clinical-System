@@ -6,13 +6,13 @@ import javafx.scene.layout.VBox;
 
 public class AdminRegister extends Register {
 
-    public AdminRegister(Parent previousPage) {
-        super("Register Admin",  previousPage);
+    public AdminRegister() {
+        super("Register Admin");
 
         addContentContainer("Username");
         addContentContainer("Password");
 
-        addButtonContainer(new ViewAdminList(previousPage).getTable());
+        addButtonContainer();
     }
 
     @Override

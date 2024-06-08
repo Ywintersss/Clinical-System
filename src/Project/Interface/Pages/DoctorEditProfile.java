@@ -20,8 +20,8 @@ public class DoctorEditProfile extends DetailView {
     private TextField specialization;
     private TextField position;
 
-    public DoctorEditProfile(Parent previousPage) {
-        super("Edit Profile",  previousPage);
+    public DoctorEditProfile() {
+        super("Edit Profile");
 
         profileScroll = new ScrollPane();
         getButtonContainer().getStylesheets().add("/Project/Interface/Assets/Styles/Styles.css");

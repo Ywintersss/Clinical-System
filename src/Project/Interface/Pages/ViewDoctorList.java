@@ -14,8 +14,8 @@ public class ViewDoctorList extends TableListingView {
     private final Button addDoctor;
     private Button updateDoctor;
 
-    public ViewDoctorList(Parent previousPage) {
-        super("Doctor List", previousPage);
+    public ViewDoctorList() {
+        super("Doctor List");
 
         doctors = ClinicalSystem.getUserDataManager().getAllDoctors();
 
@@ -34,14 +34,14 @@ public class ViewDoctorList extends TableListingView {
         updateDoctor = new Button("Update");
         updateDoctor.setOnAction(e -> {
             //TODO get doctor
-            DoctorEditProfile DoctorEditProfile = new DoctorEditProfile(new ViewDoctorList(previousPage).getTable());
+            DoctorEditProfile DoctorEditProfile = new DoctorEditProfile();
 
             Button deleteButton = new Button("Delete");
             deleteButton.setOnAction(event -> {
                 //TODO delete doctor
             });
 
-            ClinicalSystem.getLayout().setContent(new DoctorEditProfile(new ViewDoctorList(previousPage).getTable()).getDetails());
+            ClinicalSystem.navigateTo(new DoctorEditProfile().getDetails());
         });
 
         addColumnButtons(updateDoctor);
@@ -50,7 +50,7 @@ public class ViewDoctorList extends TableListingView {
 
         addDoctor = new Button("Add");
         addDoctor.setOnAction(e -> {
-            ClinicalSystem.getLayout().setContent(new DoctorRegister(new ViewDoctorList(previousPage).getTable()).getRegisterForm());
+            ClinicalSystem.navigateTo(new DoctorRegister().getRegisterForm());
         });
 
         addFunctionalButton(addDoctor);

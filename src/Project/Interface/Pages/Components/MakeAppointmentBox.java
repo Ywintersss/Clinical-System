@@ -1,5 +1,8 @@
 package Project.Interface.Pages.Components;
 
+import Project.ClinicalSystem;
+import Project.Interface.Pages.DateSelection;
+import Project.Interface.Pages.Home;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -26,6 +29,9 @@ public class MakeAppointmentBox {
         makeAppointmentLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #000000;");
 
         makeAppointmentButton = new Button("View Schedules >");
+        makeAppointmentButton.setOnAction(e -> {
+            ClinicalSystem.navigateTo(new DateSelection().getDateSelection());
+        });
 
         MakeAppointmentBox.getChildren().addAll(makeAppointmentLabel, makeAppointmentButton);
     }

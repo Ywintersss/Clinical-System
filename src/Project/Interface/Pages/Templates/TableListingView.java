@@ -20,7 +20,7 @@ public abstract class TableListingView {
         private HBox buttonContainer;
         private Button back;
 
-        public TableListingView(String title, Parent previousPage) {
+        public TableListingView(String title) {
             table = new TableView();
 
             tableLabel = new Label(title);
@@ -30,7 +30,7 @@ public abstract class TableListingView {
             back.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");
 
             back.setOnAction(e ->{
-                ClinicalSystem.getLayout().setContent(previousPage);
+                ClinicalSystem.back();
             });
 
             buttonContainer = new HBox();

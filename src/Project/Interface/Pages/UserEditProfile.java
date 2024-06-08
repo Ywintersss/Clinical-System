@@ -26,8 +26,8 @@ public class UserEditProfile extends DetailView {
     private TextField height;
     private TextField weight;
 
-	public UserEditProfile(Parent previousPage) {
-        super("Edit Profile", previousPage);
+	public UserEditProfile() {
+        super("Edit Profile");
 
         Patient oldPatientData = (Patient) UserSession.getInstance().getCurrentUser();
 
@@ -58,7 +58,7 @@ public class UserEditProfile extends DetailView {
         profileScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         profileScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        Button saveButton = getSaveButton(oldPatientData, previousPage);
+        Button saveButton = getSaveButton(oldPatientData);
         addButtonIntoContainer(saveButton);
 
         getDetails().getChildren().removeAll();
@@ -67,7 +67,7 @@ public class UserEditProfile extends DetailView {
         getDetails().getChildren().add(getButtonContainer());
     }
 
-    private Button getSaveButton(Patient oldPatientData, Parent previousPage) {
+    private Button getSaveButton(Patient oldPatientData) {
         Button saveButton = new Button("Save");
         saveButton.setOnAction(e -> {
             try {
@@ -89,13 +89,14 @@ public class UserEditProfile extends DetailView {
                 oldPatientData.setHeight(Double.parseDouble(height.getText()));
                 oldPatientData.setWeight(Double.parseDouble(weight.getText()));
 
-                String[] newData = {oldPatientData.getID(), username.getText(), password.getText(), name.getText(), email.getText(), contact.getText(), age.getText(), genderField.getGender().toUpperCase(), height.getText(), weight.getText()};
-                System.out.println(newData);
+                String[] newData = {oldPatientData.getID(), username.getText(), password.getText(), name.getText(), email.getText(),
+                        contact.getText(), age.getText(), genderField.getGender().toUpperCase(),
+                        height.getText(), weight.getText()};
                 UserDataManager.updateUser("\\users\\Patient.txt", newData);
 
                 UserSession.getInstance().setCurrentUser(oldPatientData);
 
-                ClinicalSystem.getLayout().setContent(previousPage);
+                ClinicalSystem.back();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

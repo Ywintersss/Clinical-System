@@ -22,7 +22,7 @@ public abstract class DetailView {
     private Region containerSpacer;
     private Button back;
     private CornerRadii borderRadius = new CornerRadii(4);
-    public DetailView(String title, Parent previousPage) {
+    public DetailView(String title) {
         details = new VBox();
         details.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");
 
@@ -46,7 +46,7 @@ public abstract class DetailView {
 
         back = new Button("Back");
         back.setOnAction(e -> {
-            ClinicalSystem.getLayout().setContent(previousPage);
+            ClinicalSystem.back();
         });
 
         buttonContainer.getChildren().addAll(back, containerSpacer);

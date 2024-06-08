@@ -14,25 +14,25 @@ public class PopUpPatient extends PopUp {
     public PopUpPatient() {
         editProfile = new Button("Edit Profile");
         editProfile.setOnAction(e -> {
-            ClinicalSystem.getLayout().setContent(new UserEditProfile(new Home().getHome()).getDetails());
+            ClinicalSystem.navigateTo(new UserEditProfile().getDetails());
         });
 
 
         medicalRecord = new Button("Medical Record");
         medicalRecord.setOnAction(e -> {
-            ClinicalSystem.getLayout().setContent(new MedicalRecord().getMedicalRecord());
+            ClinicalSystem.navigateTo(new MedicalRecord().getMedicalRecord());
         });
 
 
         appointments = new Button("Appointment");
         appointments.setOnAction(e -> {
-            ClinicalSystem.getLayout().setContent(new Appointment(new Home().getHome()).getTable());
+            ClinicalSystem.navigateTo(new Appointment().getTable());
         });
 
 
         payment = new Button("Payment");
         payment.setOnAction(e -> {
-            ClinicalSystem.getLayout().setContent(new PaymentHistory().getPaymentHistory());
+            ClinicalSystem.navigateTo(new PaymentHistory().getPaymentHistory());
         });
 
 

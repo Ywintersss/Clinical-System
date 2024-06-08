@@ -25,7 +25,7 @@ public class DateSelection {
     private Button back;
     private Region spacer3;
     private Button next;
-    public DateSelection(Parent previousPage) {
+    public DateSelection() {
         dateSelectionContainer = new VBox();
         dateSelectionContainer.setSpacing(10);
         dateSelectionContainer.setPadding(new Insets(10, 10, 10, 10));
@@ -63,7 +63,7 @@ public class DateSelection {
         back = new Button("Back");
         back.setPadding(new Insets(10, 20, 10, 20));
         back.setOnAction(e -> {
-            ClinicalSystem.getLayout().setContent(previousPage);
+            ClinicalSystem.back();
         });
 
         spacer3 = new Region();

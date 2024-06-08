@@ -4,6 +4,7 @@ import Project.ClinicalSystem;
 import Project.Utilities.ScreenTools;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -38,6 +39,11 @@ public class Header{
 
         clinicTitle = new Label("I-Care Clinic");
         clinicTitle.setFont(Font.font("Verdana", FontWeight.BOLD, 25));
+        clinicTitle.setCursor(Cursor.HAND);
+        clinicTitle.onMouseClickedProperty().setValue(e -> {
+            ClinicalSystem.getPageStack().clear();
+            ClinicalSystem.navigateTo(new Home().getHome());
+        });
 
         spacer2 = new Region();
         HBox.setHgrow(spacer2, Priority.ALWAYS);

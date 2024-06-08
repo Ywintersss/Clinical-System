@@ -5,8 +5,8 @@ import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
 
 public class AppointmentSchedule extends TableListingView {
-    public AppointmentSchedule(String title, Parent previousPage) {
-        super(title, previousPage);
+    public AppointmentSchedule(String title) {
+        super(title);
         addColumn("Date Time");
         addColumn("Doctor");
         addColumn("Description");

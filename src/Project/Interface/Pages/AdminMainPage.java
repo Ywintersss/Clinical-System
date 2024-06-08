@@ -57,7 +57,7 @@ public class AdminMainPage {
         patientBtn.setPrefWidth(90);
 
         patientBtn.setOnAction(e -> {
-            ClinicalSystem.getLayout().setContent(new ViewPatientList(new AdminMainPage().getAdminMainPage()).getTable());
+            ClinicalSystem.navigateTo(new ViewPatientList().getTable());
         });
 
         doctorBtn = new Button("Doctors");
@@ -65,7 +65,7 @@ public class AdminMainPage {
         doctorBtn.setPrefWidth(90);
 
         doctorBtn.setOnAction(e -> {
-            ClinicalSystem.getLayout().setContent(new ViewDoctorList(new AdminMainPage().getAdminMainPage()).getTable());
+            ClinicalSystem.navigateTo(new ViewDoctorList().getTable());
         });
 
         adminBtn = new Button("Admins");
@@ -73,7 +73,7 @@ public class AdminMainPage {
         adminBtn.setPrefWidth(90);
 
         adminBtn.setOnAction(e -> {
-            ClinicalSystem.getLayout().setContent(new ViewAdminList(new AdminMainPage().getAdminMainPage()).getTable());
+            ClinicalSystem.navigateTo(new ViewAdminList().getTable());
         });
 
         userAccContainer.setAlignment(Pos.CENTER);
