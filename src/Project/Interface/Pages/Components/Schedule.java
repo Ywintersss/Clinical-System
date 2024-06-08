@@ -12,7 +12,7 @@ public class Schedule {
     public Schedule() {
         schedule = new VBox();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             //TODO i < 3 needs to change
             scheduleCard = new ScheduleCard("Heart", "Kelly", "Monday", "10:00 - 11:00").getScheduleCard();
             //scheduleCard = new ScheduleCard().getScheduleCard();

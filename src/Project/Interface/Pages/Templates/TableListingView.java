@@ -91,7 +91,6 @@ public abstract class TableListingView {
         public void evenWidth() {
             table.widthProperty().addListener((observable, oldValue, newValue) -> {
                 double width = (newValue.doubleValue() / table.getColumns().size());
-                System.out.println(width);
                 for (Object column: table.getColumns()) {
                     ((TableColumn) column).setPrefWidth(width);
                 }

@@ -14,10 +14,6 @@ import Project.Interface.Pages.Components.PopUpDefault;
 import Project.Interface.Pages.Components.PopUpDoctor;
 import Project.Interface.Pages.Components.PopUpPatient;
 import Project.Users.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
-import java.util.ArrayList;
 
 
 public class ClinicalSystem {

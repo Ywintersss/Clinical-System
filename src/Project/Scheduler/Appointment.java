@@ -6,27 +6,33 @@ import java.time.LocalDateTime;
 
 // Appointment class, template for an appointment
 public class Appointment {
-    private Patient patient;
-    private Doctor doctor;
-    private LocalDateTime dateTime;
+    private final String appointmentID;
+    private final String patientID;
+    private final String doctorID;
+    private String dateTime;
     private String description;
 
-    public Appointment(Patient patient, Doctor doctor, String description) {
-        this.patient = patient;
-        this.doctor = doctor;
-        this.dateTime = LocalDateTime.now();
+    public Appointment(String appointmentID, String patientID, String doctorID, String dateTime, String description) {
+        this.appointmentID = appointmentID;
+        this.patientID = patientID;
+        this.doctorID = doctorID;
+        this.dateTime = dateTime;
         this.description = description;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public String getID() {
+        return appointmentID;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public String getPatientID() {
+        return patientID;
     }
 
-    public LocalDateTime getDate() {
+    public String getDoctorID() {
+        return doctorID;
+    }
+
+    public String getDateTime() {
         return dateTime;
     }
 
@@ -34,15 +40,7 @@ public class Appointment {
         return description;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public void setDate(LocalDateTime dateTime) {
+    public void setDate(String dateTime) {
         this.dateTime = dateTime;
     }
 

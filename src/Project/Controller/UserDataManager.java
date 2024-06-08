@@ -25,10 +25,10 @@ public class UserDataManager {
             return;
         }
         String path = "\\users\\Patient.txt";
-        String ID = Utilities.generateID(path) + ",";
+        String ID = Utilities.generateID("PA", path) + ",";
         String data = File.formatData(userData);
         try {
-            File.writeToFile(path, ID + data, true);
+            File.appendToFile(path, ID + data);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -36,10 +36,10 @@ public class UserDataManager {
 
     public void addDoctor(String ...userData) {
         String path = "\\users\\Doctor.txt";
-        String ID = Utilities.generateID(path) + ",";
+        String ID = Utilities.generateID("DO", path) + ",";
         String data = File.formatData(userData);
         try {
-            File.writeToFile(path, data, true);
+            File.appendToFile(path, data);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -48,7 +48,7 @@ public class UserDataManager {
     public void addAdmin(String username, String password) {
         String data = File.formatData(username, password);
         try {
-            File.writeToFile("Admin.txt",data, true);
+            File.appendToFile("Admin.txt",data);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -107,7 +107,7 @@ public class UserDataManager {
             ObservableList<Patient> FXPatientData = FXCollections.observableArrayList();
             for (String[] data : parsePatientData) {
                 FXPatientData.add(new Patient(data[0], data[1], data[2], data[3], data[4], data[5],
-                        Integer.parseInt(data[6]),Gender.valueOf(data[7]), Integer.parseInt(data[8]), Integer.parseInt(data[9])));
+                        Integer.parseInt(data[6]),Gender.valueOf(data[7]), Double.parseDouble(data[8]), Double.parseDouble(data[9])));
             }
 
             return FXPatientData;
@@ -124,7 +124,6 @@ public class UserDataManager {
             ObservableList<Doctor> FXDoctorData = FXCollections.observableArrayList();
 
             for (String[] data : parseDoctorData) {
-                System.out.println(data);
                 FXDoctorData.add(new Doctor(data[0], data[1], data[2], data[3], data[4], data[5],
                         Integer.parseInt(data[6]),Gender.valueOf(data[7]), Integer.parseInt(data[8]), data[9], data[10]));
             }
@@ -152,9 +151,22 @@ public class UserDataManager {
         }
     }
 
-    public static void updateUser(String[] data) {
+    public static void updateUser(String path, String[] data) {
+        String userID = data[0];
+        System.out.println(data);
+
         try {
-            File.updatePatientFile("\\users\\Patient.txt", data);
+            ArrayList<String> userData = File.readFile(path);
+            ArrayList<String[]> toBeUpdatedUserData = File.parseData(userData);
+
+            for (int i = 0; i < toBeUpdatedUserData.size(); i++) {
+                String[] dataArray = toBeUpdatedUserData.get(i);
+                if (userID.equals(dataArray[0])) {
+                    dataArray = data;
+                }
+                toBeUpdatedUserData.set(i, dataArray);
+            }
+            File.updateFile(path, toBeUpdatedUserData);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

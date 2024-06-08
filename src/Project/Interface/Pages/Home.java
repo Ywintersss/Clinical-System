@@ -1,62 +1,60 @@
 package Project.Interface.Pages;
 
-import Project.ClinicalSystem;
 import Project.Utilities.ScreenTools;
 import Project.Interface.Pages.Components.AboutUs;
-import Project.Interface.Pages.Components.DoctorListing;
+import Project.Interface.Pages.Components.MakeAppointmentBox;
 import Project.Interface.Pages.Components.Schedule;
 import javafx.geometry.*;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 
 public class Home {
 
     private HBox home;
-    private VBox aboutUsDoctorListContainer;
+    private VBox aboutUsMakeAppointmentContainer;
     private ScrollPane aboutUs;
-    private VBox doctorList;
-    private VBox Schedule;
+    private VBox makeAppointmentBox;
+    private VBox scheduleContainer;
+    private VBox schedule;
     public Home() {
         home = new HBox();
-        home.setSpacing(20);
+        home.setSpacing(10);
         home.setAlignment(Pos.CENTER);
 
-        aboutUsDoctorListContainer = new VBox();
+        aboutUsMakeAppointmentContainer = new VBox();
 
         //left side
         aboutUs = new AboutUs().getAboutUs();
 
-        doctorList = new DoctorListing().getDoctorList();
+        makeAppointmentBox = new MakeAppointmentBox().getMakeAppointmentBox();
 
-        aboutUsDoctorListContainer.setSpacing(10);
-        aboutUsDoctorListContainer.setPadding(new Insets(10, 10, 10, 10));
-        aboutUsDoctorListContainer.setPrefWidth(ScreenTools.getScreenWidth() * 0.2);
-        aboutUsDoctorListContainer.setPrefHeight(ScreenTools.getScreenHeight() * 0.8);
+        aboutUsMakeAppointmentContainer.setSpacing(10);
+        aboutUsMakeAppointmentContainer.setPadding(new Insets(10, 10, 10, 10));
+        aboutUsMakeAppointmentContainer.setPrefWidth(ScreenTools.getScreenWidth() * 0.2);
 
-        aboutUsDoctorListContainer.widthProperty().addListener((observable, oldValue, newValue) -> {
-           aboutUs.setPrefWidth(aboutUsDoctorListContainer.widthProperty().getValue());
-           doctorList.setPrefWidth(aboutUsDoctorListContainer.widthProperty().getValue());
+        aboutUsMakeAppointmentContainer.widthProperty().addListener((observable, oldValue, newValue) -> {
+           aboutUs.setPrefWidth(aboutUsMakeAppointmentContainer.widthProperty().getValue());
+           makeAppointmentBox.setPrefWidth(aboutUsMakeAppointmentContainer.widthProperty().getValue());
         });
 
-        aboutUsDoctorListContainer.heightProperty().addListener((observable, oldValue, newValue) -> {
-            aboutUs.setPrefHeight(aboutUsDoctorListContainer.heightProperty().getValue() * 0.8);
-            doctorList.setPrefHeight(aboutUsDoctorListContainer.heightProperty().getValue() * 0.2);
+        aboutUsMakeAppointmentContainer.heightProperty().addListener((observable, oldValue, newValue) -> {
+            aboutUs.setPrefHeight(aboutUsMakeAppointmentContainer.heightProperty().getValue() * 0.8);
+            makeAppointmentBox.setPrefHeight(aboutUsMakeAppointmentContainer.heightProperty().getValue() * 0.2);
         });
 
-        aboutUsDoctorListContainer.getChildren().addAll(aboutUs, doctorList);
+        aboutUsMakeAppointmentContainer.getChildren().addAll(aboutUs, makeAppointmentBox);
 
+        scheduleContainer = new VBox();
+        scheduleContainer.setAlignment(Pos.CENTER);
 
         //right side
-        Schedule = new Schedule().getSchedule();
+        schedule = new Schedule().getSchedule();
+        schedule.setPrefWidth(ScreenTools.getScreenWidth() * 0.2);
 
-        Schedule.setPrefWidth(ScreenTools.getScreenWidth() * 0.2);
-        Schedule.setPrefHeight(ScreenTools.getScreenHeight() * 0.8);
+        scheduleContainer.setPadding(new Insets(10, 0, 10, 0));
+        scheduleContainer.getChildren().add(schedule);
 
-        home.getChildren().addAll(aboutUsDoctorListContainer, Schedule);
+        home.getChildren().addAll(aboutUsMakeAppointmentContainer, scheduleContainer);
     }
 
     public HBox getHome() {

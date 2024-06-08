@@ -1,7 +1,6 @@
 package Project.Utilities;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.DirectoryStream;
@@ -58,14 +57,14 @@ public class File {
         if (!path.endsWith(".txt")){
             throw new IllegalArgumentException("Invalid file type");
         }
-        path = currentDbDirectory() + path;
+        String filePath = currentDbDirectory() + path;
         //initialize an array that stores the data
         ArrayList<String> data = new ArrayList<>();
 
         //try to open and read the file
         try {
             //create file reader
-            reader = new BufferedReader(new FileReader(path));
+            reader = new BufferedReader(new FileReader(filePath));
 
             String line;
             while ((line = reader.readLine()) != null) {
@@ -128,21 +127,46 @@ public class File {
      *             specify a specific directory in the db directory.
      * @param data The data to be written into the text file.
      *             (Format: "data,data,data")
-     *
      * @throws IOException If an I/O error occurs while reading the file.
      */
     //write to txt file
-    public static void writeToFile(String path, String data, boolean append) throws IOException {
+    public static void appendToFile(String path, String data) throws IOException {
         if (!path.endsWith(".txt")){
             throw new IllegalArgumentException("Invalid file type");
         }
 
-        path = currentDbDirectory() + path;
+        String filePath = currentDbDirectory() + path;
+
         try {
-            writer = new BufferedWriter(new FileWriter(path, append));
+            writer = new BufferedWriter(new FileWriter(filePath,true));
             writer.write(data);
             writer.newLine();
+        } finally {
+            if (writer != null) {
+                writer.close();
+            }
+        }
+    }
 
+    public static void updateFile(String path, ArrayList<String[]> data) throws IOException {
+        if (!path.endsWith(".txt")){
+            throw new IllegalArgumentException("Invalid file type");
+        }
+        String filePath = currentDbDirectory() + path;
+
+        String[] newData = new String[data.size()];
+
+        for (int i = 0; i < data.size(); i++) {
+            newData[i] = formatData(data.get(i));
+        }
+
+
+        try {
+            writer = new BufferedWriter(new FileWriter(filePath, false));
+            for (String i : newData) {
+                writer.write(i);
+                writer.newLine();
+            }
         } finally {
             if (writer != null) {
                 writer.close();
@@ -163,65 +187,17 @@ public class File {
         return String.join(",", dataArray);
     }
 
-    public static void updateFile(String path, ArrayList<String> data) throws IOException {
-        path = currentDbDirectory() + path;
-        writer = new BufferedWriter(new FileWriter(path, false));
-        try {
-            for (String s: data){
-                writer.write(s);
-                writer.newLine();
-            }
-
-        } finally {
-            if (writer != null) {
-                writer.close();
-            }
-        }
-    }
-    //update txt file
-    // Takes in String array of the user's updated data.
-    public static void updatePatientFile(String path, String[] newData) throws IOException{
-        path = currentDbDirectory() + path;
-
-        try {
-            reader = new BufferedReader(new FileReader(path));
-
-            String oldData;
-            ArrayList<String[]> DataArray = new ArrayList<>();
-
-            while ((oldData = reader.readLine()) != null) {
-                String[] oldDataArray = oldData.split(",");
-                DataArray.add(oldDataArray);
-                String ID = oldData.split(",")[0];
-
-                //Updating the specific row with the updated data
-                if (newData[0].equals(ID)) {
-                    int index = Integer.parseInt(ID.substring(2))-1;
-                    DataArray.set(index, newData);
-                }
-            }
-
-            // Writing the updated data back to the file
-            writer = new BufferedWriter(new FileWriter(path, false));
-
-            for (String[] i : DataArray) {
-                String line = String.join(",", i);
-                writer.write(line);
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            if (writer != null) {
-                writer.close();
-            }
-        }
-    }
 
     //testing
     public static void main(String[] args) {
         try {
-            System.out.println(getAllDbFilesFromDirectory("\\users"));
+            ArrayList<String> data = readFile("\\users\\Patient.txt");
+            ArrayList<String[]> dataArray = parseData(data);
+            for (String[] i : dataArray) {
+                for (String j : i) {
+                    System.out.println(j);
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

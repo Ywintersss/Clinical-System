@@ -65,22 +65,20 @@ public class UserEditProfile extends DetailView {
         getDetails().getChildren().remove(getButtonContainer());
         getDetails().getChildren().add(profileScroll);
         getDetails().getChildren().add(getButtonContainer());
-
     }
 
     private Button getSaveButton(Patient oldPatientData, Parent previousPage) {
         Button saveButton = new Button("Save");
         saveButton.setOnAction(e -> {
             try {
-
                 Gender genderField;
+
                 if (gender.getText().equals("Male")) {
-
                     genderField = Gender.MALE;
-
                 } else {
                     genderField = Gender.FEMALE;
                 }
+
                 oldPatientData.setUsername(username.getText());
                 oldPatientData.setPassword(password.getText());
                 oldPatientData.setName(name.getText());
@@ -92,8 +90,8 @@ public class UserEditProfile extends DetailView {
                 oldPatientData.setWeight(Double.parseDouble(weight.getText()));
 
                 String[] newData = {oldPatientData.getID(), username.getText(), password.getText(), name.getText(), email.getText(), contact.getText(), age.getText(), genderField.getGender().toUpperCase(), height.getText(), weight.getText()};
-
-                UserDataManager.updateUser(newData);
+                System.out.println(newData);
+                UserDataManager.updateUser("\\users\\Patient.txt", newData);
 
                 UserSession.getInstance().setCurrentUser(oldPatientData);
 

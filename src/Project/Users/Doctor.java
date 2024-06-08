@@ -46,9 +46,4 @@ public class Doctor extends User {
     public Schedule getSchedule() {
         return schedule;
     }
-
-    public MedicalRecord writeMedicalRecord(String Issue, String prescription, String followUpDate, Appointment appointment) {
-        MedicalRecord medicalRecord = new MedicalRecord(Issue, prescription, followUpDate, appointment);
-        return medicalRecord;
-    }
 }

@@ -11,7 +11,7 @@ public class Utilities {
     private static final DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     //txt file last ID +1
-    public static String generateID(String objPath) {
+    public static String generateID(String prefix, String objPath) {
         String ID;
         try {
             ArrayList<String> data = File.readFile(objPath);
@@ -31,7 +31,7 @@ public class Utilities {
                 }
                 IDIndex++;
             }
-            return "ID" + IDIndex;
+            return prefix + IDIndex;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,7 +54,7 @@ public class Utilities {
     }
 
     public static void main(String[] args) {
-        System.out.println(generateID("\\users\\Patient.txt"));
+        System.out.println(generateID("PA","\\users\\Patient.txt"));
         System.out.println(getCurrentDate());
         System.out.println(getCurrentDate(1));
         System.out.println(getCurrentTime());
