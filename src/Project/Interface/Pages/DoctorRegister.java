@@ -20,7 +20,7 @@ public class DoctorRegister extends Register {
         addContentContainer("Specialization");
         addContentContainer("Position");
 
-        addButtonContainer();
+        //addButtonContainer();
     }
 
     @Override

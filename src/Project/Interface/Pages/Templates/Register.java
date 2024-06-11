@@ -1,7 +1,11 @@
 package Project.Interface.Pages.Templates;
 
 import Project.ClinicalSystem;
+import Project.Users.Gender;
 import Project.Utilities.ScreenTools;
+import Project.Utilities.Utilities;
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -11,6 +15,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+
+import java.util.ArrayList;
 
 public abstract class Register {
     private VBox registerForm;
@@ -59,15 +65,19 @@ public abstract class Register {
         contentContainer.getChildren().addAll(contentLabel, contentField);
     }
 
-    public void addButtonContainer(){
-        register = new Button("Register");
-        register.setPrefHeight(40);
-        register.setPrefWidth(100);
+    public ArrayList<String> getTextFieldsData() {
+        ArrayList<String> data = new ArrayList<>();
+        ObservableList<Node> children = registerForm.getChildren();
+        for (int i = 1; i < registerForm.getChildren().size(); i++) {
+            ObservableList<Node> content = ((HBox) children.get(i)).getChildren();
+            if (content.get(1) instanceof TextField) {
+                data.add(((TextField) content.get(1)).getText());
+            }
+        }
+        return data;
+    }
 
-        register.setOnAction(e ->{
-            //ClinicalSystem.register(username.getText(), password.getText(), name.getText(), email.getText(), phoneNumber.getText(), gender.getText(), height.getText(), weight.getText());
-        });
-
+    public void addButtonContainer(Button register){
         back = new Button("Back");
         back.setPrefHeight(40);
         back.setPrefWidth(100);

@@ -12,7 +12,7 @@ public class AdminRegister extends Register {
         addContentContainer("Username");
         addContentContainer("Password");
 
-        addButtonContainer();
+        //addButtonContainer();
     }
 
     @Override
