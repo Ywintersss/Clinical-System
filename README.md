@@ -2,6 +2,7 @@
 
 ## Libraries/Technologies used
 * [JavaFX version 21.0.3](https://gluonhq.com/products/javafx/)
+* Java
 * IntelliJ IDEA
 
 ### Setup JavaFX

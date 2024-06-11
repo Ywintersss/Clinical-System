@@ -62,9 +62,8 @@ public class UserEditProfile extends DetailView {
         addButtonIntoContainer(saveButton);
 
         getDetails().getChildren().removeAll();
-        getDetails().getChildren().remove(getButtonContainer());
         getDetails().getChildren().add(profileScroll);
-        getDetails().getChildren().add(getButtonContainer());
+        moveButtonContainerToBottom();
     }
 
     private Button getSaveButton(Patient oldPatientData) {

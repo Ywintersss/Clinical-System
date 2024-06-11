@@ -24,7 +24,7 @@ public class MedicalRecordCard {
         contentContainer = new VBox();
         contentContainer.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(8), Insets.EMPTY)));
         contentContainer.setPadding(new Insets(10));
-        VBox.setMargin(contentContainer, new Insets(0, 0, 0, 35));
+        VBox.setMargin(contentContainer, new Insets(0, 20, 0, 20));
 
         issueContainer = new HBox();
         issueContainer.setSpacing(20);

@@ -10,7 +10,6 @@ import javafx.scene.paint.Color;
 
 public class AdminMainPage {
     private GridPane adminMainPage;
-
     private VBox userAcc;
     private Label userAccLabel;
     private HBox userAccContainer;
@@ -27,7 +26,7 @@ public class AdminMainPage {
     private VBox medicalRecord;
     private Label medicalRecordLabel;
     private HBox medicalRecordContainer;
-    private Button updateMedicalRecordBtn;
+    private Button viewMedicalRecordBtn;
 
     private VBox paymentRecord;
     private Label paymentRecordLabel;
@@ -54,15 +53,15 @@ public class AdminMainPage {
 
         patientBtn = new Button("Patients");
         patientBtn.setPrefHeight(30);
-        patientBtn.setPrefWidth(90);
+        patientBtn.setPrefWidth(100);
 
         patientBtn.setOnAction(e -> {
-            ClinicalSystem.navigateTo(new ViewPatientList().getTable());
+            ClinicalSystem.navigateTo(new ViewPatientList(1).getTable());
         });
 
         doctorBtn = new Button("Doctors");
         doctorBtn.setPrefHeight(30);
-        doctorBtn.setPrefWidth(90);
+        doctorBtn.setPrefWidth(100);
 
         doctorBtn.setOnAction(e -> {
             ClinicalSystem.navigateTo(new ViewDoctorList().getTable());
@@ -70,7 +69,7 @@ public class AdminMainPage {
 
         adminBtn = new Button("Admins");
         adminBtn.setPrefHeight(30);
-        adminBtn.setPrefWidth(90);
+        adminBtn.setPrefWidth(100);
 
         adminBtn.setOnAction(e -> {
             ClinicalSystem.navigateTo(new ViewAdminList().getTable());
@@ -93,11 +92,15 @@ public class AdminMainPage {
 
         addAppointmentBtn = new Button("Add");
         addAppointmentBtn.setPrefHeight(30);
-        addAppointmentBtn.setPrefWidth(90);
+        addAppointmentBtn.setPrefWidth(100);
 
-        approveAppointmentBtn = new Button("Approve");
+        addAppointmentBtn.setOnAction(e -> {
+            ClinicalSystem.navigateTo(new DateDoctorSelection().getDateSelection());
+        });
+
+        approveAppointmentBtn = new Button("Approvals");
         approveAppointmentBtn.setPrefHeight(30);
-        approveAppointmentBtn.setPrefWidth(90);
+        approveAppointmentBtn.setPrefWidth(100);
 
         appointmentContainer.setAlignment(Pos.CENTER);
         appointmentContainer.setSpacing(10);
@@ -114,15 +117,18 @@ public class AdminMainPage {
         medicalRecordContainer = new HBox();
         medicalRecordContainer.setPadding(new Insets(15, 0, 0, 0));
 
-        updateMedicalRecordBtn = new Button("Update");
-        updateMedicalRecordBtn.setPrefHeight(30);
-        updateMedicalRecordBtn.setPrefWidth(90);
+        viewMedicalRecordBtn = new Button("View");
+        viewMedicalRecordBtn.setPrefHeight(30);
+        viewMedicalRecordBtn.setPrefWidth(100);
+
+        viewMedicalRecordBtn.setOnAction(e -> {
+            ClinicalSystem.navigateTo(new ViewPatientList(2).getTable());
+        });
 
         medicalRecordContainer.setAlignment(Pos.CENTER);
         medicalRecordContainer.setSpacing(10);
-        medicalRecordContainer.getChildren().addAll(updateMedicalRecordBtn);
+        medicalRecordContainer.getChildren().addAll(viewMedicalRecordBtn);
         medicalRecord.getChildren().addAll(medicalRecordLabel, medicalRecordContainer);
-
 
         paymentRecord = new VBox();
         paymentRecord.setPrefHeight(140);
@@ -135,7 +141,7 @@ public class AdminMainPage {
 
         viewPaymentRecordBtn = new Button("Add");
         viewPaymentRecordBtn.setPrefHeight(30);
-        viewPaymentRecordBtn.setPrefWidth(90);
+        viewPaymentRecordBtn.setPrefWidth(100);
 
         viewPaymentRecordBtn.setOnAction(e -> {
             ClinicalSystem.navigateTo(new ViewPaymentRecord().getTable());

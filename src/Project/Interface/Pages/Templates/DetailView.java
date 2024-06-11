@@ -90,10 +90,15 @@ public abstract class DetailView {
 
         buttonContainer.getChildren().add(button);
     }
-
     public void addButtonIntoContainer(Button FuncButton) {
         buttonContainer.getChildren().add(FuncButton);
     }
+
+    public void moveButtonContainerToBottom(){
+        details.getChildren().remove(buttonContainer);
+        details.getChildren().add(buttonContainer);
+    }
+
 
     public VBox getContentContainer() {
         return contentContainer;

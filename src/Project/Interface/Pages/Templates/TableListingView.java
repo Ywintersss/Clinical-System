@@ -1,14 +1,10 @@
 package Project.Interface.Pages.Templates;
 
 import Project.ClinicalSystem;
-import Project.Users.Patient;
-import Project.Utilities.ScreenTools;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
@@ -22,6 +18,7 @@ public abstract class TableListingView {
 
         public TableListingView(String title) {
             table = new TableView();
+            table.setEditable(false);
 
             tableLabel = new Label(title);
             tableLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 25));
@@ -46,6 +43,19 @@ public abstract class TableListingView {
 
         public VBox getTable() {
             return tableContainer;
+        }
+
+        public TableView getTableView() {
+            return table;
+        }
+
+        public void removeTableView() {
+            tableContainer.getChildren().remove(table);
+        }
+
+        public void moveButtonsToBottom() {
+            tableContainer.getChildren().remove(buttonContainer);
+            tableContainer.getChildren().add(buttonContainer);
         }
 
         public void addColumn(TableColumn newColumn) {
@@ -87,6 +97,8 @@ public abstract class TableListingView {
             btnColumn.setSortable(false);
             addColumn(btnColumn);
         }
+
+
 
         public void evenWidth() {
             table.widthProperty().addListener((observable, oldValue, newValue) -> {

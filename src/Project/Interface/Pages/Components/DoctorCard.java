@@ -10,8 +10,8 @@ public class DoctorCard {
     private HBox doctorCard;
     private Image doctorImage;
     private VBox doctorDetails;
-    private Label specializationLabel;
     private Label doctorNameLabel;
+    private Label specializationLabel;
     private Label experienceLabel;
     private Label timeLabel;
     public DoctorCard(String specialization, String doctorName, String experience, String time) {
@@ -26,16 +26,16 @@ public class DoctorCard {
         doctorDetails = new VBox();
         doctorDetails.setSpacing(5);
 
-        this.specializationLabel = new Label("Specialization: " + specialization);
-
         this.doctorNameLabel = new Label("Name: " + doctorName);
+
+        this.specializationLabel = new Label("Specialization: " + specialization);
 
         this.experienceLabel = new Label("Experience: " + experience);
 
         this.timeLabel = new Label(time);
 
 
-        doctorDetails.getChildren().addAll(specializationLabel, doctorNameLabel, experienceLabel, timeLabel);
+        doctorDetails.getChildren().addAll(doctorNameLabel, specializationLabel, experienceLabel, timeLabel);
 
         doctorCard.getChildren().addAll(doctorDetails);
     }

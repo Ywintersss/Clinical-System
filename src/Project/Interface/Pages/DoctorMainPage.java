@@ -89,6 +89,10 @@ public class DoctorMainPage {
 		PatientMedicalRecordButton.setStyle("-fx-font-weight: bold;-fx-font-size: 15px;-fx-text-alignment: center;");
 		PatientMedicalRecordButton.setPadding(new Insets(10, 10, 10, 10));
 
+		PatientMedicalRecordButton.setOnAction(e -> {
+			ClinicalSystem.navigateTo(new ViewPatientList(2).getTable());
+		});
+
 		quickNavContainer.getChildren().addAll(AppointmentListButton, PatientMedicalRecordButton);
 
 		dailyScheduleContainer.getChildren().addAll(titleContainer, scheduleContainer);
