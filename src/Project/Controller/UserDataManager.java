@@ -1,5 +1,8 @@
 package Project.Controller;
 
+import Project.Interface.Pages.PaymentHistory;
+import Project.Payments.Payment;
+import Project.Payments.PaymentMethod;
 import Project.Users.*;
 import Project.Utilities.File;
 import Project.Utilities.Utilities;
@@ -146,6 +149,23 @@ public class UserDataManager {
             }
 
             return FXAdminData;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ObservableList<Payment> getAllPaymentHistory() {
+        try {
+            ArrayList<String> userData = File.readFile("\\payments\\PaymentHistory.txt");
+            ArrayList<String[]> parsePaymentData = File.parseData(userData);
+
+            ObservableList<Payment> FXPaymentData = FXCollections.observableArrayList();
+
+            for (String[] data : parsePaymentData) {
+                FXPaymentData.add(new Payment(data[0], data[1], data[2], PaymentMethod.valueOf(data[3]), data[4]));
+            }
+
+            return FXPaymentData;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

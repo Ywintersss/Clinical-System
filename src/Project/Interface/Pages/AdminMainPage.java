@@ -133,9 +133,13 @@ public class AdminMainPage {
         paymentRecordContainer = new HBox();
         paymentRecordContainer.setPadding(new Insets(15, 0, 0, 0));
 
-        viewPaymentRecordBtn = new Button("View");
+        viewPaymentRecordBtn = new Button("Add");
         viewPaymentRecordBtn.setPrefHeight(30);
         viewPaymentRecordBtn.setPrefWidth(90);
+
+        viewPaymentRecordBtn.setOnAction(e -> {
+            ClinicalSystem.navigateTo(new ViewPaymentRecord().getTable());
+        });
 
         paymentRecordContainer.setAlignment(Pos.CENTER);
         paymentRecordContainer.setSpacing(10);
