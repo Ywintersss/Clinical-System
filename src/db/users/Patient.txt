@@ -1,6 +1,6 @@
-ID1,Bloople,#pinis,Erica,erica@gmail.com,012-111 8888,12,FEMALE,186.2,67.0
-ID2,Username2,Password2,Eric,eric@gmail.com,012-111 9999,13,MALE,155,54
-ID3,Username3,Password3,Elon,elon@gmail.com,012-111 1010,14,MALE,188,88
-ID4,Username4,Password4,Erison,elon@gmail.com,012-111 1010,14,MALE,174,86
-PA5,tjtoo04,123456,tze jiat,mail@mail.com,0122222222,21,Male,169,60
-PA6,shawnny,poopiee,shanw,nwahs@liam.moc,019999999,99,Female,192,92
+PA1,Bloople,#pinis,Erica,erica@gmail.com,012-111 8888,12,FEMALE,186.2,67.0
+PA2,Username2,Password2,Eric,eric@gmail.com,012-111 9999,13,MALE,155,54
+PA3,Username3,Password3,Elon,elon@gmail.com,012-111 1010,14,MALE,188,88
+PA4,Username4,Password4,Erison,elon@gmail.com,012-111 1010,14,MALE,174,86
+PA5,tjtoo04,123456,tze jiat,mail@mail.com,012-222 2222,21,MALE,169,60
+PA6,shawnny,poopiee,shanw,nwahs@liam.moc,019-999 9999,99,FEMALE,192,92

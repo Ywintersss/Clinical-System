@@ -1,6 +1,7 @@
 package Project.Interface.Pages.Templates;
 
 import Project.ClinicalSystem;
+import Project.Interface.Pages.Components.Notification;
 import Project.Users.Gender;
 import Project.Utilities.ScreenTools;
 import Project.Utilities.Utilities;
@@ -11,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
@@ -19,6 +21,8 @@ import javafx.scene.text.FontWeight;
 import java.util.ArrayList;
 
 public abstract class Register {
+    private VBox registerContainer;
+    private ScrollPane registerScroll;
     private VBox registerForm;
     private Label registerTitle;
 
@@ -27,6 +31,7 @@ public abstract class Register {
     private TextField contentField;
 
     private HBox buttonContainer;
+    private Region spacer;
     private Button register;
     private Button back;
 
@@ -34,19 +39,25 @@ public abstract class Register {
         registerForm = new VBox();
         registerForm.setSpacing(25);
         registerForm.setPadding(new Insets(10, 10, 10, 10));
-        registerForm.setPrefWidth(ScreenTools.getScreenWidth() * 0.3);
-        registerForm.setPrefHeight(ScreenTools.getScreenHeight() * 0.8);
         registerForm.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");
 
         registerTitle = new Label(title);
         registerTitle.setFont(Font.font("Verdana", FontWeight.BOLD, 25));
         VBox.setMargin(registerTitle, new Insets(12, 0, 0, 40));
 
+        registerScroll = new ScrollPane();
+        registerScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        registerScroll.setFitToWidth(true);
+        registerScroll.setContent(registerForm);
+
+        registerContainer = new VBox();
+        registerContainer.getChildren().addAll(registerTitle, registerScroll);
+
         registerForm.getChildren().addAll(registerTitle);
     }
 
     public VBox getRegisterForm() {
-        return registerForm;
+        return registerContainer;
     }
 
     public void addContentContainer(String labelTitle) {
@@ -59,7 +70,7 @@ public abstract class Register {
 
         contentField = new TextField();
         contentField.setPromptText(labelTitle);
-        contentField.setPrefWidth(ScreenTools.getScreenWidth() * 0.3);
+        //contentField.setPrefWidth(ScreenTools.getScreenWidth() * 0.3);
 
         registerForm.getChildren().add(contentContainer);
         contentContainer.getChildren().addAll(contentLabel, contentField);
@@ -85,10 +96,12 @@ public abstract class Register {
             ClinicalSystem.back();
         });
 
+        spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
         buttonContainer = new HBox();
-        VBox.setMargin(buttonContainer, new Insets(0, 0, 0, 240));
         buttonContainer.setSpacing(10);
-        buttonContainer.getChildren().addAll(back,register);
+        buttonContainer.getChildren().addAll(back, spacer, register);
 
         registerForm.getChildren().add(buttonContainer);
     }
@@ -101,5 +114,12 @@ public abstract class Register {
         return buttonContainer;
     }
 
-
+    public void register(int flag, String ...data) {
+        try {
+            ClinicalSystem.register(flag, data);
+            Notification.information("Registration Successful");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

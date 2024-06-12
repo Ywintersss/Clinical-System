@@ -1,4 +1,4 @@
-DO1,James,1234,James,james@gmail.com,012-111 1010,34,MALE,11,chiropractor,Head,9am-6pm
-DO2,Kelly,1234,Kelly,kelly@gmail.com,012-222 1010,28,MALE,11,hearts,Head,9am-6pm
-DO3,Jack,1234,Jack,jack@gmail.com,012-333 1010,14,MALE,44,family,Head,9am-6pm
-DO4,Elon,1234,Elon,elon@gmail.com,012-444 1010,14,MALE,52,family,Head,2pm-11pm
+DO1,James,1234,James,james@gmail.com,012-111 1010,34,MALE,11,chiropractor,Head
+DO2,Kelly,1234,Kelly,kelly@gmail.com,012-222 1010,28,MALE,11,hearts,Head
+DO3,Jack,1234,Jack,jack@gmail.com,012-333 1010,14,MALE,44,family,Head
+DO4,Elon,1234,Elon,elon@gmail.com,012-444 1010,14,MALE,52,family,Head

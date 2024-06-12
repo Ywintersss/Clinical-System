@@ -9,7 +9,6 @@ public class Patient extends User {
     private double height, weight;
     private ArrayList<Appointment> appointments;
     private ArrayList<MedicalRecord> medicalRecords;
-
     private ArrayList<Payment> paymentHistory;
 
     public Patient(String ID, String username, String password, String name, String email, String contact, int age, Gender gender, double height, double weight) {

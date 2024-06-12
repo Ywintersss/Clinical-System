@@ -50,11 +50,10 @@ public class PatientRegister extends Register {
             } else {
                 genderField = Gender.FEMALE;
             }
-            ClinicalSystem.register(1, username, password, name, email, phoneNumber, age, genderField.getGender(), height, weight);
+            register(1, username, password, name, email, phoneNumber, age, genderField.getGender(), height, weight);
         });
 
         addButtonContainer(register);
-
     }
 
     @Override

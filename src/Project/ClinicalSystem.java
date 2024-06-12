@@ -62,9 +62,9 @@ public class ClinicalSystem {
         if (flag == 1) {
             userDataManager.addPatient(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
         } else if (flag == 2) {
-            //userDataManager.addAdmin();
+            userDataManager.addDoctor(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9]);
         } else if (flag == 3) {
-            //userDataManager.addDoctor();
+            //userDataManager.addAdmin();
         }
     }
     public static Layout getLayout() {

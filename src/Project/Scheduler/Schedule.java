@@ -6,25 +6,34 @@ import java.util.Date;
 
 // Schedule class, schedule for each individual doctor
 public class Schedule {
+    private String scheduleID;
+    private String doctorID;
     private ArrayList<Appointment> appointments; // List of appointments
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private String startTime;
+    private String endTime;
 
     public Schedule() {
+        this.scheduleID = scheduleID;
+        this.doctorID = doctorID;
+        this.startTime = startTime;
+        this.endTime = endTime;
         // Initialize the list of appointments for the doctor
         this.appointments = new ArrayList<>();
     }
+    public String getScheduleID() {
+        return scheduleID;
+    }
 
-    public LocalDateTime getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
+
     public ArrayList<Appointment> getAppointments() {
         return appointments;
-
     }
 
     public void addAppointments(Appointment appointments) {

@@ -2,6 +2,7 @@ package Project.Controller;
 
 import Project.Interface.Pages.PaymentHistory;
 import Project.Payments.Payment;
+import Project.Payments.PaymentHandler;
 import Project.Payments.PaymentMethod;
 import Project.Users.*;
 import Project.Utilities.File;
@@ -24,25 +25,34 @@ public class UserDataManager {
     // Add user to txt file
     public void addPatient(String ...userData) {
         if (userData.length < 9) {
-            System.out.println("less");
             return;
         }
         String path = "\\users\\Patient.txt";
         String ID = Utilities.generateID("PA", path) + ",";
+
+        String medicalRecordPath = "\\records\\MedicalRecords.txt";
+        String medicalRecordID = Utilities.generateID("MR", medicalRecordPath) + ",";
+
         String data = File.formatData(userData);
         try {
             File.appendToFile(path, ID + data);
+            File.appendToFile(medicalRecordPath, medicalRecordID);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void addDoctor(String ...userData) {
-        String path = "\\users\\Doctor.txt";
-        String ID = Utilities.generateID("DO", path) + ",";
+        String doctorPath = "\\users\\Doctor.txt";
+        String ID = Utilities.generateID("DO", doctorPath) + ",";
+
+        String schedulePath = "\\schedules\\Schedules.txt";
+        String ScheduleID = Utilities.generateID("SC", schedulePath) + ",";
+
         String data = File.formatData(userData);
         try {
-            File.appendToFile(path, data);
+            File.appendToFile(doctorPath, ID + data);
+            File.appendToFile(schedulePath, ScheduleID);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -128,7 +138,7 @@ public class UserDataManager {
 
             for (String[] data : parseDoctorData) {
                 FXDoctorData.add(new Doctor(data[0], data[1], data[2], data[3], data[4], data[5],
-                        Integer.parseInt(data[6]),Gender.valueOf(data[7]), Integer.parseInt(data[8]), data[9], data[10]));
+                        Integer.parseInt(data[6]), Gender.valueOf(data[7]), Integer.parseInt(data[8]), data[9], data[10]));
             }
 
             return FXDoctorData;
@@ -154,24 +164,7 @@ public class UserDataManager {
         }
     }
 
-    public ObservableList<Payment> getAllPaymentHistory() {
-        try {
-            ArrayList<String> userData = File.readFile("\\payments\\PaymentHistory.txt");
-            ArrayList<String[]> parsePaymentData = File.parseData(userData);
-
-            ObservableList<Payment> FXPaymentData = FXCollections.observableArrayList();
-
-            for (String[] data : parsePaymentData) {
-                FXPaymentData.add(new Payment(data[0], data[1], data[2], PaymentMethod.valueOf(data[3]), data[4]));
-            }
-
-            return FXPaymentData;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static void updateUser(String path, String[] data) {
+    public void updateUser(String path, String[] data) {
         String userID = data[0];
         System.out.println(data);
 
@@ -192,6 +185,9 @@ public class UserDataManager {
         }
     }
 
+    public ObservableList<Payment> getAllPaymentHistory() {
+        return PaymentHandler.getAllPaymentHistory();
+    }
     public static void main(String[] args) {
         //addPatient("test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test");
     }

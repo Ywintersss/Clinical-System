@@ -91,7 +91,7 @@ public class UserEditProfile extends DetailView {
                 String[] newData = {oldPatientData.getID(), username.getText(), password.getText(), name.getText(), email.getText(),
                         contact.getText(), age.getText(), genderField.getGender().toUpperCase(),
                         height.getText(), weight.getText()};
-                UserDataManager.updateUser("\\users\\Patient.txt", newData);
+                ClinicalSystem.getUserDataManager().updateUser("\\users\\Patient.txt", newData);
 
                 UserSession.getInstance().setCurrentUser(oldPatientData);
 
