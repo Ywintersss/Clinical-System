@@ -26,7 +26,7 @@ public class PopUpPatient extends PopUp {
 
         appointments = new Button("Appointment");
         appointments.setOnAction(e -> {
-            ClinicalSystem.navigateTo(new Appointment().getTable());
+            ClinicalSystem.navigateTo(new AppointmentHistory().getTable());
         });
 
 

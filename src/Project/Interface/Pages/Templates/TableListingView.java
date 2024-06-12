@@ -112,6 +112,7 @@ public abstract class TableListingView {
         public void initTableData(ObservableList data) {
             table.setItems(data);
         }
+        
         public void addFunctionalButton(Button FuncButton) {
             Region spacer = new Region();
             FuncButton.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");

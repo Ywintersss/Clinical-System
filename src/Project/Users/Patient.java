@@ -7,19 +7,25 @@ import java.util.ArrayList;
 
 public class Patient extends User {
     private double height, weight;
+    private String medicalRecordID;
     private ArrayList<Appointment> appointments;
     private ArrayList<MedicalRecord> medicalRecords;
     private ArrayList<Payment> paymentHistory;
 
-    public Patient(String ID, String username, String password, String name, String email, String contact, int age, Gender gender, double height, double weight) {
+    public Patient(String ID, String username, String password, String name, String email, String contact,
+                   int age, Gender gender, double height, double weight, String medicalRecordID) {
         super(ID, username, password, name, email, contact, age, gender);
         this.height = height;
         this.weight = weight;
+        this.medicalRecordID = medicalRecordID;
         this.appointments = new ArrayList<>();
         this.medicalRecords = new ArrayList<>();
         this.paymentHistory = new ArrayList<>();
     }
 
+    public String getMedicalRecordID() {
+        return medicalRecordID;
+    }
 
     public double getHeight() {
         return height;

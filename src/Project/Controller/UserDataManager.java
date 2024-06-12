@@ -1,5 +1,7 @@
 package Project.Controller;
 
+import Project.ClinicalSystem;
+import Project.Interface.Pages.MedicalRecord;
 import Project.Interface.Pages.PaymentHistory;
 import Project.Payments.Payment;
 import Project.Payments.PaymentHandler;
@@ -35,8 +37,7 @@ public class UserDataManager {
 
         String data = File.formatData(userData);
         try {
-            File.appendToFile(path, ID + data);
-            File.appendToFile(medicalRecordPath, medicalRecordID);
+            File.appendToFile(path, ID + medicalRecordID + data);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -51,8 +52,7 @@ public class UserDataManager {
 
         String data = File.formatData(userData);
         try {
-            File.appendToFile(doctorPath, ID + data);
-            File.appendToFile(schedulePath, ScheduleID);
+            File.appendToFile(doctorPath, ID + ScheduleID + data);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -94,12 +94,12 @@ public class UserDataManager {
                         if(file.contains("Patient")){
                             return new Patient(dataArray[0], dataArray[1], dataArray[2], dataArray[3], dataArray[4], dataArray[5],
                                     Integer.parseInt(dataArray[6]), Gender.valueOf(dataArray[7]),
-                                    Double.parseDouble(dataArray[8]), Double.parseDouble(dataArray[9]));
+                                    Double.parseDouble(dataArray[8]), Double.parseDouble(dataArray[9]), dataArray[10]);
                         }
                         else if(file.contains("Doctor")){
                             return new Doctor(dataArray[0], dataArray[1], dataArray[2], dataArray[3], dataArray[4], dataArray[5],
                                     Integer.parseInt(dataArray[6]), Gender.valueOf(dataArray[7]),
-                                    Integer.parseInt(dataArray[8]), dataArray[9], dataArray[10]);
+                                    Integer.parseInt(dataArray[8]), dataArray[9], dataArray[10], dataArray[11]);
                         } else if (file.contains("Admin")) {
                             return new Admin(dataArray[0], dataArray[1], dataArray[2]);
                         }
@@ -120,7 +120,7 @@ public class UserDataManager {
             ObservableList<Patient> FXPatientData = FXCollections.observableArrayList();
             for (String[] data : parsePatientData) {
                 FXPatientData.add(new Patient(data[0], data[1], data[2], data[3], data[4], data[5],
-                        Integer.parseInt(data[6]),Gender.valueOf(data[7]), Double.parseDouble(data[8]), Double.parseDouble(data[9])));
+                        Integer.parseInt(data[6]),Gender.valueOf(data[7]), Double.parseDouble(data[8]), Double.parseDouble(data[9]), data[10]));
             }
 
             return FXPatientData;
@@ -138,7 +138,7 @@ public class UserDataManager {
 
             for (String[] data : parseDoctorData) {
                 FXDoctorData.add(new Doctor(data[0], data[1], data[2], data[3], data[4], data[5],
-                        Integer.parseInt(data[6]), Gender.valueOf(data[7]), Integer.parseInt(data[8]), data[9], data[10]));
+                        Integer.parseInt(data[6]), Gender.valueOf(data[7]), Integer.parseInt(data[8]), data[9], data[10], data[11]));
             }
 
             return FXDoctorData;
@@ -183,10 +183,6 @@ public class UserDataManager {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public ObservableList<Payment> getAllPaymentHistory() {
-        return PaymentHandler.getAllPaymentHistory();
     }
     public static void main(String[] args) {
         //addPatient("test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test");

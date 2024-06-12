@@ -1,19 +1,36 @@
 package Project.Interface.Pages;
 
+import Project.ClinicalSystem;
 import Project.Interface.Pages.Templates.TableListingView;
-import javafx.scene.Parent;
+import Project.Scheduler.Appointment;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class AppointmentList extends TableListingView {
+    private Button completeButton;
+    private ObservableList<Appointment> appointments;
     public AppointmentList() {
         super("Appointment List");
 
-        addColumn("Patient");
+        appointments = ClinicalSystem.getScheduler().getAllAppointments();
+
         addColumn("Doctor");
-        addColumn("Date Time");
+        addColumn("Patient");
+        addColumn("Date");
+        addColumn("Time");
         addColumn("Description");
+
+        completeButton = new Button("Complete");
+        completeButton.setOnAction(e -> {
+            return;
+        });
+
+        addColumnButtons(completeButton);
+
+        initTableData(appointments);
+
+        evenWidth();
     }
 
     @Override

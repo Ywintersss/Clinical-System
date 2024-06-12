@@ -11,12 +11,14 @@ public class Schedule {
     private ArrayList<Appointment> appointments; // List of appointments
     private String startTime;
     private String endTime;
+    private String date;
 
     public Schedule() {
         this.scheduleID = scheduleID;
         this.doctorID = doctorID;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.date = date;
         // Initialize the list of appointments for the doctor
         this.appointments = new ArrayList<>();
     }

@@ -15,7 +15,7 @@ public class ViewPaymentRecord extends TableListingView {
     public ViewPaymentRecord() {
         super("Payment Record");
 
-        paymentHistory = ClinicalSystem.getUserDataManager().getAllPaymentHistory();
+        paymentHistory = ClinicalSystem.getPaymentHandler().getAllPaymentHistory();
 
         addColumn("PaymentID");
         addColumn("PatientID");

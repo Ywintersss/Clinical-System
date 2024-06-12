@@ -2,6 +2,7 @@ package Project.Interface.Pages.Components;
 
 import Project.ClinicalSystem;
 import Project.Interface.Pages.DateDoctorSelection;
+import Project.UserSession;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -29,6 +30,10 @@ public class MakeAppointmentBox {
 
         makeAppointmentButton = new Button("View Schedules >");
         makeAppointmentButton.setOnAction(e -> {
+            if (UserSession.getInstance().getCurrentUser() == null) {
+                Notification.error("Please Login First");
+                return;
+            }
             ClinicalSystem.navigateTo(new DateDoctorSelection().getDateSelection());
         });
 

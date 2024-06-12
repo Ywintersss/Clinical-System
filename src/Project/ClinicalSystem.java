@@ -5,9 +5,11 @@ import Project.Interface.Pages.*;
 
 
 import Project.Interface.Pages.Components.*;
+import Project.Records.Recorder;
 import Project.Scheduler.Appointment;
 import Project.Scheduler.Scheduler;
 import Project.Scheduler.Schedule;
+import Project.Payments.PaymentHandler;
 import Project.Controller.UserDataManager;
 import Project.Interface.Pages.Components.PopUpAdmin;
 import Project.Interface.Pages.Components.PopUpDefault;
@@ -22,6 +24,9 @@ import java.util.Stack;
 public class ClinicalSystem {
     private static final Stack<Parent> pageStack = new Stack<>();
     private static final UserDataManager userDataManager = UserDataManager.getInstance();
+    private static final PaymentHandler paymentHandler = PaymentHandler.getInstance();
+    private static final Scheduler scheduler = Scheduler.getInstance();
+    private static final Recorder recorder = Recorder.getInstance();
     private static Layout layout;
 
     public static void login(String username, String password) {
@@ -76,6 +81,15 @@ public class ClinicalSystem {
 
     public static UserDataManager getUserDataManager() {
         return userDataManager;
+    }
+    public static PaymentHandler getPaymentHandler() {
+        return paymentHandler;
+    }
+    public static Scheduler getScheduler() {
+        return scheduler;
+    }
+    public static Recorder getRecorder() {
+        return recorder;
     }
 
     public static void navigateTo(Parent newPage) {

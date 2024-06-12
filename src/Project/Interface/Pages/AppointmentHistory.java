@@ -1,10 +1,9 @@
 package Project.Interface.Pages;
 
 import Project.Interface.Pages.Templates.TableListingView;
-import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
-public class Appointment extends TableListingView {
-    public Appointment() {
+public class AppointmentHistory extends TableListingView {
+    public AppointmentHistory() {
         super("Appointment History");
 
         addColumn("Doctor");

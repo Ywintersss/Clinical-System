@@ -10,13 +10,21 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class PaymentHandler {
-    public static void makePayment (String paymentID,  String patientID, String amount, PaymentMethod paymentMethod, String date){
+    private static PaymentHandler instance;
+    private PaymentHandler() {}
+    public static PaymentHandler getInstance() {
+        if(instance == null) {
+            instance = new PaymentHandler();
+        }
+        return instance;
+    }
+    public void makePayment (String paymentID,  String patientID, String amount, PaymentMethod paymentMethod, String date){
         Payment payment = new Payment(paymentID, patientID,  amount, paymentMethod, date);
 
         // write into PaymentHistory.txt
     }
 
-    public static ObservableList<Payment> getAllPaymentHistory() {
+    public ObservableList<Payment> getAllPaymentHistory() {
         try {
             ArrayList<String> userData = File.readFile("\\payments\\PaymentHistory.txt");
             ArrayList<String[]> parsePaymentData = File.parseData(userData);

@@ -6,8 +6,16 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Recorder {
+    private static Recorder instance;
+    private Recorder() { }
+    public static Recorder getInstance() {
+        if(instance == null) {
+            instance = new Recorder();
+        }
+        return instance;
+    }
 
-    public static void addRecord(String patientID, String Issue, String prescription, String followUpDate, String appointmentID) {
+    public void addRecord(String patientID, String Issue, String prescription, String followUpDate, String appointmentID) {
         String recordID = Utilities.generateID("RC","\\records\\MedicalRecords.txt");
 
         // write to txt file
@@ -19,7 +27,7 @@ public class Recorder {
         }
     }
 
-    public static void removeRecord(String RecordID, String PatientID) {
+    public void removeRecord(String RecordID, String PatientID) {
         try {
             ArrayList<String> oldRecord = File.readFile("\\records\\MedicalRecords.txt");
             ArrayList<String[]> oldRecordArray = File.parseData(oldRecord);
@@ -35,7 +43,7 @@ public class Recorder {
 
     }
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
         //addRecord("PA1", "test", "test", "test", "AP1");
         removeRecord("RC1", "PA1");
     }

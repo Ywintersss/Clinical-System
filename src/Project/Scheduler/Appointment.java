@@ -9,16 +9,14 @@ public class Appointment {
     private final String appointmentID;
     private final String scheduleID;
     private final String patientID;
-    private final String doctorID;
-    private String dateTime;
+    private String time;
     private String description;
 
-    public Appointment(String appointmentID, String scheduleID, String patientID, String doctorID, String dateTime, String description) {
+    public Appointment(String appointmentID, String scheduleID, String patientID, String time, String description) {
         this.appointmentID = appointmentID;
         this.scheduleID = scheduleID;
         this.patientID = patientID;
-        this.doctorID = doctorID;
-        this.dateTime = dateTime;
+        this.time = time;
         this.description = description;
     }
 
@@ -34,20 +32,16 @@ public class Appointment {
         return patientID;
     }
 
-    public String getDoctorID() {
-        return doctorID;
-    }
-
-    public String getDateTime() {
-        return dateTime;
+    public String getTimeTime() {
+        return time;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDate(String dateTime) {
-        this.dateTime = dateTime;
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public void setDescription(String description) {
