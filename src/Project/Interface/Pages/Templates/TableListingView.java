@@ -1,6 +1,7 @@
 package Project.Interface.Pages.Templates;
 
 import Project.ClinicalSystem;
+import Project.Scheduler.Appointment;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

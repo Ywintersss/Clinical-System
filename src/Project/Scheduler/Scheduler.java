@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 //Controller for schedules and appointments among patients and doctors
@@ -22,7 +23,22 @@ public class Scheduler {
         return instance;
     }
 
-    public ObservableList<Appointment> getAllAppointments(){
+    public ObservableList<Schedule> getAllSchedules() {
+        try {
+            ArrayList<String> scheduleData = File.readFile("\\schedules\\Schedules.txt");
+            ArrayList<String[]> parseScheduleData = File.parseData(scheduleData);
+
+            ObservableList<Schedule> FXScheduleData = FXCollections.observableArrayList();
+            for (String[] data : parseScheduleData) {
+                FXScheduleData.add(new Schedule(data[0], data[1], data[2], data[3], data[4]));
+            }
+            return FXScheduleData;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+	    public ObservableList<Appointment> getAllAppointments(){
         try {
             ArrayList<String> appointmentData = File.readFile("\\schedules\\Appointments.txt");
             ArrayList<String[]> parseAppointmentData = File.parseData(appointmentData);
@@ -31,7 +47,6 @@ public class Scheduler {
             for (String[] data : parseAppointmentData) {
                 FXAppointmentData.add(new Appointment(data[0], data[1], data[2], data[3], data[4]));
             }
-
             return FXAppointmentData;
         } catch (IOException e) {
             throw new RuntimeException(e);

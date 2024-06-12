@@ -44,6 +44,7 @@ public class ClinicalSystem {
                 System.out.println(doctor.getPosition());
                 navigateTo(new DoctorMainPage().getDoctorMainPage());
                 layout.setHeaderPopUp(new PopUpDoctor());
+                UserSession.getInstance().setCurrentUser(doctor);
             } else if (user instanceof Admin) {
                 Admin admin = (Admin) user;
                 navigateTo(new AdminMainPage().getAdminMainPage());
