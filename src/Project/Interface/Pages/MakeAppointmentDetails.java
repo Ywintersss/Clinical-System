@@ -37,7 +37,7 @@ public class MakeAppointmentDetails extends DetailView {
         makeAppointment = new Button("Make Appointment");
         makeAppointment.setOnAction(e -> {
             Patient patient = (Patient) UserSession.getInstance().getCurrentUser();
-            ClinicalSystem.getScheduler().makeAppointment(doctor.getScheduleID(), patient.getID(), time, "Something for now");
+            //ClinicalSystem.getScheduler().makeAppointment(doctor, patient.getID(), time, "Something for now");
         });
 
         addButtonIntoContainer(makeAppointment);

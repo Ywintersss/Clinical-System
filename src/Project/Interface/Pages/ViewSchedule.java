@@ -61,7 +61,7 @@ public class ViewSchedule {
         for (int row = 0; row < 14; row++) {
             //Columns
             for (int column = 0; column < 2; column++) {
-                String formattedTime = startTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+                String formattedTime = startTime.format(DateTimeFormatter.ofPattern("HHmm"));
 
                 ToggleButton scheduleButton = new ToggleButton(formattedTime);
                 scheduleButton.setMinWidth(100);

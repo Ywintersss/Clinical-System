@@ -99,7 +99,7 @@ public class UserDataManager {
                         else if(file.contains("Doctor")){
                             return new Doctor(dataArray[0], dataArray[1], dataArray[2], dataArray[3], dataArray[4], dataArray[5],
                                     Integer.parseInt(dataArray[6]), Gender.valueOf(dataArray[7]),
-                                    Integer.parseInt(dataArray[8]), dataArray[9], dataArray[10], dataArray[11]);
+                                    Integer.parseInt(dataArray[8]), dataArray[9], dataArray[10]);
                         } else if (file.contains("Admin")) {
                             return new Admin(dataArray[0], dataArray[1], dataArray[2]);
                         }
@@ -138,7 +138,7 @@ public class UserDataManager {
 
             for (String[] data : parseDoctorData) {
                 FXDoctorData.add(new Doctor(data[0], data[1], data[2], data[3], data[4], data[5],
-                        Integer.parseInt(data[6]), Gender.valueOf(data[7]), Integer.parseInt(data[8]), data[9], data[10], data[11]));
+                        Integer.parseInt(data[6]), Gender.valueOf(data[7]), Integer.parseInt(data[8]), data[9], data[10]));
             }
 
             return FXDoctorData;

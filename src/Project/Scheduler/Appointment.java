@@ -35,6 +35,9 @@ public class Appointment {
     public String getScheduleID() {
         return scheduleID;
     }
+    public String getPatientID() {
+        return patientID;
+    }
 
     public String getPatient() {
         ObservableList<Patient> data = UserDataManager.getInstance().getAllPatients();

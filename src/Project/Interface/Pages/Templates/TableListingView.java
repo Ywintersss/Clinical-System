@@ -1,7 +1,7 @@
 package Project.Interface.Pages.Templates;
 
 import Project.ClinicalSystem;
-import Project.Scheduler.Appointment;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,6 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
+import javafx.util.Callback;
 
 public abstract class TableListingView {
         protected VBox tableContainer;
@@ -73,6 +74,12 @@ public abstract class TableListingView {
         public void addColumn(String column, String property) {
             TableColumn<Object, ?> newColumn = new TableColumn<>(column);
             newColumn.setCellValueFactory(new PropertyValueFactory<>(property));
+            addColumn(newColumn);
+        }
+
+        public <S> void addColumn(String column, Callback<TableColumn.CellDataFeatures<Object, S>, ObservableValue<S>> callback) {
+            TableColumn<Object, S> newColumn = new TableColumn<>(column);
+            newColumn.setCellValueFactory(callback);
             addColumn(newColumn);
         }
 

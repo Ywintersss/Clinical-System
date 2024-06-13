@@ -1,6 +1,7 @@
 package Project.Scheduler;
 
-import Project.Users.Gender;
+import Project.ClinicalSystem;
+import Project.Users.Doctor;
 import Project.Users.Patient;
 import Project.Utilities.File;
 import Project.Utilities.Utilities;
@@ -9,7 +10,7 @@ import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 
 
 //Controller for schedules and appointments among patients and doctors
@@ -22,6 +23,8 @@ public class Scheduler {
         }
         return instance;
     }
+
+
 
     public ObservableList<Schedule> getAllSchedules() {
         try {
@@ -38,12 +41,31 @@ public class Scheduler {
         }
     }
 
-	    public ObservableList<Appointment> getAllAppointments(){
+    public ObservableList<Schedule> getAllDoctorSchedules(String doctorID) {
+        try {
+            ArrayList<String> scheduleData = File.readFile("\\schedules\\Schedules.txt");
+            ArrayList<String[]> parseScheduleData = File.parseData(scheduleData);
+
+            ObservableList<Schedule> FXScheduleData = FXCollections.observableArrayList();
+
+            for (String[] data: parseScheduleData){
+                if (data[0].equals(doctorID)){
+                    FXScheduleData.add(new Schedule(data[0], data[1], data[2], data[3], data[4]));
+                }
+            }
+
+            return FXScheduleData;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public ObservableList<Appointment> getAllAppointments(){
         try {
             ArrayList<String> appointmentData = File.readFile("\\schedules\\Appointments.txt");
             ArrayList<String[]> parseAppointmentData = File.parseData(appointmentData);
 
             ObservableList<Appointment> FXAppointmentData = FXCollections.observableArrayList();
+
             for (String[] data : parseAppointmentData) {
                 FXAppointmentData.add(new Appointment(data[0], data[1], data[2], data[3], data[4]));
             }
@@ -52,18 +74,69 @@ public class Scheduler {
             throw new RuntimeException(e);
         }
     }
+
+    public ObservableList<Appointment> getAllDoctorAppointments(String doctorID){
+        try {
+            ArrayList<String> appointmentData = File.readFile("\\schedules\\Appointments.txt");
+            ArrayList<String[]> parseAppointmentData = File.parseData(appointmentData);
+
+            ObservableList<Appointment> FXAppointmentData = FXCollections.observableArrayList();
+
+            for (String[] data : parseAppointmentData) {
+                if (data[0].equals(doctorID)){
+                    FXAppointmentData.add(new Appointment(data[0], data[1], data[2], data[3], data[4]));
+                }
+            }
+
+            return FXAppointmentData;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ObservableList<AppointmentDetail> getAllAppointmentDetails() {
+        ObservableList<Doctor> doctors = ClinicalSystem.getUserDataManager().getAllDoctors();
+        HashMap<String, Doctor> doctorMap = new HashMap<>();
+        ObservableList<Patient> patients = ClinicalSystem.getUserDataManager().getAllPatients();
+        HashMap<String, Patient> patientMap = new HashMap<>();
+        ObservableList<Schedule> schedules = ClinicalSystem.getScheduler().getAllSchedules();
+        HashMap<String, Schedule> scheduleMap = new HashMap<>();
+        ObservableList<Appointment> appointments = ClinicalSystem.getScheduler().getAllAppointments();
+        ObservableList<AppointmentDetail> appointmentDetails = FXCollections.observableArrayList();
+
+        for (Doctor doctor : doctors) {
+            doctorMap.put(doctor.getID(), doctor);
+        }
+
+        for (Patient patient : patients) {
+            patientMap.put(patient.getID(), patient);
+        }
+
+        for (Schedule schedule : schedules) {
+            scheduleMap.put(schedule.getScheduleID(), schedule);
+        }
+
+        for (Appointment appointment : appointments) {
+            Doctor doctor = doctorMap.get(scheduleMap.get(appointment.getScheduleID()).getDoctorID());
+            Patient patient = patientMap.get(appointment.getPatientID());
+            Schedule schedule = scheduleMap.get(appointment.getScheduleID());
+
+            appointmentDetails.add(new AppointmentDetail(doctor, patient, schedule, appointment.getTime(), appointment.getDescription()));
+        }
+
+        return appointmentDetails;
+    }
+
     // Create a new appointment
     public void makeAppointment(String scheduleID, String patientID, String time, String description) {
         String appointmentID = Utilities.generateID("AP", "\\schedules\\appointments.txt");
         //Write to appointment file
-        String appointmentData = File.formatData(appointmentID, scheduleID,patientID, time, description);
+        String appointmentData = File.formatData(appointmentID, scheduleID, patientID, time, description);
         try {
             File.appendToFile("\\schedules\\appointments.txt", appointmentData);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
     public void cancelAppointment(String doctorID, String patientID, Appointment appointment) {
@@ -80,6 +153,9 @@ public class Scheduler {
 //        Recorder.addRecord(patient, issue ,prescription, followUpDate, appointment);
 
         //delete from appointment file
+    }
+
+    public static void main(String[] args) {
 
     }
 }

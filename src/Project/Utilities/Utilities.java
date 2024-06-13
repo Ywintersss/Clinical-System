@@ -53,10 +53,39 @@ public class Utilities {
         return now.format(formatterTime);
     }
 
+    public static boolean hasPassedDate(String date) {
+        return LocalDate.now().isAfter(LocalDate.parse(date, formatterDate));
+    }
+
+    public static boolean hasPassedTime(String time) {
+        StringBuilder timeBuilder = new StringBuilder(time);
+        for (int i = 2; i < time.length(); i+=3) {
+            char c = time.charAt(i);
+            if (c != ':') {
+                timeBuilder.insert(i, ":");
+            }
+        }
+        int length;
+        while ((length = timeBuilder.length()) < 8) {
+            if (length % 3 == 2){
+                timeBuilder.append(':');
+            }
+            timeBuilder.append('0');
+        }
+        String newTime = timeBuilder.toString();
+        //returns true if the current time is after the given time
+        return LocalTime.now().isAfter(LocalTime.parse(newTime, formatterTime));
+    }
+
+    public static boolean validateEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return email.matches(emailRegex);
+    }
     public static void main(String[] args) {
         System.out.println(generateID("PA","\\users\\Patient.txt"));
         System.out.println(getCurrentDate());
         System.out.println(getCurrentDate(1));
         System.out.println(getCurrentTime());
+        System.out.println(hasPassedTime("2200"));
     }
 }

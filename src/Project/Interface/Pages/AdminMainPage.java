@@ -90,12 +90,12 @@ public class AdminMainPage {
         appointmentContainer = new HBox();
         appointmentContainer.setPadding(new Insets(15, 0, 0, 0));
 
-        addAppointmentBtn = new Button("Add");
+        addAppointmentBtn = new Button("View");
         addAppointmentBtn.setPrefHeight(30);
         addAppointmentBtn.setPrefWidth(100);
 
         addAppointmentBtn.setOnAction(e -> {
-            ClinicalSystem.navigateTo(new DateDoctorSelection().getDateSelection());
+            ClinicalSystem.navigateTo(new AppointmentList(1, "Appointments").getTable());
         });
 
         approveAppointmentBtn = new Button("Approvals");
@@ -117,7 +117,7 @@ public class AdminMainPage {
         medicalRecordContainer = new HBox();
         medicalRecordContainer.setPadding(new Insets(15, 0, 0, 0));
 
-        viewMedicalRecordBtn = new Button("View");
+        viewMedicalRecordBtn = new Button("Add");
         viewMedicalRecordBtn.setPrefHeight(30);
         viewMedicalRecordBtn.setPrefWidth(100);
 

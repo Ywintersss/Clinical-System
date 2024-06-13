@@ -1,2 +1,2 @@
-AP1,SC1,PA1,12:00,Something for now
-AP1,SC2,PA1,13:00,This gay
+AP1,SC1,PA1,1200,Something for now
+AP1,SC2,PA1,1300,This gay

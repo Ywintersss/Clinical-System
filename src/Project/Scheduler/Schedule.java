@@ -14,16 +14,6 @@ public class Schedule {
     private String endTime;
     private String date;
 
-    public Schedule() {
-        this.scheduleID = scheduleID;
-        this.doctorID = doctorID;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.date = date;
-        // Initialize the list of appointments for the doctor
-        this.appointments = new ArrayList<>();
-    }
-
     public Schedule(String scheduleID, String doctorID, String startTime, String endTime, String date) {
         this.scheduleID = scheduleID;
         this.doctorID = doctorID;
@@ -47,12 +37,13 @@ public class Schedule {
     public String getEndTime() {
         return endTime;
     }
+    public String getDate() {
+        return date;
+    }
 
     public ArrayList<Appointment> getAppointments() {
         return appointments;
     }
-
-    public String getDate() { return date; }
 
     public void addAppointments(Appointment appointments) {
         this.appointments.add(appointments);

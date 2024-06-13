@@ -1,23 +1,29 @@
 package Project.Interface.Pages;
 
 import Project.ClinicalSystem;
+import Project.Interface.Pages.Components.UploadBox;
+import Project.Scheduler.Schedule;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 public class DoctorMainPage {
+	private ObservableList<Schedule> doctorSchedule;
 	private GridPane doctorMainPage;
 
 	private VBox dailyScheduleContainer;
 	private HBox titleContainer;
 	private Label title;
-	private FlowPane scheduleContainer;
+	private VBox scheduleUploadContainer;
+	private StackPane scheduleContainer;
 	private Label schedulesLabel;
 	private Button uploadScheduleButton;
-	private Pane spacer;
+	private VBox uploadBox;
 
 	private HBox quickNavContainer;
 	private Button AppointmentListButton;
@@ -32,34 +38,45 @@ public class DoctorMainPage {
 		doctorMainPage.setAlignment(Pos.TOP_CENTER);
 
 		dailyScheduleContainer = new VBox();
-		dailyScheduleContainer.setPrefHeight(300);
+		dailyScheduleContainer.setPrefHeight(420);
 		dailyScheduleContainer.setPrefWidth(550);
 		dailyScheduleContainer.setStyle("-fx-alignment: center;");
 		dailyScheduleContainer.setSpacing(10);
 
-		scheduleContainer = new FlowPane();
+		scheduleContainer = new StackPane();
 		scheduleContainer.setStyle("-fx-background-color: #FFFFFF;");
 		scheduleContainer.setPadding(new Insets(10, 10, 10, 10));
 		scheduleContainer.setPrefHeight(dailyScheduleContainer.getPrefHeight());
 		scheduleContainer.setPrefWidth(dailyScheduleContainer.getPrefWidth());
-		scheduleContainer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		//scheduleContainer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
+		uploadBox = new UploadBox().getUploadBox();
 
 		schedulesLabel = new Label("Schedules");
 		schedulesLabel.setStyle("-fx-font-weight: bold;-fx-font-size: 16px;-fx-text-alignment: center;");
 		schedulesLabel.setPrefHeight(scheduleContainer.getPrefHeight());
 		schedulesLabel.setPrefWidth(scheduleContainer.getPrefWidth());
-		scheduleContainer.getChildren().add(schedulesLabel);
+		scheduleContainer.getChildren().addAll(schedulesLabel, uploadBox);
 
 		uploadScheduleButton = new Button("Upload Schedule");
-		uploadScheduleButton.setPrefWidth(95);
-		uploadScheduleButton.setPrefHeight(35);
+		uploadScheduleButton.setPadding(new Insets(10, 10, 10, 10));
+		uploadScheduleButton.setPrefWidth(105);
+		uploadScheduleButton.setPrefHeight(45);
 		uploadScheduleButton.setStyle("-fx-font-weight: bold;-fx-font-size: 10px;-fx-text-alignment: center;");
+		uploadScheduleButton.setOnAction(e -> {
+			uploadBox.setVisible(!uploadBox.isVisible());
+		});
 
-		spacer = new Pane();
-		spacer.setPrefWidth(450);
-
-		scheduleContainer.getChildren().add(spacer);
-		scheduleContainer.getChildren().add(uploadScheduleButton);
+		scheduleUploadContainer = new VBox();
+		scheduleUploadContainer.setStyle("-fx-background-color: #FFFFFF;");
+		scheduleUploadContainer.setSpacing(10);
+		scheduleUploadContainer.setAlignment(Pos.CENTER_RIGHT);
+		scheduleUploadContainer.setPadding(new Insets(10, 10, 10, 10));
+		scheduleUploadContainer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		scheduleUploadContainer.getChildren().addAll(scheduleContainer, uploadScheduleButton);
+//
+//		scheduleContainer.getChildren().add(spacer);
+		//scheduleContainer.getChildren().add(uploadScheduleButton);
 
 		titleContainer = new HBox();
 		titleContainer.setStyle("-fx-background-color: #C0C0C0;-fx-alignment: center;");
@@ -80,7 +97,7 @@ public class DoctorMainPage {
 		AppointmentListButton.setStyle("-fx-font-weight: bold;-fx-font-size: 15px;-fx-text-alignment: center;");
 		AppointmentListButton.setPadding(new Insets(10, 10, 10, 10));
 		AppointmentListButton.setOnAction(e -> {
-			ClinicalSystem.navigateTo(new AppointmentList().getTable());
+			ClinicalSystem.navigateTo(new AppointmentList(2, "My Appointments").getTable());
 		});
 
 		PatientMedicalRecordButton = new Button("Patient Medical Record");
@@ -95,7 +112,7 @@ public class DoctorMainPage {
 
 		quickNavContainer.getChildren().addAll(AppointmentListButton, PatientMedicalRecordButton);
 
-		dailyScheduleContainer.getChildren().addAll(titleContainer, scheduleContainer);
+		dailyScheduleContainer.getChildren().addAll(titleContainer, scheduleUploadContainer);
 		doctorMainPage.add(dailyScheduleContainer, 0, 0);
 		doctorMainPage.add(quickNavContainer, 0, 1);
 	}
