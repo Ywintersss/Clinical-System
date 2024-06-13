@@ -16,7 +16,6 @@ import Project.Interface.Pages.Components.PopUpDefault;
 import Project.Interface.Pages.Components.PopUpDoctor;
 import Project.Interface.Pages.Components.PopUpPatient;
 import Project.Users.*;
-import Project.Utilities.Utilities;
 import javafx.scene.Parent;
 import java.util.Stack;
 
@@ -94,7 +93,7 @@ public class ClinicalSystem {
     }
 
     public static void navigateTo(Parent newPage) {
-        if (!pageStack.isEmpty() && Utilities.isSameObjectInstance(pageStack.peek(),newPage)) {
+        if (!pageStack.isEmpty() && newPage.equals(pageStack.peek())) {
             return;
         }
 
