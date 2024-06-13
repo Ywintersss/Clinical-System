@@ -127,6 +127,45 @@ public class Scheduler {
         return appointmentDetails;
     }
 
+    public ObservableList<ScheduleDetail> getAllScheduleDetails() {
+        ObservableList<Schedule> schedules = ClinicalSystem.getScheduler().getAllSchedules();
+        ObservableList<Doctor> doctors = ClinicalSystem.getUserDataManager().getAllDoctors();
+        HashMap<String, Doctor> doctorMap = new HashMap<>();
+        ObservableList<ScheduleDetail> scheduleDetails = FXCollections.observableArrayList();
+
+        for (Doctor doctor : doctors) {
+            doctorMap.put(doctor.getID(), doctor);
+        }
+
+        for (Schedule schedule : schedules) {
+            Doctor doctor = doctorMap.get(schedule.getDoctorID());
+            scheduleDetails.add(new ScheduleDetail(schedule, doctor, schedule.getStartTime(), schedule.getEndTime(), schedule.getDate()));
+        }
+
+        return scheduleDetails;
+    }
+
+    public ObservableList<ScheduleDetail> getActiveScheduleDetails(){
+        ObservableList<ScheduleDetail> activeScheduleDetails = FXCollections.observableArrayList();
+        for(ScheduleDetail scheduleDetail : getAllScheduleDetails()){
+            if (!Utilities.hasPassedDate(scheduleDetail.getSchedule().getDate()) && !Utilities.hasPassedTime(scheduleDetail.getSchedule().getEndTime())) {
+                activeScheduleDetails.add(scheduleDetail);
+            }
+        }
+        return activeScheduleDetails;
+    }
+
+    public void addSchedule(String doctorID, String startTime, String endTime, String date) {
+        String scheduleID = Utilities.generateID("SC", "\\schedules\\Schedules.txt");
+        //Write to schedule file
+        String scheduleData = File.formatData(scheduleID, doctorID, startTime, endTime, date);
+        try {
+            File.appendToFile("\\schedules\\Schedules.txt", scheduleData);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     // Create a new appointment
     public void makeAppointment(String scheduleID, String patientID, String time, String description) {
         String appointmentID = Utilities.generateID("AP", "\\schedules\\appointments.txt");

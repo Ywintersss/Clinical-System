@@ -1,7 +1,9 @@
 package Project.Interface.Pages;
 
 import Project.ClinicalSystem;
+import Project.Interface.Pages.Components.Notification;
 import Project.Interface.Pages.Templates.DetailView;
+import Project.Scheduler.ScheduleDetail;
 import Project.UserSession;
 import Project.Users.Doctor;
 import Project.Users.Patient;
@@ -17,14 +19,14 @@ public class MakeAppointmentDetails extends DetailView {
     private Label timeLabel;
     private Label consultationFees;
     private Button makeAppointment;
-    public MakeAppointmentDetails(Doctor doctor, String date, String time) {
+    public MakeAppointmentDetails(ScheduleDetail scheduleDetail, String selectedTime) {
         super("Appointment Details");
 
-        doctorName = new Label(doctor.getName());
-        doctorSpecialization = new Label(doctor.getSpecialization());
-        doctorPosition = new Label(doctor.getPosition());
-        dateLabel = new Label(date);
-        timeLabel = new Label(time);
+        doctorName = new Label(scheduleDetail.getDoctor().getName());
+        doctorSpecialization = new Label(scheduleDetail.getDoctor().getSpecialization());
+        doctorPosition = new Label(scheduleDetail.getDoctor().getPosition());
+        dateLabel = new Label(scheduleDetail.getDate());
+        timeLabel = new Label(selectedTime);
         consultationFees = new Label("250");
 
         addContent("Doctor Name", doctorName);
@@ -37,7 +39,11 @@ public class MakeAppointmentDetails extends DetailView {
         makeAppointment = new Button("Make Appointment");
         makeAppointment.setOnAction(e -> {
             Patient patient = (Patient) UserSession.getInstance().getCurrentUser();
-            //ClinicalSystem.getScheduler().makeAppointment(doctor, patient.getID(), time, "Something for now");
+            try {
+                ClinicalSystem.getScheduler().makeAppointment(scheduleDetail.getSchedule().getScheduleID(), patient.getID(), selectedTime, "Something for now");
+            } catch (Exception ex) {
+                Notification.error("Something went wrong");
+            }
         });
 
         addButtonIntoContainer(makeAppointment);

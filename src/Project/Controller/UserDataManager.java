@@ -47,12 +47,9 @@ public class UserDataManager {
         String doctorPath = "\\users\\Doctor.txt";
         String ID = Utilities.generateID("DO", doctorPath) + ",";
 
-        String schedulePath = "\\schedules\\Schedules.txt";
-        String ScheduleID = Utilities.generateID("SC", schedulePath) + ",";
-
         String data = File.formatData(userData);
         try {
-            File.appendToFile(doctorPath, ID + ScheduleID + data);
+            File.appendToFile(doctorPath, ID + data);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

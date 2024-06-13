@@ -16,6 +16,7 @@ import Project.Interface.Pages.Components.PopUpDefault;
 import Project.Interface.Pages.Components.PopUpDoctor;
 import Project.Interface.Pages.Components.PopUpPatient;
 import Project.Users.*;
+import Project.Utilities.Utilities;
 import javafx.scene.Parent;
 import java.util.Stack;
 
@@ -36,15 +37,14 @@ public class ClinicalSystem {
             Notification.information("Login Successful");
             if (user instanceof Patient) {
                 Patient patient = (Patient) user;
+                UserSession.getInstance().setCurrentUser(patient);
                 navigateTo(new Home().getHome());
                 layout.setHeaderPopUp(new PopUpPatient());
-                UserSession.getInstance().setCurrentUser(patient);
             } else if (user instanceof Doctor) {
                 Doctor doctor = (Doctor) user;
-                System.out.println(doctor.getPosition());
+                UserSession.getInstance().setCurrentUser(doctor);
                 navigateTo(new DoctorMainPage().getDoctorMainPage());
                 layout.setHeaderPopUp(new PopUpDoctor());
-                UserSession.getInstance().setCurrentUser(doctor);
             } else if (user instanceof Admin) {
                 Admin admin = (Admin) user;
                 navigateTo(new AdminMainPage().getAdminMainPage());
@@ -94,14 +94,19 @@ public class ClinicalSystem {
     }
 
     public static void navigateTo(Parent newPage) {
-        if (!pageStack.isEmpty() && newPage.equals(pageStack.peek())) {
-            System.out.println("Already on that page");
+        if (!pageStack.isEmpty() && Utilities.isSameObjectInstance(pageStack.peek(),newPage)) {
             return;
         }
 
         pageStack.push(newPage);
         System.out.println(pageStack);
         getLayout().setContent(newPage);
+    }
+
+    public static void Refresh(Parent Page) {
+        pageStack.pop();
+        getLayout().setContent(Page);
+        pageStack.push(Page);
     }
 
     public static void back() {

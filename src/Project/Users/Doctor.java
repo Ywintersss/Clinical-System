@@ -44,9 +44,4 @@ public class Doctor extends User {
         this.yearsOfExperience = yearsOfExperience;
     }
 
-    @Override
-    public String toString() {
-        return getName();
-    }
-
 }

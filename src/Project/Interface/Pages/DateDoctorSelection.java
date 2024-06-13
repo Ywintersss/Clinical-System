@@ -2,8 +2,8 @@ package Project.Interface.Pages;
 
 import Project.ClinicalSystem;
 import Project.Interface.Pages.Components.Notification;
+import Project.Scheduler.ScheduleDetail;
 import Project.Users.Doctor;
-import Project.Utilities.Utilities;
 
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -15,10 +15,8 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-import javax.print.Doc;
-
 public class DateDoctorSelection {
-    private ObservableList<Doctor> doctors;
+    private ObservableList<ScheduleDetail> scheduleDetails;
     private Label titleLabel;
     private Region spacer1;
     private VBox dateSelectionContainer;
@@ -33,7 +31,11 @@ public class DateDoctorSelection {
     private Region spacer3;
     private Button next;
     public DateDoctorSelection() {
-        doctors = ClinicalSystem.getUserDataManager().getAllDoctors();
+        scheduleDetails = ClinicalSystem.getScheduler().getActiveScheduleDetails();
+
+        if (scheduleDetails.isEmpty()) {
+            Notification.information("No Schedule Available, Please try again later");
+        }
 
         dateSelectionContainer = new VBox();
         dateSelectionContainer.setSpacing(10);
@@ -57,8 +59,19 @@ public class DateDoctorSelection {
 
         dateSelector = new ComboBox<>();
         dateSelector.setPromptText("Select a Date");
-        dateSelector.setValue("Today");
-        dateSelector.getItems().addAll("Today", Utilities.getCurrentDate(1), Utilities.getCurrentDate(2));
+
+        dateSelector.setOnMouseClicked(e -> {
+            dateSelector.getItems().clear();
+            if (doctorSelector.getValue() == null) {
+                dateSelector.getItems().addAll(scheduleDetails.stream().map(ScheduleDetail::getDate).distinct().toList());
+            } else {
+                for (ScheduleDetail scheduleDetail : scheduleDetails) {
+                    if (scheduleDetail.getDoctor().equals(doctorSelector.getValue())) {
+                        dateSelector.getItems().add(scheduleDetail.getDate());
+                    }
+                }
+            }
+        });
 
         SelectDoctor = new Label("Select Doctor: ");
         SelectDoctor.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
@@ -66,8 +79,18 @@ public class DateDoctorSelection {
 
         doctorSelector = new ComboBox<>();
         doctorSelector.setPromptText("Select a Doctor");
-        //doctorSelector.setValue();
-        doctorSelector.getItems().addAll(doctors);
+        doctorSelector.setOnMouseClicked(e -> {
+            doctorSelector.getItems().clear();
+            if (dateSelector.getValue() == null) {
+                doctorSelector.getItems().addAll(scheduleDetails.stream().map(ScheduleDetail::getDoctor).distinct().toList());
+            } else {
+                for (ScheduleDetail scheduleDetail : scheduleDetails) {
+                    if (scheduleDetail.getDate().equals(dateSelector.getValue())) {
+                        doctorSelector.getItems().add(scheduleDetail.getDoctor());
+                    }
+                }
+            }
+        });
 
         dateDoctorSelectorContainer.getChildren().addAll(SelectDate, dateSelector, SelectDoctor, doctorSelector);
 
@@ -92,18 +115,18 @@ public class DateDoctorSelection {
         next = new Button("Next");
         next.setPadding(new Insets(10, 20, 10, 20));
         next.setOnAction(e -> {
-            if (doctorSelector.getValue() == null) {
-                Notification.error("Please select a doctor");
+            if (doctorSelector.getValue() == null || dateSelector.getValue() == null) {
+                Notification.error("Please select a doctor and a date");
                 return;
             }
 
-            if (dateSelector.getValue().equals("Today")) {
-                ClinicalSystem.navigateTo(new ViewSchedule(doctorSelector.getValue(), Utilities.getCurrentDate(0)).getSchedules());
-            } else if (dateSelector.getValue().equals(Utilities.getCurrentDate(1))) {
-//                ClinicalSystem.navigateTo(new ViewSchedule(Utilities.getCurrentDate(1)).getTable();
-            } else if (dateSelector.getValue().equals(Utilities.getCurrentDate(2))) {
-//                ClinicalSystem.navigateTo(new ViewSchedule(Utilities.getCurrentDate(2)).getTable();
-            }
+            ScheduleDetail scheduleDetail = scheduleDetails.stream()
+                .filter(sd -> sd.getDoctor().equals(doctorSelector.getValue()))
+                .filter(sd -> sd.getDate().equals(dateSelector.getValue()))
+                .findFirst()
+                .orElse(null);
+
+            ClinicalSystem.navigateTo(new ScheduleSelector(scheduleDetail).getSchedules());
         });
 
         buttonContainer.getChildren().addAll(back, spacer3, next);

@@ -2,9 +2,10 @@ package Project.Interface.Pages;
 
 import Project.ClinicalSystem;
 import Project.Interface.Pages.Components.Notification;
-import Project.Users.Doctor;
-import Project.Utilities.ScreenTools;
+import Project.Scheduler.AppointmentDetail;
+import Project.Scheduler.ScheduleDetail;
 import Project.Utilities.Styles;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -12,9 +13,11 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
+import java.util.ArrayList;
 
-public class ViewSchedule {
+public class ScheduleSelector {
+    private ObservableList<AppointmentDetail> appointmentDetails;
+    private ArrayList<String> unavailableTimes;
     private HBox LabelContainer;
     private Label doctorNameLabel;
     private Label dateLabel;
@@ -26,7 +29,9 @@ public class ViewSchedule {
     private Button back;
     private Region spacer;
     private Button makeAppointment;
-    public ViewSchedule(Doctor doctor, String date) {
+    public ScheduleSelector(ScheduleDetail scheduleDetail) {
+        appointmentDetails = ClinicalSystem.getScheduler().getAllAppointmentDetails();
+
         scheduleContainer = new VBox();
         scheduleContainer.setAlignment(Pos.CENTER);
         scheduleContainer.setPadding(new Insets(10, 10, 10, 10));
@@ -37,9 +42,9 @@ public class ViewSchedule {
         LabelContainer.setPadding(new Insets(10, 10, 10, 10));
         LabelContainer.setAlignment(Pos.CENTER);
 
-        doctorNameLabel = new Label("Doctor: " + doctor.getName());
+        doctorNameLabel = new Label("Doctor: " + scheduleDetail.getDoctor().getName());
         doctorNameLabel.setStyle(Styles.fontWeightTitle + Styles.fontSize(25) +Styles.fontFamily);
-        dateLabel = new Label("Date: " + date);
+        dateLabel = new Label("Date: " + scheduleDetail.getDate());
         dateLabel.setStyle(Styles.fontWeightTitle + Styles.fontSize(25) +Styles.fontFamily);
 
         LabelContainer.getChildren().addAll(doctorNameLabel, dateLabel);
@@ -54,11 +59,14 @@ public class ViewSchedule {
 
         toggleGroup = new ToggleGroup();
 
+
+        //ex: get 08 from 0800
+        int duration = Integer.parseInt(scheduleDetail.getEndTime().substring(0, 2)) - Integer.parseInt(scheduleDetail.getStartTime().substring(0, 2));
         //TODO diff schedule based on doctor type
-        LocalTime startTime = LocalTime.of(9, 0);
+        LocalTime startTime = LocalTime.of(Integer.parseInt(scheduleDetail.getStartTime().substring(0, 2)), 0);
 
         //Rows
-        for (int row = 0; row < 14; row++) {
+        for (int row = 0; row < duration; row++) {
             //Columns
             for (int column = 0; column < 2; column++) {
                 String formattedTime = startTime.format(DateTimeFormatter.ofPattern("HHmm"));
@@ -104,8 +112,22 @@ public class ViewSchedule {
                 return;
             }
 
+            //Removes unrelated appointment details
+            appointmentDetails.removeIf(appointmentDetail -> !appointmentDetail.getSchedule().getScheduleID().equals(scheduleDetail.getSchedule().getScheduleID()));
+
+            unavailableTimes = new ArrayList<>();
+            for (AppointmentDetail appointmentDetail : appointmentDetails) {
+                unavailableTimes.add(appointmentDetail.getAppointmentTime());
+            }
+
             String time = ((ToggleButton) toggleGroup.getSelectedToggle()).getText();
-            ClinicalSystem.navigateTo(new MakeAppointmentDetails(doctor, date, time).getDetails());
+
+            if (unavailableTimes.contains(time)) {
+                Notification.error("Time is unavailable");
+                return;
+            }
+
+            ClinicalSystem.navigateTo(new MakeAppointmentDetails(scheduleDetail, time).getDetails());
         });
 
         buttonContainer.getChildren().addAll(back, spacer, makeAppointment);

@@ -20,7 +20,6 @@ public class MakeAppointmentBox {
 
         MakeAppointmentBox.setAlignment(Pos.CENTER);
         MakeAppointmentBox.setSpacing(10);
-        //MakeAppointmentBox.setBackground(new Background(new BackgroundFill(Color.DARKSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
         MakeAppointmentBox.setStyle("-fx-background-color: #FFFFFF;");
         MakeAppointmentBox.setPadding(new Insets(10, 10, 10, 10));
         MakeAppointmentBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));

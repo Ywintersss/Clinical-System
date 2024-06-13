@@ -1,5 +1,7 @@
 package Project.Utilities;
 
+import Project.Users.Admin;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.time.LocalDate;
@@ -81,11 +83,16 @@ public class Utilities {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         return email.matches(emailRegex);
     }
+
+    public static boolean isSameObjectInstance(Object obj1, Object obj2) {
+        return obj1.getClass().equals(obj2.getClass());
+    }
     public static void main(String[] args) {
-        System.out.println(generateID("PA","\\users\\Patient.txt"));
-        System.out.println(getCurrentDate());
-        System.out.println(getCurrentDate(1));
-        System.out.println(getCurrentTime());
-        System.out.println(hasPassedTime("2200"));
+//        System.out.println(generateID("PA","\\users\\Patient.txt"));
+//        System.out.println(getCurrentDate());
+//        System.out.println(getCurrentDate(1));
+//        System.out.println(getCurrentTime());
+//        System.out.println(hasPassedTime("2200"));
+        System.out.println(isSameObjectInstance(new Admin("admin", "admin", "admin"), new Admin("nope", "admin", "admin")));
     }
 }
