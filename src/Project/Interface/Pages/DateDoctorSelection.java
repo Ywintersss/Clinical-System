@@ -32,6 +32,7 @@ public class DateDoctorSelection {
     private Button next;
     public DateDoctorSelection() {
         scheduleDetails = ClinicalSystem.getScheduler().getActiveScheduleDetails();
+        System.out.println(scheduleDetails);
 
         if (scheduleDetails.isEmpty()) {
             Notification.information("No Schedule Available, Please try again later");

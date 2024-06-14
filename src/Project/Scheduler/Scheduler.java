@@ -148,7 +148,7 @@ public class Scheduler {
     public ObservableList<ScheduleDetail> getActiveScheduleDetails(){
         ObservableList<ScheduleDetail> activeScheduleDetails = FXCollections.observableArrayList();
         for(ScheduleDetail scheduleDetail : getAllScheduleDetails()){
-            if (!Utilities.hasPassedDate(scheduleDetail.getSchedule().getDate()) && !Utilities.hasPassedTime(scheduleDetail.getSchedule().getEndTime())) {
+            if (!Utilities.hasPassedDate(scheduleDetail.getSchedule().getDate()) || !Utilities.hasPassedTime(scheduleDetail.getSchedule().getEndTime())) {
                 activeScheduleDetails.add(scheduleDetail);
             }
         }
