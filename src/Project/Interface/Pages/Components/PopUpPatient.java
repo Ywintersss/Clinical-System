@@ -37,7 +37,7 @@ public class PopUpPatient extends PopUp {
         payment = new Button("Payment");
         payment.setStyle(Styles.buttonStyle());
         payment.setOnAction(e -> {
-            ClinicalSystem.navigateTo(new PaymentHistory().getPaymentHistory());
+            ClinicalSystem.navigateTo(new PaymentHistoryList(null).getPaymentHistory());
         });
 
 

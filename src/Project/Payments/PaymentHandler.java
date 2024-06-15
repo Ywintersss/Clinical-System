@@ -50,4 +50,11 @@ public class PaymentHandler {
         }
     }
 
+    public ObservableList<Payment> getPatientPaymentHistory(String patientID) {
+        ObservableList<Payment> paymentList = getAllPaymentHistory();
+
+        paymentList.removeIf(payment -> !payment.getPatientID().equals(patientID));
+
+        return paymentList;
+    }
 }
