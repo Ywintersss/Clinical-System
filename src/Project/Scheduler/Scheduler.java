@@ -24,8 +24,6 @@ public class Scheduler {
         return instance;
     }
 
-
-
     public ObservableList<Schedule> getAllSchedules() {
         try {
             ArrayList<String> scheduleData = File.readFile("\\schedules\\Schedules.txt");
@@ -41,24 +39,20 @@ public class Scheduler {
         }
     }
 
-    public ObservableList<Schedule> getAllDoctorSchedules(String doctorID) {
-        try {
-            ArrayList<String> scheduleData = File.readFile("\\schedules\\Schedules.txt");
-            ArrayList<String[]> parseScheduleData = File.parseData(scheduleData);
+    public ObservableList<Schedule> getAllDoctorSchedules(String doctorID, boolean getActiveSchedules) {
+            try {
+                ObservableList<Schedule> Schedules = getAllSchedules();
+                Schedules.removeIf(schedule -> !schedule.getDoctorID().equals(doctorID));
 
-            ObservableList<Schedule> FXScheduleData = FXCollections.observableArrayList();
-
-            for (String[] data: parseScheduleData){
-                if (data[0].equals(doctorID)){
-                    FXScheduleData.add(new Schedule(data[0], data[1], data[2], data[3], data[4]));
+                if (getActiveSchedules) {
+                    Schedules.removeIf(schedule -> !Utilities.isActive(schedule.getDate(), schedule.getEndTime()));
                 }
-            }
 
-            return FXScheduleData;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+                return Schedules;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
-    }
     public ObservableList<Appointment> getAllAppointments(){
         try {
             ArrayList<String> appointmentData = File.readFile("\\schedules\\Appointments.txt");
@@ -148,7 +142,7 @@ public class Scheduler {
     public ObservableList<ScheduleDetail> getActiveScheduleDetails(){
         ObservableList<ScheduleDetail> activeScheduleDetails = FXCollections.observableArrayList();
         for(ScheduleDetail scheduleDetail : getAllScheduleDetails()){
-            if (!Utilities.hasPassedDate(scheduleDetail.getSchedule().getDate()) || !Utilities.hasPassedTime(scheduleDetail.getSchedule().getEndTime())) {
+            if (Utilities.isActive(scheduleDetail.getDate(), scheduleDetail.getEndTime())) {
                 activeScheduleDetails.add(scheduleDetail);
             }
         }

@@ -14,19 +14,26 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 
 public class AppointmentList extends TableListingView {
     private Button viewButton;
+    private Button addAppointment;
     private ObservableList<AppointmentDetail> appointmentDetailsList;
     public AppointmentList(int flag, String title) {
         super(title);
 
         appointmentDetailsList = ClinicalSystem.getScheduler().getAllAppointmentDetails();
 
+        //flag Null: All Appointments
+        //2: Doctor's Appointments
+        //3: Patient's Active Appointments
+        //4: Patient's Historical Appointments
         if (flag == 2){
+            //Remove unrelated appointments
             appointmentDetailsList.removeIf(appointmentDetail -> !appointmentDetail.getDoctor().getID().equals(UserSession.getInstance().getCurrentUser().getID()));
         } else if (flag == 3) {
             appointmentDetailsList.removeIf(appointmentDetail -> !appointmentDetail.getPatient().getID().equals(UserSession.getInstance().getCurrentUser().getID()));
@@ -34,7 +41,10 @@ public class AppointmentList extends TableListingView {
                 Schedule schedule = appointmentDetail.getSchedule();
                 String date = schedule.getDate();
                 String appointmentTime = appointmentDetail.getAppointmentTime();
-                return Utilities.hasPassedDate(date) || Utilities.hasPassedTime(appointmentTime);
+                //Filter out inactive appointments
+                //Return true if appointment is active
+                //Don't remove if it is active
+                return !Utilities.isActive(date, appointmentTime);
             });
 
             Button appointmentHistory = new Button("Appointment History");
@@ -48,7 +58,8 @@ public class AppointmentList extends TableListingView {
                 Schedule schedule = appointmentDetail.getSchedule();
                 String date = schedule.getDate();
                 String appointmentTime = appointmentDetail.getAppointmentTime();
-                return !Utilities.hasPassedDate(date) && !Utilities.hasPassedTime(appointmentTime);
+                //Remove if it is active
+                return Utilities.isActive(date, appointmentTime);
             });
         }
 
@@ -66,10 +77,20 @@ public class AppointmentList extends TableListingView {
         addColumn("Time", "appointmentTime");
         addColumn("Description");
 
-        viewButton = new Button("View");
+        viewButton = new Button("Delete");
         viewButton.setOnAction(e -> {
-            return;
+            TableCell<?, ?> cell = (TableCell<?, ?>) ((Button) e.getSource()).getParent().getParent();
+            int index = cell.getIndex();
+
+            Appointment appointment = (Appointment) getTableView().getItems().get(index);
         });
+
+        addAppointment = new Button("Add");
+        addAppointment.setOnAction(e -> {
+            ClinicalSystem.navigateTo(new DateDoctorSelection().getDateSelection());
+        });
+
+        addFunctionalButton(addAppointment);
 
         addColumnButtons(viewButton);
 

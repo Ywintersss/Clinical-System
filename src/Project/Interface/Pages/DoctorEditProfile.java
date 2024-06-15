@@ -1,6 +1,8 @@
 package Project.Interface.Pages;
 
 import Project.Interface.Pages.Templates.DetailView;
+import Project.UserSession;
+import Project.Users.Doctor;
 import Project.Utilities.ScreenTools;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -20,21 +22,25 @@ public class DoctorEditProfile extends DetailView {
     private TextField specialization;
     private TextField position;
 
-    public DoctorEditProfile() {
+    public DoctorEditProfile(Doctor oldDoctorData) {
         super("Edit Profile");
+
+        if (oldDoctorData == null) {
+            oldDoctorData = (Doctor) UserSession.getInstance().getCurrentUser();
+        }
 
         profileScroll = new ScrollPane();
         getButtonContainer().getStylesheets().add("/Project/Interface/Assets/Styles/Styles.css");
 
-        username = new TextField("Elon");
-        password = new TextField("1234");
-        name = new TextField("elon");
-        email = new TextField("elon@1234");
-        contact = new TextField("012-3456789");
-        age = new TextField("34");
-        yearsOfExperience = new TextField("10");
-        specialization = new TextField("Heart");
-        position = new TextField("Doctor");
+        username = new TextField(oldDoctorData.getUsername());
+        password = new TextField(oldDoctorData.getPassword());
+        name = new TextField(oldDoctorData.getName());
+        email = new TextField(oldDoctorData.getEmail());
+        contact = new TextField(oldDoctorData.getContact());
+        age = new TextField(Integer.toString(oldDoctorData.getAge()));
+        yearsOfExperience = new TextField(Integer.toString(oldDoctorData.getYearsOfExperience()));
+        specialization = new TextField(oldDoctorData.getSpecialization());
+        position = new TextField(oldDoctorData.getPosition());
 
         addContent("Username", username);
         addContent("Password", password);

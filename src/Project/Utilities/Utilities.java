@@ -79,6 +79,17 @@ public class Utilities {
         return LocalTime.now().isAfter(LocalTime.parse(newTime, formatterTime));
     }
 
+    public static boolean isActive(String date, String time) {
+        if (date == null || time == null) {
+            return false;
+        }
+        if (date.equals(getCurrentDate())) {
+            return !hasPassedTime(time);
+        } else {
+            return !hasPassedDate(date);
+        }
+    }
+
     public static boolean validateEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         return email.matches(emailRegex);

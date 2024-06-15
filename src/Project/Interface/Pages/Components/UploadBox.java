@@ -45,13 +45,13 @@ public class UploadBox {
         uploadBox.toFront();
 
         startLabel = new Label("Start Time");
-        startLabel.setStyle(Styles.fontFamily + Styles.fontWeightTitle + Styles.fontSize(15));
+        startLabel.setStyle(Styles.fontFamily + Styles.fontWeightBold + Styles.fontSize(15));
 
         endLabel = new Label("End Time");
-        endLabel.setStyle(Styles.fontFamily + Styles.fontWeightTitle + Styles.fontSize(15));
+        endLabel.setStyle(Styles.fontFamily + Styles.fontWeightBold + Styles.fontSize(15));
 
         dateLabel = new Label("Date");
-        dateLabel.setStyle(Styles.fontFamily + Styles.fontWeightTitle + Styles.fontSize(15));
+        dateLabel.setStyle(Styles.fontFamily + Styles.fontWeightBold + Styles.fontSize(15));
 
         startTime = new ComboBox<>();
         startTime.setPromptText("Select Start Time");
@@ -85,13 +85,13 @@ public class UploadBox {
         }
 
         takeLeave = new Button("Take Leave");
-        takeLeave.setStyle(Styles.fontWeightTitle);
+        takeLeave.setStyle(Styles.fontWeightBold);
         takeLeave.setOnAction(e -> {
             return;
         });
 
         upload = new Button("Upload");
-        upload.setStyle(Styles.fontWeightTitle + Styles.fontSize(15) + Styles.padding(10, 20, 10, 20));
+        upload.setStyle(Styles.fontWeightBold + Styles.fontSize(15) + Styles.padding(10, 20, 10, 20));
         upload.setOnAction(e -> {
             if (startTime.getValue() == null || endTime.getValue() == null || date.getValue() == null) {
                     Notification.information("Please fill all the fields.");

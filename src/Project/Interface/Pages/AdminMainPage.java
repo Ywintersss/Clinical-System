@@ -21,7 +21,6 @@ public class AdminMainPage {
     private Label appointmentLabel;
     private HBox appointmentContainer;
     private Button addAppointmentBtn;
-    private Button approveAppointmentBtn;
 
     private VBox medicalRecord;
     private Label medicalRecordLabel;
@@ -90,21 +89,18 @@ public class AdminMainPage {
         appointmentContainer = new HBox();
         appointmentContainer.setPadding(new Insets(15, 0, 0, 0));
 
-        addAppointmentBtn = new Button("View");
+        addAppointmentBtn = new Button("Add/Cancel");
         addAppointmentBtn.setPrefHeight(30);
-        addAppointmentBtn.setPrefWidth(100);
+        addAppointmentBtn.setPrefWidth(130);
 
         addAppointmentBtn.setOnAction(e -> {
             ClinicalSystem.navigateTo(new AppointmentList(1, "Appointments").getTable());
         });
 
-        approveAppointmentBtn = new Button("Approvals");
-        approveAppointmentBtn.setPrefHeight(30);
-        approveAppointmentBtn.setPrefWidth(100);
-
         appointmentContainer.setAlignment(Pos.CENTER);
         appointmentContainer.setSpacing(10);
-        appointmentContainer.getChildren().addAll(addAppointmentBtn, approveAppointmentBtn);
+        appointmentContainer.getChildren().addAll(addAppointmentBtn);
+
         appointment.getChildren().addAll(appointmentLabel, appointmentContainer);
 
 

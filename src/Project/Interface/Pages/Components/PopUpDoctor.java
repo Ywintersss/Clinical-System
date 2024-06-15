@@ -14,7 +14,7 @@ public class PopUpDoctor extends PopUp {
     public PopUpDoctor() {
         editProfile = new Button("Edit Profile");
         editProfile.setOnAction(e -> {
-            ClinicalSystem.navigateTo(new DoctorEditProfile().getDetails());
+            ClinicalSystem.navigateTo(new DoctorEditProfile(null).getDetails());
         });
 
         addContent(editProfile);

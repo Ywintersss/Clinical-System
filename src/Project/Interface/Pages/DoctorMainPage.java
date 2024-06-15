@@ -1,8 +1,10 @@
 package Project.Interface.Pages;
 
 import Project.ClinicalSystem;
+import Project.Interface.Pages.Components.ScheduleCard;
 import Project.Interface.Pages.Components.UploadBox;
 import Project.Scheduler.Schedule;
+import Project.UserSession;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,6 +24,8 @@ public class DoctorMainPage {
 	private VBox scheduleUploadContainer;
 	private StackPane scheduleContainer;
 	private Label schedulesLabel;
+	private VBox scheduleCardContainer;
+	private HBox scheduleCard;
 	private Button uploadScheduleButton;
 	private VBox uploadBox;
 
@@ -31,6 +35,8 @@ public class DoctorMainPage {
 
 
 	public DoctorMainPage() {
+		doctorSchedule = ClinicalSystem.getScheduler().getAllDoctorSchedules(UserSession.getInstance().getCurrentUser().getID(), true);
+
 		doctorMainPage = new GridPane();
 		doctorMainPage.setHgap(15);
 		doctorMainPage.setVgap(20);
@@ -48,15 +54,28 @@ public class DoctorMainPage {
 		scheduleContainer.setPadding(new Insets(10, 10, 10, 10));
 		scheduleContainer.setPrefHeight(dailyScheduleContainer.getPrefHeight());
 		scheduleContainer.setPrefWidth(dailyScheduleContainer.getPrefWidth());
-		//scheduleContainer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
 		uploadBox = new UploadBox().getUploadBox();
 
-		schedulesLabel = new Label("Schedules");
+		schedulesLabel = new Label("Upcoming Schedules");
 		schedulesLabel.setStyle("-fx-font-weight: bold;-fx-font-size: 16px;-fx-text-alignment: center;");
-		schedulesLabel.setPrefHeight(scheduleContainer.getPrefHeight());
-		schedulesLabel.setPrefWidth(scheduleContainer.getPrefWidth());
-		scheduleContainer.getChildren().addAll(schedulesLabel, uploadBox);
+		schedulesLabel.setPadding(new Insets(6, 10, 6, 10));
+
+		scheduleCardContainer = new VBox();
+		scheduleCardContainer.setSpacing(10);
+		scheduleCardContainer.setAlignment(Pos.TOP_CENTER);
+		scheduleCardContainer.setPadding(new Insets(10, 10, 10, 10));
+		scheduleCardContainer.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(8), Insets.EMPTY)));
+		scheduleCardContainer.setPrefHeight(scheduleContainer.getPrefHeight());
+		scheduleCardContainer.setPrefWidth(scheduleContainer.getPrefWidth());
+		scheduleCardContainer.getChildren().add(schedulesLabel);
+
+		for (Schedule schedule : doctorSchedule) {
+			scheduleCard = new ScheduleCard(schedule).getScheduleCard();
+			scheduleCardContainer.getChildren().add(scheduleCard);
+		}
+
+		scheduleContainer.getChildren().addAll(scheduleCardContainer, uploadBox);
 
 		uploadScheduleButton = new Button("Upload Schedule");
 		uploadScheduleButton.setPadding(new Insets(10, 10, 10, 10));

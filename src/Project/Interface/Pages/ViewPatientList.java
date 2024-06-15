@@ -25,11 +25,18 @@ public class ViewPatientList extends TableListingView {
 
         initTableData(patients);
 
+        //flag 1: All Patients (Admin) CRUD operations
+        //flag 2: All Patients (Doctor) View Medical Record
         if (flag == 1) {
             columnButton = new Button("Update");
             columnButton.setOnAction(e -> {
+                TableCell<?, ?> cell = (TableCell<?, ?>) ((Button) e.getSource()).getParent().getParent();
+                int index = cell.getIndex();
+
                 //TODO get patient
-                UserEditProfile userEditProfile = new UserEditProfile();
+                Patient patient = (Patient) getTableView().getItems().get(index);
+
+                UserEditProfile userEditProfile = new UserEditProfile(patient);
 
                 Button deleteButton = new Button("Delete");
                 deleteButton.setOnAction(event -> {

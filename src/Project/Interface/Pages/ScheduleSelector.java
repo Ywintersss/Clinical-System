@@ -43,9 +43,9 @@ public class ScheduleSelector {
         LabelContainer.setAlignment(Pos.CENTER);
 
         doctorNameLabel = new Label("Doctor: " + scheduleDetail.getDoctor().getName());
-        doctorNameLabel.setStyle(Styles.fontWeightTitle + Styles.fontSize(25) +Styles.fontFamily);
+        doctorNameLabel.setStyle(Styles.fontWeightBold + Styles.fontSize(25) +Styles.fontFamily);
         dateLabel = new Label("Date: " + scheduleDetail.getDate());
-        dateLabel.setStyle(Styles.fontWeightTitle + Styles.fontSize(25) +Styles.fontFamily);
+        dateLabel.setStyle(Styles.fontWeightBold + Styles.fontSize(25) +Styles.fontFamily);
 
         LabelContainer.getChildren().addAll(doctorNameLabel, dateLabel);
 

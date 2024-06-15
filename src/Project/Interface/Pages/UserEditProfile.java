@@ -26,10 +26,12 @@ public class UserEditProfile extends DetailView {
     private TextField height;
     private TextField weight;
 
-	public UserEditProfile() {
+	public UserEditProfile(Patient oldPatientData) {
         super("Edit Profile");
 
-        Patient oldPatientData = (Patient) UserSession.getInstance().getCurrentUser();
+        if (oldPatientData == null) {
+            oldPatientData = (Patient) UserSession.getInstance().getCurrentUser();
+        }
 
         profileScroll = new ScrollPane();
 
