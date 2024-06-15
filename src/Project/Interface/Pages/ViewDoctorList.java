@@ -1,6 +1,7 @@
 package Project.Interface.Pages;
 
 import Project.ClinicalSystem;
+import Project.Interface.Pages.Components.Notification;
 import Project.Interface.Pages.Templates.TableListingView;
 import Project.Users.Doctor;
 import Project.Users.Patient;
@@ -42,12 +43,19 @@ public class ViewDoctorList extends TableListingView {
 
             Doctor doctor = (Doctor) getTableView().getItems().get(index);
 
-            //TODO get doctor
             DoctorEditProfile DoctorEditProfile = new DoctorEditProfile(doctor);
 
             Button deleteButton = new Button("Delete");
             deleteButton.setOnAction(event -> {
-                //TODO delete doctor
+                try{
+                    //Notification.confirmation("Are you sure?");
+                    ClinicalSystem.getUserDataManager().deleteUser("\\users\\Doctor.txt", doctor.getID());
+                    Notification.information("Deleted");
+                    ClinicalSystem.back();
+                    ClinicalSystem.Refresh(new ViewDoctorList().getTable());
+                } catch (Exception exception) {
+                    Notification.error("Error Deleting");
+                }
             });
 
             DoctorEditProfile.addButtonIntoContainer(deleteButton);

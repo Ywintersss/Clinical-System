@@ -1,6 +1,7 @@
 package Project.Scheduler;
 
 import Project.ClinicalSystem;
+import Project.Interface.Pages.Components.Notification;
 import Project.Users.Doctor;
 import Project.Users.Patient;
 import Project.Utilities.File;
@@ -172,7 +173,21 @@ public class Scheduler {
         }
     }
 
-    public void cancelAppointment(String doctorID, String patientID, Appointment appointment) {
+    public void cancelAppointment(String AppointmentID) {
+        String path = "\\schedules\\appointments.txt";
+
+        try {
+            ArrayList<String> appointmentData = File.readFile(path);
+            ArrayList<String[]> parseAppointmentData = File.parseData(appointmentData);
+
+            parseAppointmentData.removeIf(data -> data[0].equals(AppointmentID));
+
+            File.updateFile(path, parseAppointmentData);
+            Notification.information("Appointment deleted successfully");
+        } catch (Exception e) {
+            Notification.error("Error while deleting appointment");
+        }
+
 
         //Delete from appointment file
     }

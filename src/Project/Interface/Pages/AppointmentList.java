@@ -20,7 +20,7 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 
 public class AppointmentList extends TableListingView {
-    private Button viewButton;
+    private Button cancelButton;
     private Button addAppointment;
     private ObservableList<AppointmentDetail> appointmentDetailsList;
     public AppointmentList(int flag, String title) {
@@ -28,13 +28,45 @@ public class AppointmentList extends TableListingView {
 
         appointmentDetailsList = ClinicalSystem.getScheduler().getAllAppointmentDetails();
 
-        //flag Null: All Appointments
+        addColumn("Doctor");
+        addColumn("Patient", cellData -> {
+            AppointmentDetail appointmentDetail = (AppointmentDetail) cellData.getValue();
+            Patient patient = appointmentDetail.getPatient();
+            return new SimpleObjectProperty<Object>(patient.getName());
+        });
+        addColumn("Date", cellData -> {
+            AppointmentDetail appointmentDetail = (AppointmentDetail) cellData.getValue();
+            Schedule schedule = appointmentDetail.getSchedule();
+            return new SimpleObjectProperty<Object>(schedule.getDate());
+        });
+        addColumn("Time", "appointmentTime");
+        addColumn("Description");
+
+        cancelButton = new Button("Cancel");
+        cancelButton.setOnAction(e -> {
+            TableCell<?, ?> cell = (TableCell<?, ?>) ((Button) e.getSource()).getParent().getParent();
+            int index = cell.getIndex();
+
+            Appointment appointment = (Appointment) getTableView().getItems().get(index);
+        });
+
+        addAppointment = new Button("Add");
+        addAppointment.setOnAction(e -> {
+            ClinicalSystem.navigateTo(new DateDoctorSelection().getDateSelection());
+        });
+
+        //flag 1: All Appointments
         //2: Doctor's Appointments
         //3: Patient's Active Appointments
         //4: Patient's Historical Appointments
-        if (flag == 2){
+        if (flag == 1){
+            addFunctionalButton(addAppointment);
+            addColumnButtons(cancelButton);
+        } else if (flag == 2){
             //Remove unrelated appointments
             appointmentDetailsList.removeIf(appointmentDetail -> !appointmentDetail.getDoctor().getID().equals(UserSession.getInstance().getCurrentUser().getID()));
+
+            addColumnButtons(cancelButton);
         } else if (flag == 3) {
             appointmentDetailsList.removeIf(appointmentDetail -> !appointmentDetail.getPatient().getID().equals(UserSession.getInstance().getCurrentUser().getID()));
             appointmentDetailsList.removeIf(appointmentDetail -> {
@@ -52,6 +84,8 @@ public class AppointmentList extends TableListingView {
                 ClinicalSystem.navigateTo(new AppointmentList(4, "Appointment History").getTable());
             });
 
+            addColumnButtons(cancelButton);
+
             addFunctionalButton(appointmentHistory);
         } else if (flag == 4) {
             appointmentDetailsList.removeIf(appointmentDetail -> {
@@ -62,37 +96,6 @@ public class AppointmentList extends TableListingView {
                 return Utilities.isActive(date, appointmentTime);
             });
         }
-
-        addColumn("Doctor");
-        addColumn("Patient", cellData -> {
-            AppointmentDetail appointmentDetail = (AppointmentDetail) cellData.getValue();
-            Patient patient = appointmentDetail.getPatient();
-            return new SimpleObjectProperty<Object>(patient.getName());
-        });
-        addColumn("Date", cellData -> {
-            AppointmentDetail appointmentDetail = (AppointmentDetail) cellData.getValue();
-            Schedule schedule = appointmentDetail.getSchedule();
-            return new SimpleObjectProperty<Object>(schedule.getDate());
-        });
-        addColumn("Time", "appointmentTime");
-        addColumn("Description");
-
-        viewButton = new Button("Delete");
-        viewButton.setOnAction(e -> {
-            TableCell<?, ?> cell = (TableCell<?, ?>) ((Button) e.getSource()).getParent().getParent();
-            int index = cell.getIndex();
-
-            Appointment appointment = (Appointment) getTableView().getItems().get(index);
-        });
-
-        addAppointment = new Button("Add");
-        addAppointment.setOnAction(e -> {
-            ClinicalSystem.navigateTo(new DateDoctorSelection().getDateSelection());
-        });
-
-        addFunctionalButton(addAppointment);
-
-        addColumnButtons(viewButton);
 
         initTableData(appointmentDetailsList);
 

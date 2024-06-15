@@ -1,6 +1,7 @@
 package Project.Interface.Pages;
 
 import Project.ClinicalSystem;
+import Project.Interface.Pages.Components.Notification;
 import Project.Interface.Pages.Templates.TableListingView;
 import Project.Users.Patient;
 import javafx.collections.ObservableList;
@@ -33,14 +34,21 @@ public class ViewPatientList extends TableListingView {
                 TableCell<?, ?> cell = (TableCell<?, ?>) ((Button) e.getSource()).getParent().getParent();
                 int index = cell.getIndex();
 
-                //TODO get patient
                 Patient patient = (Patient) getTableView().getItems().get(index);
 
                 UserEditProfile userEditProfile = new UserEditProfile(patient);
 
                 Button deleteButton = new Button("Delete");
                 deleteButton.setOnAction(event -> {
-                    //TODO delete patient
+                    try{
+                        //Notification.confirmation("Are you sure?");
+                        ClinicalSystem.getUserDataManager().deleteUser("\\users\\Patient.txt", patient.getID());
+                        Notification.information("Deleted");
+                        ClinicalSystem.back();
+                        ClinicalSystem.Refresh(new ViewPatientList(1).getTable());
+                    } catch (Exception exception) {
+                        Notification.error("Error Deleting");
+                    }
                 });
 
                 userEditProfile.addButtonIntoContainer(deleteButton);
@@ -59,7 +67,11 @@ public class ViewPatientList extends TableListingView {
         } else if (flag == 2) {
             columnButton = new Button("View");
             columnButton.setOnAction(e -> {
-                //TODO get patient
+                TableCell<?, ?> cell = (TableCell<?, ?>) ((Button) e.getSource()).getParent().getParent();
+                int index = cell.getIndex();
+
+                Patient patient = (Patient) getTableView().getItems().get(index);
+
                 MedicalRecord MedicalRecord = new MedicalRecord();
 
                 Button add = new Button("Add");

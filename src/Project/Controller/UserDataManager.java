@@ -184,8 +184,18 @@ public class UserDataManager {
             throw new RuntimeException(e);
         }
     }
-    public static void main(String[] args) {
-        //addPatient("test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test");
+
+    public void deleteUser(String path, String userID) {
+        try {
+            ArrayList<String> userData = File.readFile(path);
+            ArrayList<String[]> toBeUpdatedDeleteData = File.parseData(userData);
+
+            toBeUpdatedDeleteData.removeIf(data -> data[0].equals(userID));
+
+            File.updateFile(path, toBeUpdatedDeleteData);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 
