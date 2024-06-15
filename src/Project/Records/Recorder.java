@@ -1,6 +1,8 @@
 package Project.Records;
 import Project.Utilities.File;
 import Project.Utilities.Utilities;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -15,14 +17,42 @@ public class Recorder {
         return instance;
     }
 
-    public void addRecord(String patientID, String Issue, String prescription, String followUpDate, String appointmentID) {
-        String recordID = Utilities.generateID("RC","\\records\\MedicalRecords.txt");
+    public void addRecord(String ...patientData) {
+        String path = "\\records\\MedicalRecords.txt";
+        String recordID = Utilities.generateID("RC", path) + ",";
 
-        // write to txt file
-        String data = File.formatData(recordID, patientID, Issue, prescription, followUpDate, appointmentID);
+        // write to MedicalRecords.txt
+        String data = File.formatData(patientData);
         try {
-            File.appendToFile("\\records\\MedicalRecords.txt", data);
+            File.appendToFile(path, recordID + data);
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ObservableList<MedicalRecord> getAllRecords() {
+        try {
+            ArrayList<String> oldRecord = File.readFile("\\records\\MedicalRecords.txt");
+            ArrayList<String[]> oldRecordArray = File.parseData(oldRecord);
+            ObservableList<MedicalRecord> medicalRecordList = FXCollections.observableArrayList();
+
+            for (String[] dataArray : oldRecordArray) {
+                MedicalRecord medicalRecord = new MedicalRecord(dataArray[0], dataArray[1], dataArray[2], dataArray[3], dataArray[4]);
+                medicalRecordList.add(medicalRecord);
+            }
+            return medicalRecordList;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ObservableList<MedicalRecord> getPatientMedicalRecord(String patientID) {
+        try {
+            ObservableList<MedicalRecord> medicalRecordList = getAllRecords();
+            medicalRecordList.removeIf(medicalRecord -> !medicalRecord.getPatientID().equals(patientID));
+
+            return medicalRecordList;
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

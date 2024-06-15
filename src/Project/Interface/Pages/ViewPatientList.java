@@ -5,7 +5,6 @@ import Project.Interface.Pages.Components.Notification;
 import Project.Interface.Pages.Templates.TableListingView;
 import Project.Users.Patient;
 import javafx.collections.ObservableList;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
@@ -72,16 +71,16 @@ public class ViewPatientList extends TableListingView {
 
                 Patient patient = (Patient) getTableView().getItems().get(index);
 
-                MedicalRecord MedicalRecord = new MedicalRecord();
+                MedicalRecordList MedicalRecordList = new MedicalRecordList(patient);
 
                 Button add = new Button("Add");
                 add.setOnAction(event -> {
-                    //TODO delete patient
+                    ClinicalSystem.navigateTo(new AddMedicalRecord(patient).getDetails());
                 });
 
-                MedicalRecord.addButtonIntoContainer(add);
+                MedicalRecordList.addButtonIntoContainer(add);
 
-                ClinicalSystem.navigateTo(MedicalRecord.getMedicalRecord());
+                ClinicalSystem.navigateTo(MedicalRecordList.getMedicalRecordList());
             });
 
             addColumnButtons(columnButton);

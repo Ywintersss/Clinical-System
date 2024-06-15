@@ -2,6 +2,10 @@ package Project.Interface.Pages;
 
 import Project.ClinicalSystem;
 import Project.Interface.Pages.Components.MedicalRecordCard;
+import Project.UserSession;
+import Project.Users.Patient;
+import Project.Records.MedicalRecord;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -11,7 +15,8 @@ import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import static javafx.scene.text.Font.font;
 
-public class MedicalRecord {
+public class MedicalRecordList {
+    private ObservableList<MedicalRecord> patientMedicalRecordList;
     private ScrollPane medicalRecordScroller;
     private VBox medicalRecordContainer;
     private VBox medicalRecord;
@@ -20,7 +25,13 @@ public class MedicalRecord {
     private HBox buttonContainer;
     private Region containerSpacer;
     private Button back;
-    public MedicalRecord() {
+    public MedicalRecordList(Patient patient) {
+        if (patient == null) {
+            patient = (Patient) UserSession.getInstance().getCurrentUser();
+        }
+
+        patientMedicalRecordList = ClinicalSystem.getRecorder().getPatientMedicalRecord(patient.getID());
+
         medicalRecord = new VBox();
 
         title = new Label("Medical Records");
@@ -49,8 +60,8 @@ public class MedicalRecord {
         medicalRecordContainer.setPadding(new Insets(10));
         medicalRecordContainer.setSpacing(20);
 
-        for (int i = 0; i < 2; i++) {
-            medicalRecordContainer.getChildren().add(new MedicalRecordCard("Azoospermia","No sperm.","6/7/2024").getMedicalRecordCard());
+        for (MedicalRecord medicalRecord : patientMedicalRecordList) {
+            medicalRecordContainer.getChildren().add(new MedicalRecordCard(medicalRecord.getIssue(),medicalRecord.getPrescription(),medicalRecord.getFollowUpDate()).getMedicalRecordCard());
         }
 
         medicalRecordScroller = new ScrollPane(medicalRecord);
@@ -62,7 +73,7 @@ public class MedicalRecord {
         medicalRecord.getChildren().addAll(title, medicalRecordScroller, spacer, buttonContainer);
     }
 
-    public VBox getMedicalRecord() {
+    public VBox getMedicalRecordList() {
         return medicalRecord;
     }
 

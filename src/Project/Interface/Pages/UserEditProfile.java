@@ -1,18 +1,19 @@
 package Project.Interface.Pages;
 
 import Project.ClinicalSystem;
+import Project.Interface.Pages.Components.Notification;
 import Project.Interface.Pages.Templates.DetailView;
 import Project.Users.Gender;
-import Project.Users.User;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import Project.UserSession;
 import Project.Users.Patient;
 import Project.Controller.UserDataManager;
+import Project.Users.User;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.collections.ObservableList;
+
+import java.util.Arrays;
 
 public class UserEditProfile extends DetailView {
     private ScrollPane profileScroll;
@@ -22,7 +23,7 @@ public class UserEditProfile extends DetailView {
     private TextField email;
     private TextField contact;
     private TextField age;
-    private TextField gender;
+    private ComboBox<String> gender;
     private TextField height;
     private TextField weight;
 
@@ -41,7 +42,9 @@ public class UserEditProfile extends DetailView {
         email = new TextField(oldPatientData.getEmail());
         contact = new TextField(oldPatientData.getContact());
         age = new TextField(Integer.toString(oldPatientData.getAge()));
-        gender = new TextField(oldPatientData.getGender().getGender());
+        gender = new ComboBox<String>();
+        gender.getItems().addAll("MALE", "FEMALE");
+        gender.setValue(oldPatientData.getGender().toString());
         height = new TextField(Double.toString(oldPatientData.getHeight()));
         weight = new TextField(Double.toString(oldPatientData.getWeight()));
 
@@ -51,7 +54,7 @@ public class UserEditProfile extends DetailView {
         addContent("Email", email);
         addContent("Contact", contact);
         addContent("Age", age);
-        addContent("Gender", gender);
+        addSelectionContainer("Gender", gender);
         addContent("Height", height);
         addContent("Weight", weight);
 
@@ -72,31 +75,28 @@ public class UserEditProfile extends DetailView {
         Button saveButton = new Button("Save");
         saveButton.setOnAction(e -> {
             try {
-                Gender genderField;
-
-                if (gender.getText().equals("Male")) {
-                    genderField = Gender.MALE;
-                } else {
-                    genderField = Gender.FEMALE;
-                }
-
                 oldPatientData.setUsername(username.getText());
                 oldPatientData.setPassword(password.getText());
                 oldPatientData.setName(name.getText());
                 oldPatientData.setEmail(email.getText());
                 oldPatientData.setContact(contact.getText());
                 oldPatientData.setAge(Integer.parseInt(age.getText()));
-                oldPatientData.setGender(genderField);
+                oldPatientData.setGender(Gender.valueOf(gender.getValue()));
                 oldPatientData.setHeight(Double.parseDouble(height.getText()));
                 oldPatientData.setWeight(Double.parseDouble(weight.getText()));
 
                 String[] newData = {oldPatientData.getID(), username.getText(), password.getText(), name.getText(), email.getText(),
-                        contact.getText(), age.getText(), genderField.getGender().toUpperCase(),
+                        contact.getText(), age.getText(), gender.getValue(),
                         height.getText(), weight.getText()};
-                ClinicalSystem.getUserDataManager().updateUser("\\users\\Patient.txt", newData);
 
-                UserSession.getInstance().setCurrentUser(oldPatientData);
+                try {
+                    ClinicalSystem.getUserDataManager().updateUser("\\users\\Patient.txt", newData);
+                    UserSession.getInstance().setCurrentUser(oldPatientData);
 
+                    Notification.information("Changes saved successfully");
+                } catch (Exception ex) {
+                    Notification.error("Failed to save changes");
+                }
                 ClinicalSystem.back();
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -104,9 +104,6 @@ public class UserEditProfile extends DetailView {
         });
         return saveButton;
     }
-    //addButtonIntoContainer();
-
-
 
 
     @Override

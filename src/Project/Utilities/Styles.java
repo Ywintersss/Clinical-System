@@ -37,4 +37,8 @@ public class Styles {
     public static String borderRadius(int borderRadius) {
         return "-fx-border-radius: " + borderRadius + "px;";
     }
+
+    public static String buttonStyle() {
+        return "-fx-font-size: 14px;-fx-font-weight: bold;-fx-pref-width: 140px;-fx-pref-height: 36px;-fx-spacing: 20px;";
+    }
 }

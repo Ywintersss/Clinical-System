@@ -23,6 +23,7 @@ public abstract class DetailView {
 
     private HBox selectionContainer;
     private Label selectionLabel;
+    private Region spacer;
     private ComboBox<String> selectionField;
 
     private Button back;
@@ -93,22 +94,45 @@ public abstract class DetailView {
     public void addSelectionContainer(String labelTitle, String[] options) {
         selectionContainer = new HBox();
         selectionContainer.setAlignment(Pos.CENTER_LEFT);
-        selectionContainer.setSpacing(55);
-        VBox.setMargin(selectionContainer, new Insets(10, 0, 0, 0));
+        VBox.setMargin(selectionContainer, new Insets(15, 0, 0, 0));
 
         selectionLabel = new Label(labelTitle);
         selectionLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         selectionLabel.setAlignment(Pos.CENTER);
 
+        spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
         selectionField = new ComboBox<>();
-        selectionField.setPromptText("Select "+labelTitle);
+        selectionField.setPromptText("Select " + labelTitle);
         selectionField.getItems().addAll(options);
-        selectionField.setPrefWidth(ScreenTools.getScreenWidth() * 0.30);
+        selectionField.setPrefWidth(ScreenTools.getScreenWidth() * 0.26);
         Background background = new Background(new BackgroundFill( Color.WHITE, borderRadius, null));
         selectionField.setBackground(background);
         selectionField.setPadding(new Insets(4, 4, 4, 4));
 
-        selectionContainer.getChildren().addAll(selectionLabel, selectionField);
+        selectionContainer.getChildren().addAll(selectionLabel, spacer, selectionField);
+        contentContainer.getChildren().add(selectionContainer);
+    }
+
+    public void addSelectionContainer(String labelTitle, ComboBox<String> selectionField) {
+        selectionField.setPrefWidth(ScreenTools.getScreenWidth() * 0.26);
+        Background background = new Background(new BackgroundFill( Color.WHITE, borderRadius, null));
+        selectionField.setBackground(background);
+        selectionField.setPadding(new Insets(4, 4, 4, 4));
+
+        selectionContainer = new HBox();
+        selectionContainer.setAlignment(Pos.CENTER_LEFT);
+        selectionContainer.setSpacing(55);;
+
+        spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        selectionLabel = new Label(labelTitle);
+        selectionLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        selectionLabel.setAlignment(Pos.CENTER);
+
+        selectionContainer.getChildren().addAll(selectionLabel, spacer, selectionField);
         contentContainer.getChildren().add(selectionContainer);
     }
 

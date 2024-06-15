@@ -1,11 +1,5 @@
 package Project.Controller;
 
-import Project.ClinicalSystem;
-import Project.Interface.Pages.MedicalRecord;
-import Project.Interface.Pages.PaymentHistory;
-import Project.Payments.Payment;
-import Project.Payments.PaymentHandler;
-import Project.Payments.PaymentMethod;
 import Project.Users.*;
 import Project.Utilities.File;
 import Project.Utilities.Utilities;

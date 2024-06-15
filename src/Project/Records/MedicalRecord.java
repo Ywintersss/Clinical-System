@@ -7,15 +7,13 @@ public class MedicalRecord {
     private String Issue;
     private String Prescription;
     private String FollowUpDate;
-    private Appointment pastAppointment;
 
-    public MedicalRecord(String ID, String PatientID, String Issue, String prescription, String followUpDate, Appointment pastAppointment) {
+    public MedicalRecord(String ID, String PatientID, String Issue, String prescription, String followUpDate) {
         this.ID = ID;
         this.PatientID = PatientID;
         this.Issue = Issue;
         this.Prescription = prescription;
         this.FollowUpDate = followUpDate;
-        this.pastAppointment = pastAppointment;
     }
 
     public String getID() {
@@ -38,9 +36,6 @@ public class MedicalRecord {
         return FollowUpDate;
     }
 
-    public Appointment getPastAppointment() {
-        return pastAppointment;
-    }
 
     public void setIssue(String Issue) {
         this.Issue = Issue;
@@ -52,10 +47,6 @@ public class MedicalRecord {
 
     public void setFollowUpDate(String followUpDate) {
         this.FollowUpDate = followUpDate;
-    }
-
-    public void setPastAppointment(Appointment pastAppointment) {
-        this.pastAppointment = pastAppointment;
     }
 }
 
