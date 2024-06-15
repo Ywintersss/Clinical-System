@@ -2,6 +2,7 @@ package Project.Payments;
 
 import Project.Users.Patient;
 import Project.Utilities.File;
+import Project.Utilities.Utilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -18,10 +19,18 @@ public class PaymentHandler {
         }
         return instance;
     }
-    public void makePayment (String paymentID,  String patientID, String amount, PaymentMethod paymentMethod, String date){
-        Payment payment = new Payment(paymentID, patientID,  amount, paymentMethod, date);
+    public void makePayment ( String... userData) {
+        String path = "\\payments\\PaymentHistory.txt";
+        String paymentID = Utilities.generateID("PH", path) + ",";
 
         // write into PaymentHistory.txt
+        String data = File.formatData(userData);
+        try {
+            File.appendToFile(path, paymentID + data);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public ObservableList<Payment> getAllPaymentHistory() {

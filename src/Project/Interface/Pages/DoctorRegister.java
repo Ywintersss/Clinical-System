@@ -15,16 +15,16 @@ public class DoctorRegister extends Register {
     public DoctorRegister() {
         super("Register Doctor");
 
-        addContentContainer("Username");
-        addContentContainer("Password");
-        addContentContainer("Name");
-        addContentContainer("Email");
-        addContentContainer("Phone Number");
-        addContentContainer("Age");
-        addContentContainer("Gender");
-        addContentContainer("Years Of Experience");
-        addContentContainer("Specialization");
-        addContentContainer("Position");
+        addContentContainer("Username","Username");
+        addContentContainer("Password","At least 8 characters, 1 uppercase, 1 number");
+        addContentContainer("Name","Full Name");
+        addContentContainer("Email","Ryan1234@gmail.com");
+        addContentContainer("Phone Number","012-1118888");
+        addContentContainer("Age","Age");
+        addSelectionContainer("Gender", "Select Gender", new String[]{"MALE", "FEMALE"});
+        addContentContainer("Years Of Experience","Years Of Experience");
+        addSelectionContainer("Specialization","Select Specialization", new String[]{"Heart", "Chiropractor", "Family"});
+        addSelectionContainer("Position","Select Position", new String[]{"Head", "Assistant"});
 
         Button register = new Button("Register");
         register.setPrefHeight(40);
@@ -45,13 +45,7 @@ public class DoctorRegister extends Register {
             String specialization = doctorData.get(8);
             String position = doctorData.get(9);
 
-            Gender genderField;
-            if (gender.equalsIgnoreCase("Male")) {
-                genderField = Gender.MALE;
-            } else {
-                genderField = Gender.FEMALE;
-            }
-            register(2, username, password, name, email, phoneNumber, age, genderField.getGender(), yearsOfExperience, specialization, position);
+            register(2, username, password, name, email, phoneNumber, age, gender, yearsOfExperience, specialization, position);
         });
 
         addButtonContainer(register);

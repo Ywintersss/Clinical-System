@@ -16,15 +16,15 @@ public class PatientRegister extends Register {
     public PatientRegister() {
         super("Register Patient");
 
-        addContentContainer("Username");
-        addContentContainer("Password");
-        addContentContainer("Name");
-        addContentContainer("Email");
-        addContentContainer("Phone Number");
-        addContentContainer("Age");
-        addContentContainer("Gender");
-        addContentContainer("Height");
-        addContentContainer("Weight");
+        addContentContainer("Username","Username");
+        addContentContainer("Password","At least 8 characters, 1 uppercase, 1 number");
+        addContentContainer("Name","Full Name");
+        addContentContainer("Email","Ryan1234@gmail.com");
+        addContentContainer("Phone Number","012-1118888");
+        addContentContainer("Age","Age");
+        addSelectionContainer("Gender", "Select Gender", new String[]{"MALE", "FEMALE"});
+        addContentContainer("Height","Height in cm");
+        addContentContainer("Weight","Weight in kg");
 
         Button register = new Button("Register");
         register.setPrefHeight(40);
@@ -44,13 +44,9 @@ public class PatientRegister extends Register {
             String height = data.get(7);
             String weight = data.get(8);
 
-            Gender genderField;
-            if (gender.equalsIgnoreCase("Male")) {
-                genderField = Gender.MALE;
-            } else {
-                genderField = Gender.FEMALE;
-            }
-            register(1, username, password, name, email, phoneNumber, age, genderField.getGender(), height, weight);
+            register(1, username, password, name, email, phoneNumber, age, gender, height, weight);
+
+            ClinicalSystem.navigateTo(new Home().getHome());
         });
 
         addButtonContainer(register);

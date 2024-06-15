@@ -55,10 +55,13 @@ public class UserDataManager {
         }
     }
 
-    public void addAdmin(String username, String password) {
-        String data = File.formatData(username, password);
+    public void addAdmin(String ...userData) {
+        String adminPath = "\\users\\Admin.txt";
+        String ID = Utilities.generateID("ID", adminPath) + ",";
+
+        String data = File.formatData(userData);
         try {
-            File.appendToFile("Admin.txt",data);
+            File.appendToFile(adminPath, ID + data);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -91,7 +94,7 @@ public class UserDataManager {
                         if(file.contains("Patient")){
                             return new Patient(dataArray[0], dataArray[1], dataArray[2], dataArray[3], dataArray[4], dataArray[5],
                                     Integer.parseInt(dataArray[6]), Gender.valueOf(dataArray[7]),
-                                    Double.parseDouble(dataArray[8]), Double.parseDouble(dataArray[9]), dataArray[10]);
+                                    Double.parseDouble(dataArray[8]), Double.parseDouble(dataArray[9]));
                         }
                         else if(file.contains("Doctor")){
                             return new Doctor(dataArray[0], dataArray[1], dataArray[2], dataArray[3], dataArray[4], dataArray[5],
@@ -117,7 +120,7 @@ public class UserDataManager {
             ObservableList<Patient> FXPatientData = FXCollections.observableArrayList();
             for (String[] data : parsePatientData) {
                 FXPatientData.add(new Patient(data[0], data[1], data[2], data[3], data[4], data[5],
-                        Integer.parseInt(data[6]),Gender.valueOf(data[7]), Double.parseDouble(data[8]), Double.parseDouble(data[9]), data[10]));
+                        Integer.parseInt(data[6]),Gender.valueOf(data[7]), Double.parseDouble(data[8]), Double.parseDouble(data[9])));
             }
 
             return FXPatientData;

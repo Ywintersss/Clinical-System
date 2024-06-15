@@ -2,17 +2,17 @@ package Project.Interface.Pages.Templates;
 
 import Project.ClinicalSystem;
 import Project.Utilities.ScreenTools;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Control;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
+
+import java.util.ArrayList;
 
 public abstract class DetailView {
     private VBox details;
@@ -20,6 +20,11 @@ public abstract class DetailView {
     private VBox contentContainer;
     private HBox buttonContainer;
     private Region containerSpacer;
+
+    private HBox selectionContainer;
+    private Label selectionLabel;
+    private ComboBox<String> selectionField;
+
     private Button back;
     private CornerRadii borderRadius = new CornerRadii(4);
     public DetailView(String title) {
@@ -85,6 +90,28 @@ public abstract class DetailView {
         contentContainer.getChildren().add(contentBox);
     }
 
+    public void addSelectionContainer(String labelTitle, String[] options) {
+        selectionContainer = new HBox();
+        selectionContainer.setAlignment(Pos.CENTER_LEFT);
+        selectionContainer.setSpacing(55);
+        VBox.setMargin(selectionContainer, new Insets(10, 0, 0, 0));
+
+        selectionLabel = new Label(labelTitle);
+        selectionLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        selectionLabel.setAlignment(Pos.CENTER);
+
+        selectionField = new ComboBox<>();
+        selectionField.setPromptText("Select "+labelTitle);
+        selectionField.getItems().addAll(options);
+        selectionField.setPrefWidth(ScreenTools.getScreenWidth() * 0.30);
+        Background background = new Background(new BackgroundFill( Color.WHITE, borderRadius, null));
+        selectionField.setBackground(background);
+        selectionField.setPadding(new Insets(4, 4, 4, 4));
+
+        selectionContainer.getChildren().addAll(selectionLabel, selectionField);
+        contentContainer.getChildren().add(selectionContainer);
+    }
+
     public void addButtonIntoContainer(String buttonLabel) {
         Button button = new Button(buttonLabel);
 
@@ -106,5 +133,20 @@ public abstract class DetailView {
 
     public HBox getButtonContainer() {
         return buttonContainer;
+    }
+
+    public ArrayList<String> getInputData() {
+        ArrayList<String> data = new ArrayList<>();
+        ObservableList<Node> children = contentContainer.getChildren();
+        for (int i = 1; i < children.size(); i++) {
+            ObservableList<Node> content = ((Parent) children.get(i)).getChildrenUnmodifiable();
+            if (content.get(1) instanceof TextField) {
+                data.add(((TextField) content.get(1)).getText());
+            }
+            if (content.get(1) instanceof ComboBox) {
+                data.add(((ComboBox) content.get(1)).getSelectionModel().getSelectedItem().toString());
+            }
+        }
+        return data;
     }
 }

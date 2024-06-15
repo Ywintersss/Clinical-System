@@ -36,7 +36,7 @@ public class ViewPaymentRecord extends TableListingView {
 
         addPayment = new Button("Add");
         addPayment.setOnAction(e -> {
-            ClinicalSystem.navigateTo(new PatientRegister().getRegisterForm());
+            ClinicalSystem.navigateTo(new AddPaymentRecord().getDetails());
         });
 
         addFunctionalButton(addPayment);

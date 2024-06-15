@@ -10,10 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -29,6 +26,10 @@ public abstract class Register {
     private HBox contentContainer;
     private Label contentLabel;
     private TextField contentField;
+
+    private HBox selectionContainer;
+    private Label selectionLabel;
+    private ComboBox<String> selectionField;
 
     private HBox buttonContainer;
     private Region spacer;
@@ -60,20 +61,39 @@ public abstract class Register {
         return registerContainer;
     }
 
-    public void addContentContainer(String labelTitle) {
+    public void addContentContainer(String labelTitle,String promptText) {
         contentContainer = new HBox();
         contentContainer.setSpacing(10);
         VBox.setMargin(contentContainer, new Insets(0, 0, 0, 40));
 
         contentLabel = new Label(labelTitle);
+        contentLabel.setPrefWidth(185);
         contentLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
 
         contentField = new TextField();
-        contentField.setPromptText(labelTitle);
-        //contentField.setPrefWidth(ScreenTools.getScreenWidth() * 0.3);
+        contentField.setPromptText(promptText);
+        contentField.setPrefWidth(ScreenTools.getScreenWidth() * 0.18);
 
         registerForm.getChildren().add(contentContainer);
         contentContainer.getChildren().addAll(contentLabel, contentField);
+    }
+
+    public void addSelectionContainer (String labelTitle, String promptText, String[] options) {
+        selectionContainer = new HBox();
+        VBox.setMargin(selectionContainer, new Insets(8, 0, 0, 40));
+
+        selectionLabel = new Label(labelTitle);
+        selectionLabel.setPrefWidth(195);
+        selectionLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        selectionLabel.setPadding(new Insets(10, -20, 10, 0));
+
+        selectionField = new ComboBox<>();
+        selectionField.setPromptText(promptText);
+        selectionField.getItems().addAll(options);
+        selectionField.setPrefWidth(ScreenTools.getScreenWidth() * 0.18);
+
+        registerForm.getChildren().add(selectionContainer);
+        selectionContainer.getChildren().addAll(selectionLabel, selectionField);
     }
 
     public ArrayList<String> getTextFieldsData() {
@@ -83,6 +103,9 @@ public abstract class Register {
             ObservableList<Node> content = ((HBox) children.get(i)).getChildren();
             if (content.get(1) instanceof TextField) {
                 data.add(((TextField) content.get(1)).getText());
+            }
+            if (content.get(1) instanceof ComboBox) {
+                data.add(((ComboBox) content.get(1)).getSelectionModel().getSelectedItem().toString());
             }
         }
         return data;

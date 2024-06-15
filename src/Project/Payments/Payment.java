@@ -2,6 +2,7 @@ package Project.Payments;
 
 import Project.Users.Patient;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Payment {
     private String paymentID;
@@ -16,6 +17,16 @@ public class Payment {
         this.amount = amount;
         this.paymentMethod = paymentMethod;
         this.date = date;
+    }
+
+    public ArrayList<String> getPaymentData() {
+        ArrayList<String> details = new ArrayList<>();
+        details.add(paymentID);
+        details.add(patientID);
+        details.add(amount);
+        details.add(paymentMethod.toString());
+        details.add(date);
+        return details;
     }
 
     public String getPaymentID () {return paymentID;}

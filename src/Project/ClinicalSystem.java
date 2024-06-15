@@ -46,6 +46,7 @@ public class ClinicalSystem {
                 layout.setHeaderPopUp(new PopUpDoctor());
             } else if (user instanceof Admin) {
                 Admin admin = (Admin) user;
+                UserSession.getInstance().setCurrentUser(admin);
                 navigateTo(new AdminMainPage().getAdminMainPage());
                 layout.setHeaderPopUp(new PopUpAdmin());
             }
@@ -69,7 +70,7 @@ public class ClinicalSystem {
         } else if (flag == 2) {
             userDataManager.addDoctor(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9]);
         } else if (flag == 3) {
-            //userDataManager.addAdmin();
+            userDataManager.addAdmin(args[0],args[1]);
         }
     }
     public static Layout getLayout() {
