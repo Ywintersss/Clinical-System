@@ -116,7 +116,7 @@ public class Scheduler {
             Patient patient = patientMap.get(appointment.getPatientID());
             Schedule schedule = scheduleMap.get(appointment.getScheduleID());
 
-            appointmentDetails.add(new AppointmentDetail(doctor, patient, schedule, appointment.getTime(), appointment.getDescription()));
+            appointmentDetails.add(new AppointmentDetail(appointment, doctor, patient, schedule, appointment.getTime(), appointment.getDescription()));
         }
 
         return appointmentDetails;
@@ -183,9 +183,8 @@ public class Scheduler {
             parseAppointmentData.removeIf(data -> data[0].equals(AppointmentID));
 
             File.updateFile(path, parseAppointmentData);
-            Notification.information("Appointment deleted successfully");
         } catch (Exception e) {
-            Notification.error("Error while deleting appointment");
+            throw new RuntimeException(e);
         }
 
 

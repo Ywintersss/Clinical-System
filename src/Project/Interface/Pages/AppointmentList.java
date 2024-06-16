@@ -1,6 +1,7 @@
 package Project.Interface.Pages;
 
 import Project.ClinicalSystem;
+import Project.Interface.Pages.Components.Notification;
 import Project.Interface.Pages.Templates.TableListingView;
 import Project.Scheduler.Appointment;
 import Project.Scheduler.AppointmentDetail;
@@ -47,7 +48,16 @@ public class AppointmentList extends TableListingView {
             TableCell<?, ?> cell = (TableCell<?, ?>) ((Button) e.getSource()).getParent().getParent();
             int index = cell.getIndex();
 
-            Appointment appointment = (Appointment) getTableView().getItems().get(index);
+            AppointmentDetail appointmentDetail = (AppointmentDetail) getTableView().getItems().get(index);
+
+            try {
+                ClinicalSystem.getScheduler().cancelAppointment(appointmentDetail.getAppointment().getAppointmentID());
+                ClinicalSystem.back();
+                ClinicalSystem.navigateTo(new AppointmentList(flag, "Appointments").getTable());
+                Notification.information("Appointment deleted successfully");
+            } catch (Exception e1) {
+                Notification.error("Error while deleting appointment");
+            }
         });
 
         addAppointment = new Button("Add");
