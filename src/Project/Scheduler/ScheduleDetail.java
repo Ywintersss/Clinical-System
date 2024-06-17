@@ -2,6 +2,12 @@ package Project.Scheduler;
 
 import Project.Users.*;
 
+/**
+ * <h3>ScheduleDetail class, template for a compilation of related schedule information which includes:</h3>
+ * Schedule (Object), Doctor (Object), StartTime (String), EndTime (String), Date (String)
+ *
+ */
+
 public class ScheduleDetail {
     private Schedule schedule;
     private Doctor doctor;

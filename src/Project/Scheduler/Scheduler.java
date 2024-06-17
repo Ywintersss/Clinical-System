@@ -186,9 +186,6 @@ public class Scheduler {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
-        //Delete from appointment file
     }
 
     public void completeAppointment(String issue, String prescription, String followUpDate, Appointment appointment) {
@@ -200,9 +197,5 @@ public class Scheduler {
 //        Recorder.addRecord(patient, issue ,prescription, followUpDate, appointment);
 
         //delete from appointment file
-    }
-
-    public static void main(String[] args) {
-
     }
 }

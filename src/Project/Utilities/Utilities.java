@@ -12,13 +12,14 @@ public class Utilities {
     private static final DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-    //txt file last ID +1
+    //generate a specific with a prefix ID based on users in the specified file
     public static String generateID(String prefix, String objPath) {
         String ID;
         try {
             ArrayList<String> data = File.readFile(objPath);
             ArrayList<String[]> parsedData = File.parseData(data);
             ArrayList<Integer> IDList = new ArrayList<>();
+
             int IDIndex = 1;
             for (String[] dataArray : parsedData) {
                 ID = dataArray[0];
@@ -97,13 +98,5 @@ public class Utilities {
 
     public static boolean isSameObjectInstance(Object obj1, Object obj2) {
         return obj1.getClass().equals(obj2.getClass());
-    }
-    public static void main(String[] args) {
-//        System.out.println(generateID("PA","\\users\\Patient.txt"));
-//        System.out.println(getCurrentDate());
-//        System.out.println(getCurrentDate(1));
-//        System.out.println(getCurrentTime());
-//        System.out.println(hasPassedTime("2200"));
-        System.out.println(isSameObjectInstance(new Admin("admin", "admin", "admin"), new Admin("nope", "admin", "admin")));
     }
 }

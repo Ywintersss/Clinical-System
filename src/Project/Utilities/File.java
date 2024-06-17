@@ -13,6 +13,12 @@ import java.util.ArrayList;
 public class File {
     private static BufferedReader reader;
     private static BufferedWriter writer;
+
+    /**
+     * Returns the current directory of the project.
+     *
+     * @return The current directory of the project.
+     */
     public static String currentDbDirectory() {
         return System.getProperty("user.dir") + "\\src\\db";
     }
@@ -151,6 +157,14 @@ public class File {
         }
     }
 
+    /**
+     *
+     * @param path The path to the text file. The path should end with ".txt" and
+     *             specify a specific directory in the db directory.
+     * @param data
+     * @throws IOException If an I/O error occurs while reading the file.
+     */
+
     public static void updateFile(String path, ArrayList<String[]> data) throws IOException {
         if (!path.endsWith(".txt")){
             throw new IllegalArgumentException("Invalid file type");
@@ -188,21 +202,5 @@ public class File {
     //formats a data array into a string with commas between each element
     public static String formatData(String ...dataArray) {
         return String.join(",", dataArray);
-    }
-
-
-    //testing
-    public static void main(String[] args) {
-        try {
-            ArrayList<String> data = readFile("\\users\\Patient.txt");
-            ArrayList<String[]> dataArray = parseData(data);
-            for (String[] i : dataArray) {
-                for (String j : i) {
-                    System.out.println(j);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

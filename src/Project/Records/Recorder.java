@@ -7,9 +7,18 @@ import javafx.collections.ObservableList;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * <h3>UserDataManager class, a singleton class for controlling and interacting with the db and user data</h3>
+ *
+ *
+ */
 public class Recorder {
     private static Recorder instance;
+
+    // private constructor so it can only be instantiated once through the class itself
     private Recorder() { }
+
+    // instantiate the class if it doesn't exist already
     public static Recorder getInstance() {
         if(instance == null) {
             instance = new Recorder();
@@ -17,6 +26,7 @@ public class Recorder {
         return instance;
     }
 
+    // adding a medical record
     public void addRecord(String ...patientData) {
         String path = "\\records\\MedicalRecords.txt";
         String recordID = Utilities.generateID("RC", path) + ",";
@@ -30,6 +40,7 @@ public class Recorder {
         }
     }
 
+    // get all medical records
     public ObservableList<MedicalRecord> getAllRecords() {
         try {
             ArrayList<String> oldRecord = File.readFile("\\records\\MedicalRecords.txt");
@@ -46,6 +57,7 @@ public class Recorder {
         }
     }
 
+    // get a patient's medical record
     public ObservableList<MedicalRecord> getPatientMedicalRecord(String patientID) {
         try {
             ObservableList<MedicalRecord> medicalRecordList = getAllRecords();
@@ -57,6 +69,7 @@ public class Recorder {
         }
     }
 
+    // remove a medical record
     public void removeRecord(String RecordID, String PatientID) {
         try {
             ArrayList<String> oldRecord = File.readFile("\\records\\MedicalRecords.txt");

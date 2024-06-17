@@ -2,7 +2,11 @@ package Project.Scheduler;
 
 import Project.Users.*;
 
-import java.util.HashMap;
+/**
+ * <h3>AppointmentDetail class, template for a compilation of related appointment information which includes:</h3>
+ * Appointment (Object), Doctor (Object), Patient (Object), Schedule (Object), AppointmentTime (String)
+ *
+*/
 
 public class AppointmentDetail {
     private Appointment appointment;

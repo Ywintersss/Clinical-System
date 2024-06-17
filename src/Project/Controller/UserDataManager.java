@@ -9,15 +9,25 @@ import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+
+/**
+ * <h3>UserDataManager class, a singleton class for controlling and interacting with the db and user data</h3>
+ *
+ *
+ */
 public class UserDataManager {
     private static UserDataManager instance;
+    // private constructor so it can only be instantiated once through the class itself
     private UserDataManager() {}
+
+    // instantiate the class if it doesn't exist already
     public static UserDataManager getInstance() {
         if(instance == null) {
             instance = new UserDataManager();
         }
         return instance;
     }
+
     // Add user to txt file
     public void addPatient(String ...userData) {
         if (userData.length < 9) {
@@ -106,6 +116,8 @@ public class UserDataManager {
         return null;
     }
 
+
+    // gets all stored Patient Data
     public ObservableList<Patient> getAllPatients() {
         try {
             ArrayList<String> userData = File.readFile("\\users\\Patient.txt");
@@ -117,12 +129,14 @@ public class UserDataManager {
                         Integer.parseInt(data[6]),Gender.valueOf(data[7]), Double.parseDouble(data[8]), Double.parseDouble(data[9])));
             }
 
+            //returns an observable list of patients for use in the UI
             return FXPatientData;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    // gets all stored Doctor Data
     public ObservableList<Doctor> getAllDoctors() {
         try {
             ArrayList<String> userData = File.readFile("\\users\\Doctor.txt");
@@ -135,12 +149,15 @@ public class UserDataManager {
                         Integer.parseInt(data[6]), Gender.valueOf(data[7]), Integer.parseInt(data[8]), data[9], data[10]));
             }
 
+            //returns an observable list of doctors for use in the UI
             return FXDoctorData;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+
+    // gets all stored Admin Data
     public ObservableList<Admin> getAllAdmins() {
         try {
             ArrayList<String> userData = File.readFile("\\users\\Admin.txt");
@@ -152,15 +169,17 @@ public class UserDataManager {
                 FXAdminData.add(new Admin(data[0], data[1], data[2]));
             }
 
+            //returns an observable list of admins for use in the UI
             return FXAdminData;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    // updates a specific user with new data
     public void updateUser(String path, String[] data) {
+        //User's ID to identify which user to update
         String userID = data[0];
-        System.out.println(data);
 
         try {
             ArrayList<String> userData = File.readFile(path);
@@ -168,9 +187,12 @@ public class UserDataManager {
 
             for (int i = 0; i < toBeUpdatedUserData.size(); i++) {
                 String[] dataArray = toBeUpdatedUserData.get(i);
+                //check if ID matches
                 if (userID.equals(dataArray[0])) {
+                    //update old data with new data
                     dataArray = data;
                 }
+                //set new data
                 toBeUpdatedUserData.set(i, dataArray);
             }
             File.updateFile(path, toBeUpdatedUserData);
@@ -179,13 +201,16 @@ public class UserDataManager {
         }
     }
 
+    // deletes a user
     public void deleteUser(String path, String userID) {
         try {
             ArrayList<String> userData = File.readFile(path);
             ArrayList<String[]> toBeUpdatedDeleteData = File.parseData(userData);
 
+            //removes the data
             toBeUpdatedDeleteData.removeIf(data -> data[0].equals(userID));
 
+            //updates the file with the new data without the deleted data
             File.updateFile(path, toBeUpdatedDeleteData);
         } catch (IOException e) {
             throw new RuntimeException(e);
