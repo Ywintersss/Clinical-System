@@ -22,9 +22,9 @@ public class DoctorListing {
             DoctorListing.getChildren().add(DoctorCard);
         }
 
-        DoctorListing.setSpacing(12.5);
+        DoctorListing.setSpacing(10);
         DoctorListing.setAlignment(Pos.CENTER);
-        DoctorListing.setPadding(new Insets(20, 10, 20, 10));
+        DoctorListing.setPadding(new Insets(10, 10, 10, 10));
         DoctorListing.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         DoctorListing.setStyle("-fx-background-color: #FFFFFF;");
     }

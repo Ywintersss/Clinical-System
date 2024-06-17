@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -35,6 +36,49 @@ public class Recorder {
         String data = File.formatData(patientData);
         try {
             File.appendToFile(path, recordID + data);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addFeedback(String ...feedbackData) {
+        String path = "\\records\\Feedback.txt";
+        String feedbackID = Utilities.generateID("FB", path) + ",";
+
+        // write to Feedback.txt
+        String data = File.formatData(feedbackData);
+        try {
+            File.appendToFile(path, feedbackID + data);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ObservableList<Feedback> getAllFeedback() {
+        try {
+            ArrayList<String> feedbackData = File.readFile("\\records\\Feedback.txt");
+            ArrayList<String[]> parseFeedbackData = File.parseData(feedbackData);
+            ObservableList<Feedback> FXFeedbackData = FXCollections.observableArrayList();
+
+            for (String[] data : parseFeedbackData) {
+                FXFeedbackData.add(new Feedback(data[0], data[1], data[2], data[3]));
+            }
+            return FXFeedbackData;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void removeFeedback(String feedbackID) {
+        String path = "\\records\\Feedback.txt";
+
+        try{
+            ArrayList<String> feedbackData = File.readFile(path);
+            ArrayList<String[]> parseFeedbackData = File.parseData(feedbackData);
+
+            parseFeedbackData.removeIf(s -> s[0].equals(feedbackID));
+
+            File.updateFile(path, parseFeedbackData);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

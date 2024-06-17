@@ -32,6 +32,11 @@ public class AdminMainPage {
     private HBox paymentRecordContainer;
     private Button viewPaymentRecordBtn;
 
+    private VBox feedBack;
+    private Label feedBackLabel;
+    private HBox feedBackContainer;
+    private Button viewFeedBackBtn;
+
     public AdminMainPage() {
         adminMainPage = new GridPane();
         adminMainPage.setHgap(25);
@@ -148,10 +153,33 @@ public class AdminMainPage {
         paymentRecordContainer.getChildren().addAll(viewPaymentRecordBtn);
         paymentRecord.getChildren().addAll(paymentRecordLabel, paymentRecordContainer);
 
+        feedBack = new VBox();
+        feedBack.setPrefHeight(140);
+        feedBack.setPrefWidth(300);
+
+        feedBackLabel = new Label("Feedback Management");
+
+        feedBackContainer = new HBox();
+        feedBackContainer.setPadding(new Insets(15, 0, 0, 0));
+
+        viewFeedBackBtn = new Button("Add");
+        viewFeedBackBtn.setPrefHeight(30);
+        viewFeedBackBtn.setPrefWidth(100);
+
+        viewFeedBackBtn.setOnAction(e -> {
+            ClinicalSystem.navigateTo(new ViewFeedBack().getTable());
+        });
+
+        feedBackContainer.setAlignment(Pos.CENTER);
+        feedBackContainer.setSpacing(10);
+        feedBackContainer.getChildren().addAll(viewFeedBackBtn);
+        feedBack.getChildren().addAll(feedBackLabel, feedBackContainer);
+
         adminMainPage.add(userAcc, 0, 0);
         adminMainPage.add(appointment, 1, 0);
         adminMainPage.add(medicalRecord, 0, 1);
         adminMainPage.add(paymentRecord, 1, 1);
+        adminMainPage.add(feedBack, 0, 2);
     }
     public GridPane getAdminMainPage() {
         return adminMainPage;

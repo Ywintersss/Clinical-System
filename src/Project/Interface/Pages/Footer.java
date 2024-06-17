@@ -1,5 +1,8 @@
 package Project.Interface.Pages;
 
+import Project.ClinicalSystem;
+import Project.Interface.Pages.Components.Notification;
+import Project.Utilities.Utilities;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -22,6 +25,21 @@ public class Footer {
 
         reviewBtn = new Button();
         reviewBtn.setText("Review");
+
+        reviewBtn.setOnAction(e -> {
+            String review = reviewInput.getText();
+            if(review.isEmpty()) {
+                Notification.error("Empty Review");
+                return;
+            }
+
+            String date = Utilities.getCurrentDate();
+            String time = Utilities.getCurrentTime();
+
+            ClinicalSystem.getRecorder().addFeedback(review, date, time);
+            Notification.information("Review Added");
+            reviewInput.clear();
+        });
 
         reviewInput = new TextField();
         reviewInput.setPromptText("Feedback");

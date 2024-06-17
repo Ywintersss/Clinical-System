@@ -21,7 +21,7 @@ public class DoctorCard {
 
         //this.doctorImage = new Image("\\assets\\images\\doctor.png");
 
-        doctorCard.setPadding(new Insets(17.5, 15, 17.5, 15));
+        doctorCard.setPadding(new Insets(15));
         doctorCard.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(8), Insets.EMPTY)));
 
         doctorDetails = new VBox();
