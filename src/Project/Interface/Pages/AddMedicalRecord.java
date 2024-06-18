@@ -44,7 +44,7 @@ public class AddMedicalRecord extends DetailView {
             ClinicalSystem.getRecorder().addRecord(patient.getID(), issue, description, followUpDate);
 
             ClinicalSystem.back();
-            ClinicalSystem.Refresh(new MedicalRecordList(patient).getMedicalRecordList());
+            ClinicalSystem.refresh(new MedicalRecordList(patient).getMedicalRecordList());
         });
 
         addButtonIntoContainer(save);

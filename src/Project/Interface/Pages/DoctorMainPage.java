@@ -93,9 +93,7 @@ public class DoctorMainPage {
 		scheduleUploadContainer.setPadding(new Insets(10, 10, 10, 10));
 		scheduleUploadContainer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		scheduleUploadContainer.getChildren().addAll(scheduleContainer, uploadScheduleButton);
-//
-//		scheduleContainer.getChildren().add(spacer);
-		//scheduleContainer.getChildren().add(uploadScheduleButton);
+
 
 		titleContainer = new HBox();
 		titleContainer.setStyle("-fx-background-color: #C0C0C0;-fx-alignment: center;");

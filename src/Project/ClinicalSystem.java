@@ -6,9 +6,7 @@ import Project.Interface.Pages.*;
 
 import Project.Interface.Pages.Components.*;
 import Project.Records.Recorder;
-import Project.Scheduler.Appointment;
 import Project.Scheduler.Scheduler;
-import Project.Scheduler.Schedule;
 import Project.Payments.PaymentHandler;
 import Project.Controller.UserDataManager;
 import Project.Interface.Pages.Components.PopUpAdmin;
@@ -103,7 +101,7 @@ public class ClinicalSystem {
         getLayout().setContent(newPage);
     }
 
-    public static void Refresh(Parent Page) {
+    public static void refresh(Parent Page) {
         pageStack.pop();
         getLayout().setContent(Page);
         pageStack.push(Page);

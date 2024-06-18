@@ -4,6 +4,7 @@ import Project.ClinicalSystem;
 import Project.Interface.Pages.Components.Notification;
 import Project.Scheduler.AppointmentDetail;
 import Project.Scheduler.ScheduleDetail;
+import Project.Users.Doctor;
 import Project.Utilities.Styles;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;

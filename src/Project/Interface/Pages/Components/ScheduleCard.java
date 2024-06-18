@@ -12,7 +12,9 @@ public class ScheduleCard {
     private Label dateLabel;
     private Label startTimeLabel;
     private Label endTimeLabel;
+    private Label leaveLabel;
     public ScheduleCard(Schedule schedule) {
+
         scheduleCard = new HBox();
         scheduleCard.setSpacing(10);
         scheduleCard.setPadding(new Insets(10));
@@ -22,13 +24,20 @@ public class ScheduleCard {
         dateLabel = new Label("Schedule Date: " + schedule.getDate());
         dateLabel.setStyle(Styles.fontWeightBold + Styles.fontSize(16));
 
-        startTimeLabel = new Label("Start Time: " + schedule.getStartTime());
-        startTimeLabel.setStyle(Styles.fontWeightBold + Styles.fontSize(16));
+        if (schedule.getStartTime().equals("null") && schedule.getEndTime().equals("null")) {
+            leaveLabel = new Label("On Leave");
+            leaveLabel.setStyle(Styles.fontWeightBold + Styles.fontSize(16));
+            scheduleCard.getChildren().addAll(dateLabel, leaveLabel);
+        } else {
 
-        endTimeLabel = new Label("End Time: " + schedule.getEndTime());
-        endTimeLabel.setStyle(Styles.fontWeightBold + Styles.fontSize(16));
+            startTimeLabel = new Label("Start Time: " + schedule.getStartTime());
+            startTimeLabel.setStyle(Styles.fontWeightBold + Styles.fontSize(16));
 
-        scheduleCard.getChildren().addAll(dateLabel, startTimeLabel, endTimeLabel);
+            endTimeLabel = new Label("End Time: " + schedule.getEndTime());
+            endTimeLabel.setStyle(Styles.fontWeightBold + Styles.fontSize(16));
+
+            scheduleCard.getChildren().addAll(dateLabel, startTimeLabel, endTimeLabel);
+        }
     }
     public HBox getScheduleCard() {
         return scheduleCard;

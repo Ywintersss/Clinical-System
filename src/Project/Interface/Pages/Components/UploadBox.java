@@ -75,7 +75,7 @@ public class UploadBox {
 
         date = new ComboBox<>();
         date.setPromptText("DD-MM-YYYY");
-        //date.getItems().addAll(Utilities.getCurrentDate(), Utilities.getCurrentDate(1), Utilities.getCurrentDate(2), Utilities.getCurrentDate(3), Utilities.getCurrentDate(4));
+
         for (int i = 0; i < 5; i++) {
             String boxDateItem = Utilities.getCurrentDate(i);
             if (scheduleDate.containsKey(boxDateItem)) {
@@ -87,7 +87,9 @@ public class UploadBox {
         takeLeave = new Button("Take Leave");
         takeLeave.setStyle(Styles.fontWeightBold);
         takeLeave.setOnAction(e -> {
-            return;
+            ClinicalSystem.getScheduler().addSchedule(UserSession.getInstance().getCurrentUser().getID(), null, null, date.getValue());
+            Notification.information("Schedule uploaded Successfully");
+            ClinicalSystem.refresh(new DoctorMainPage().getDoctorMainPage());
         });
 
         upload = new Button("Upload");
@@ -100,7 +102,7 @@ public class UploadBox {
             try {
                 ClinicalSystem.getScheduler().addSchedule(UserSession.getInstance().getCurrentUser().getID(), startTime.getValue(), endTime.getValue(), date.getValue());
                 Notification.information("Schedule uploaded Successfully");
-                ClinicalSystem.Refresh(new DoctorMainPage().getDoctorMainPage());
+                ClinicalSystem.refresh(new DoctorMainPage().getDoctorMainPage());
             } catch (Exception e1) {
                 Notification.error("Something went wrong. Please try again.");
             }

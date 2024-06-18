@@ -44,7 +44,7 @@ public class ViewPatientList extends TableListingView {
                         ClinicalSystem.getUserDataManager().deleteUser("\\users\\Patient.txt", patient.getID());
                         Notification.information("Deleted");
                         ClinicalSystem.back();
-                        ClinicalSystem.Refresh(new ViewPatientList(1).getTable());
+                        ClinicalSystem.refresh(new ViewPatientList(1).getTable());
                     } catch (Exception exception) {
                         Notification.error("Error Deleting");
                     }

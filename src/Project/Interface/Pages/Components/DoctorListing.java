@@ -18,13 +18,13 @@ public class DoctorListing {
         Doctors = ClinicalSystem.getUserDataManager().getAllDoctors();
 
         for (int i = 0; i < Doctors.size(); i++) {
-            DoctorCard = new DoctorCard(Doctors.get(i).getSpecialization(), Doctors.get(i).getPosition(), Doctors.get(i).getName(), Integer.toString(Doctors.get(i).getYearsOfExperience())).getDoctorCard();
+            DoctorCard = new DoctorCard(Doctors.get(i)).getDoctorCard();
             DoctorListing.getChildren().add(DoctorCard);
         }
 
-        DoctorListing.setSpacing(10);
+        DoctorListing.setSpacing(7.5);
         DoctorListing.setAlignment(Pos.CENTER);
-        DoctorListing.setPadding(new Insets(10, 10, 10, 10));
+        DoctorListing.setPadding(new Insets(7.5));
         DoctorListing.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         DoctorListing.setStyle("-fx-background-color: #FFFFFF;");
     }

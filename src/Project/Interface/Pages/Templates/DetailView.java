@@ -106,7 +106,7 @@ public abstract class DetailView {
         selectionField = new ComboBox<>();
         selectionField.setPromptText("Select " + labelTitle);
         selectionField.getItems().addAll(options);
-        selectionField.setPrefWidth(ScreenTools.getScreenWidth() * 0.26);
+        selectionField.setPrefWidth(ScreenTools.getScreenWidth() * 0.22);
         Background background = new Background(new BackgroundFill( Color.WHITE, borderRadius, null));
         selectionField.setBackground(background);
         selectionField.setPadding(new Insets(4, 4, 4, 4));
@@ -116,7 +116,7 @@ public abstract class DetailView {
     }
 
     public void addSelectionContainer(String labelTitle, ComboBox<String> selectionField) {
-        selectionField.setPrefWidth(ScreenTools.getScreenWidth() * 0.26);
+        selectionField.setPrefWidth(ScreenTools.getScreenWidth() * 0.22);
         Background background = new Background(new BackgroundFill( Color.WHITE, borderRadius, null));
         selectionField.setBackground(background);
         selectionField.setPadding(new Insets(4, 4, 4, 4));

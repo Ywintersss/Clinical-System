@@ -4,14 +4,10 @@ import Project.ClinicalSystem;
 import Project.Interface.Pages.Components.Notification;
 import Project.Interface.Pages.Templates.TableListingView;
 import Project.Users.Doctor;
-import Project.Users.Patient;
 import javafx.collections.ObservableList;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.layout.VBox;
-
-import javax.print.Doc;
 
 
 public class ViewDoctorList extends TableListingView {
@@ -52,7 +48,7 @@ public class ViewDoctorList extends TableListingView {
                     ClinicalSystem.getUserDataManager().deleteUser("\\users\\Doctor.txt", doctor.getID());
                     Notification.information("Deleted");
                     ClinicalSystem.back();
-                    ClinicalSystem.Refresh(new ViewDoctorList().getTable());
+                    ClinicalSystem.refresh(new ViewDoctorList().getTable());
                 } catch (Exception exception) {
                     Notification.error("Error Deleting");
                 }

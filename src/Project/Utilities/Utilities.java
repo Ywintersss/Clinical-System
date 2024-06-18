@@ -61,6 +61,10 @@ public class Utilities {
     }
 
     public static boolean hasPassedTime(String time) {
+        if (time.equals("null")) {
+            return false;
+        }
+
         StringBuilder timeBuilder = new StringBuilder(time);
         for (int i = 2; i < time.length(); i+=3) {
             char c = time.charAt(i);
@@ -81,7 +85,7 @@ public class Utilities {
     }
 
     public static boolean isActive(String date, String time) {
-        if (date == null || time == null) {
+        if (date.equals("null") || time.equals("null")) {
             return false;
         }
         if (date.equals(getCurrentDate())) {
