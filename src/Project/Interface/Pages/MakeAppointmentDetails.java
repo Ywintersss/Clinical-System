@@ -41,6 +41,11 @@ public class MakeAppointmentDetails extends DetailView {
             Patient patient = (Patient) UserSession.getInstance().getCurrentUser();
             try {
                 ClinicalSystem.getScheduler().makeAppointment(scheduleDetail.getSchedule().getScheduleID(), patient.getID(), selectedTime, "Something for now");
+                Notification.information("Appointment made successfully");
+
+                ClinicalSystem.back();
+                ClinicalSystem.back();
+                ClinicalSystem.refresh(new DateDoctorSelection().getDateSelection());
             } catch (Exception ex) {
                 Notification.error("Something went wrong");
             }

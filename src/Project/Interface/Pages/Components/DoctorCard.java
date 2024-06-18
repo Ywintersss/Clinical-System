@@ -3,6 +3,7 @@ package Project.Interface.Pages.Components;
 import Project.ClinicalSystem;
 import Project.Interface.Pages.ScheduleSelector;
 import Project.Scheduler.ScheduleDetail;
+import Project.UserSession;
 import Project.Users.Doctor;
 import Project.Utilities.Styles;
 import Project.Utilities.Utilities;
@@ -45,13 +46,13 @@ public class DoctorCard {
         }
 
         ImageView imageView = new ImageView(doctorImage);
-        imageView.setFitHeight(75);
+        imageView.setFitHeight(65);
         imageView.setFitWidth(150);
         imageView.setPreserveRatio(true);
 
 
         doctorDetails = new VBox();
-        doctorDetails.setSpacing(2.5);
+        doctorDetails.setSpacing(2);
 
         this.doctorNameLabel = new Label("Name: " + doctor.getName());
         doctorNameLabel.setStyle(Styles.fontSize(13));
@@ -67,10 +68,15 @@ public class DoctorCard {
 
         appointMentButton = new Button("Make Appointment Today");
         appointMentButton.setOnAction(e -> {
+            if (UserSession.getInstance().getCurrentUser() == null) {
+                Notification.error("Please Login First");
+                return;
+            }
+
             activeScheduleDetails = ClinicalSystem.getScheduler().getActiveScheduleDetails();
 
             for (ScheduleDetail scheduleDetail : activeScheduleDetails) {
-                if (scheduleDetail.getDoctor().getID().equals(doctor.getID()) && scheduleDetail.getDate().equals(Utilities.getCurrentDate(1))) {
+                if (scheduleDetail.getDoctor().getID().equals(doctor.getID()) && scheduleDetail.getDate().equals(Utilities.getCurrentDate())) {
                     if (scheduleDetail.getStartTime().equals("null") && scheduleDetail.getEndTime().equals("null")) {
                         Notification.error("Doctor is on leave today");
                     } else {
