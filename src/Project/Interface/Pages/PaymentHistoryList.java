@@ -37,10 +37,6 @@ public class PaymentHistoryList {
 
         paymentHistory.getChildren().addAll(title);
 
-//        for (int i = 0; i < 2; i++) {
-//            paymentHistory.getChildren().add(new PaymentCard("50001","Onic","RM 100.00", "Cash", "10/10/2021").getPaymentCard());
-//        }
-
         for (Payment payment: paymentList) {
             paymentHistory.getChildren().add(new PaymentCard(payment.getPaymentID(), payment.getPatientID(), payment.getAmount(), payment.getPaymentMethod().getPaymentMethod(), payment.getDate()).getPaymentCard());
         }
