@@ -5,6 +5,7 @@ import Project.Interface.Pages.Components.Notification;
 import Project.Scheduler.ScheduleDetail;
 import Project.Users.Doctor;
 
+import Project.Utilities.Styles;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -107,6 +108,7 @@ public class DateDoctorSelection {
         back.setOnAction(e -> {
             ClinicalSystem.back();
         });
+        back.setStyle(Styles.buttonStyleColored());
 
 
         spacer3 = new Region();
@@ -128,6 +130,7 @@ public class DateDoctorSelection {
 
             ClinicalSystem.navigateTo(new ScheduleSelector(scheduleDetail).getSchedules());
         });
+        next.setStyle(Styles.buttonStyleColored());
 
         buttonContainer.getChildren().addAll(back, spacer3, next);
 

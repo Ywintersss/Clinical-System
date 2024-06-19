@@ -61,7 +61,7 @@ public class MedicalRecordList {
         medicalRecordContainer.setSpacing(20);
 
         for (MedicalRecord medicalRecord : patientMedicalRecordList) {
-            medicalRecordContainer.getChildren().add(new MedicalRecordCard(medicalRecord.getIssue(),medicalRecord.getPrescription(),medicalRecord.getFollowUpDate()).getMedicalRecordCard());
+            medicalRecordContainer.getChildren().add(new MedicalRecordCard(medicalRecord).getMedicalRecordCard());
         }
 
         medicalRecordScroller = new ScrollPane(medicalRecord);

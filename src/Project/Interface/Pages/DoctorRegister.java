@@ -44,8 +44,9 @@ public class DoctorRegister extends Register {
             String yearsOfExperience = doctorData.get(7);
             String specialization = doctorData.get(8);
             String position = doctorData.get(9);
+            String consultationFee = "0";
 
-            register(2, username, password, name, email, phoneNumber, age, gender, yearsOfExperience, specialization, position);
+            register(2, username, password, name, email, phoneNumber, age, gender, yearsOfExperience, specialization, position, consultationFee);
         });
 
         addButtonContainer(register);

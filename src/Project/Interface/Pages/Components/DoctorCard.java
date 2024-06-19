@@ -60,7 +60,7 @@ public class DoctorCard {
         this.specializationLabel = new Label("Specialization: " + doctor.getSpecialization());
         specializationLabel.setStyle(Styles.fontSize(13));
 
-        this.experienceLabel = new Label("Experience: " + doctor.getYearsOfExperience());
+        this.experienceLabel = new Label("Experience: " + doctor.getYearsOfExperience() + " years");
         experienceLabel.setStyle(Styles.fontSize(13));
 
         this.positionLabel = new Label("Position: " + doctor.getPosition());

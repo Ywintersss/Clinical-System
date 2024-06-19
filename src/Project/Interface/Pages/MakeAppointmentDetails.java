@@ -9,6 +9,7 @@ import Project.Users.Doctor;
 import Project.Users.Patient;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class MakeAppointmentDetails extends DetailView {
@@ -17,6 +18,7 @@ public class MakeAppointmentDetails extends DetailView {
     private Label doctorPosition;
     private Label dateLabel;
     private Label timeLabel;
+    private TextField description;
     private Label consultationFees;
     private Button makeAppointment;
     public MakeAppointmentDetails(ScheduleDetail scheduleDetail, String selectedTime) {
@@ -27,20 +29,23 @@ public class MakeAppointmentDetails extends DetailView {
         doctorPosition = new Label(scheduleDetail.getDoctor().getPosition());
         dateLabel = new Label(scheduleDetail.getDate());
         timeLabel = new Label(selectedTime);
-        consultationFees = new Label("250");
+        description = new TextField();
+        description.setPromptText("Anything to tell the doctor?");
+        consultationFees = new Label("RM" + scheduleDetail.getDoctor().getConsultationFee());
 
         addContent("Doctor Name", doctorName);
         addContent("Specialization", doctorSpecialization);
         addContent("Position", doctorPosition);
         addContent("Date", dateLabel);
         addContent("Time", timeLabel);
+        addContent("Description", description);
         addContent("Fees", consultationFees);
 
         makeAppointment = new Button("Make Appointment");
         makeAppointment.setOnAction(e -> {
             Patient patient = (Patient) UserSession.getInstance().getCurrentUser();
             try {
-                ClinicalSystem.getScheduler().makeAppointment(scheduleDetail.getSchedule().getScheduleID(), patient.getID(), selectedTime, "Something for now");
+                ClinicalSystem.getScheduler().makeAppointment(scheduleDetail.getSchedule().getScheduleID(), patient.getID(), selectedTime, description.getText());
                 Notification.information("Appointment made successfully");
 
                 ClinicalSystem.back();
