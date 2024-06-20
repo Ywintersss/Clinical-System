@@ -162,7 +162,7 @@ public class AdminMainPage {
         feedBackContainer = new HBox();
         feedBackContainer.setPadding(new Insets(15, 0, 0, 0));
 
-        viewFeedBackBtn = new Button("Add");
+        viewFeedBackBtn = new Button("View");
         viewFeedBackBtn.setPrefHeight(30);
         viewFeedBackBtn.setPrefWidth(100);
 

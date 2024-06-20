@@ -72,6 +72,7 @@ public class ViewPatientList extends TableListingView {
                 MedicalRecordList MedicalRecordList = new MedicalRecordList(patient);
 
                 Button add = new Button("Add");
+                add.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");
                 add.setOnAction(event -> {
                     ClinicalSystem.navigateTo(new AddMedicalRecord(patient).getDetails());
                 });

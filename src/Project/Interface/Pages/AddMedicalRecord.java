@@ -31,7 +31,7 @@ public class AddMedicalRecord extends DetailView {
         addContent("Prescription",prescription);
 
         followUpDate = new TextField();
-        followUpDate.setPromptText("Enter FollowUp Date...");
+        followUpDate.setPromptText("6/7/2023");
         addContent("FollowUp Date",followUpDate);
 
         Button save = new Button("Save");
