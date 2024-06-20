@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class AddMedicalRecord extends DetailView {
     private TextField issue;
     private TextField description;
+    private TextField prescription;
     private TextField followUpDate;
 
     public AddMedicalRecord(Patient patient) {
@@ -24,6 +25,10 @@ public class AddMedicalRecord extends DetailView {
         description = new TextField();
         description.setPromptText("Enter Description...");
         addContent("Description",description);
+
+        prescription = new TextField();
+        prescription.setPromptText("Enter Prescription...");
+        addContent("Prescription",prescription);
 
         followUpDate = new TextField();
         followUpDate.setPromptText("Enter FollowUp Date...");
@@ -40,8 +45,9 @@ public class AddMedicalRecord extends DetailView {
             String issue = data.get(0);
             String description = data.get(1);
             String followUpDate = data.get(2);
+            String prescription = data.get(3);
 
-            ClinicalSystem.getRecorder().addRecord(patient.getID(), issue, description, followUpDate);
+            ClinicalSystem.getRecorder().addRecord(patient.getID(), issue, prescription, description, followUpDate);
 
             ClinicalSystem.back();
             ClinicalSystem.refresh(new MedicalRecordList(patient).getMedicalRecordList());

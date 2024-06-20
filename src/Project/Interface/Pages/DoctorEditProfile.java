@@ -24,6 +24,7 @@ public class DoctorEditProfile extends DetailView {
     private TextField yearsOfExperience;
     private ComboBox<String> specialization;
     private ComboBox<String> position;
+    private TextField consultationFees;
 
     public DoctorEditProfile(Doctor oldDoctorData) {
         super("Edit Profile");
@@ -56,6 +57,8 @@ public class DoctorEditProfile extends DetailView {
         position.getItems().addAll("Head", "Assistant");
         position.setValue(oldDoctorData.getPosition());
 
+        consultationFees = new TextField(Integer.toString(oldDoctorData.getConsultationFee()));
+
         addContent("Username", username);
         addContent("Password", password);
         addContent("Name", name);
@@ -66,6 +69,7 @@ public class DoctorEditProfile extends DetailView {
         addContent("Years of Experience", yearsOfExperience);
         addSelectionContainer("Specialization", specialization);
         addSelectionContainer("Position", position);
+        addContent("Consultation Fees", consultationFees);
 
         profileScroll.setContent(getContentContainer());
         profileScroll.setFitToWidth(true);
@@ -94,10 +98,11 @@ public class DoctorEditProfile extends DetailView {
                 oldDoctorData.setYearsOfExperience(Integer.parseInt(yearsOfExperience.getText()));
                 oldDoctorData.setSpecialization(specialization.getValue());
                 oldDoctorData.setPosition(position.getValue());
+                oldDoctorData.setConsultationFee(Integer.parseInt(consultationFees.getText()));
 
                 String[] newData = {oldDoctorData.getID(), username.getText(), password.getText(), name.getText(), email.getText(),
                         contact.getText(), age.getText(), gender.getValue(),
-                        yearsOfExperience.getText(), specialization.getValue(), position.getValue()};
+                        yearsOfExperience.getText(), specialization.getValue(), position.getValue(), consultationFees.getText()};
 
                 try {
                     ClinicalSystem.getUserDataManager().updateUser("\\users\\Doctor.txt", newData);

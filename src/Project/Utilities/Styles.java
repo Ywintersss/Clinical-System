@@ -41,4 +41,8 @@ public class Styles {
     public static String buttonStyle() {
         return "-fx-font-size: 14px;-fx-font-weight: bold;-fx-pref-width: 140px;-fx-pref-height: 36px;-fx-spacing: 20px;";
     }
+
+    public static String buttonStyleColored() {
+        return fontSize(16) + fontWeightBold + "-fx-pref-width: 140px;-fx-pref-height: 36px;-fx-spacing: 20px; -fx-background-color: #da8ee7; -fx-text-fill: #FFFFFF;";
+    }
 }

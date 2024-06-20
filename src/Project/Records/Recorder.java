@@ -92,7 +92,7 @@ public class Recorder {
             ObservableList<MedicalRecord> medicalRecordList = FXCollections.observableArrayList();
 
             for (String[] dataArray : oldRecordArray) {
-                MedicalRecord medicalRecord = new MedicalRecord(dataArray[0], dataArray[1], dataArray[2], dataArray[3], dataArray[4]);
+                MedicalRecord medicalRecord = new MedicalRecord(dataArray[0], dataArray[1], dataArray[2], dataArray[3], dataArray[4], dataArray[5]);
                 medicalRecordList.add(medicalRecord);
             }
             return medicalRecordList;
