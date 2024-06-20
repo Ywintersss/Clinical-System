@@ -108,7 +108,7 @@ public class DateDoctorSelection {
         back.setOnAction(e -> {
             ClinicalSystem.back();
         });
-        back.setStyle(Styles.buttonStyleColored());
+        back.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");
 
 
         spacer3 = new Region();
@@ -130,7 +130,7 @@ public class DateDoctorSelection {
 
             ClinicalSystem.navigateTo(new ScheduleSelector(scheduleDetail).getSchedules());
         });
-        next.setStyle(Styles.buttonStyleColored());
+        next.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");
 
         buttonContainer.getChildren().addAll(back, spacer3, next);
 

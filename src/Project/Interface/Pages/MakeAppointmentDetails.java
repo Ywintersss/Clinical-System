@@ -45,7 +45,7 @@ public class MakeAppointmentDetails extends DetailView {
         makeAppointment.setOnAction(e -> {
             Patient patient = (Patient) UserSession.getInstance().getCurrentUser();
             try {
-                ClinicalSystem.getScheduler().makeAppointment(scheduleDetail.getSchedule().getScheduleID(), patient.getID(), selectedTime, description.getText());
+                ClinicalSystem.getScheduler().makeAppointment(scheduleDetail.getSchedule().getScheduleID(), patient.getID(), selectedTime, description.getText() == null ? description.getText() : "none");
                 Notification.information("Appointment made successfully");
 
                 ClinicalSystem.back();

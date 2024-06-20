@@ -72,6 +72,11 @@ public class ScheduleSelector {
             for (int column = 0; column < 2; column++) {
                 String formattedTime = startTime.format(DateTimeFormatter.ofPattern("HHmm"));
 
+                if (formattedTime.equals("1200") || formattedTime.equals("1230") || formattedTime.equals("1900") || formattedTime.equals("1930")) {
+                    startTime = startTime.plusMinutes(30);
+                    continue;
+                }
+
                 ToggleButton scheduleButton = new ToggleButton(formattedTime);
                 scheduleButton.setMinWidth(100);
                 scheduleButton.setMinHeight(50);
@@ -99,6 +104,7 @@ public class ScheduleSelector {
         buttonContainer.setPadding(new Insets(10, 10, 10, 10));
 
         back = new Button("Back");
+        back.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");
         back.setOnAction(e -> {
             ClinicalSystem.back();
         });
@@ -107,6 +113,7 @@ public class ScheduleSelector {
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
         makeAppointment = new Button("Make Appointment");
+        makeAppointment.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");
         makeAppointment.setOnAction(e -> {
             if (toggleGroup.getSelectedToggle() == null) {
                 Notification.error("Please select a time");

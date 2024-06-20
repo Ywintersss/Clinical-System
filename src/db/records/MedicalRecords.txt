@@ -1,2 +1,8 @@
-RC1,PA1,Azoospermia,No sperm.,Some drug,6/7/2024
-RC2,PA1,Emo,Gained to much emo energy cus of valorant,girlfriend YJ,6/7/2024
+RC1,PA1,Hypertension,Elevated blood pressure readings over the past three months. Current readings average 150/95 mmHg. The patient reports occasional headaches and dizziness. No history of heart disease but family history of hypertension.,Amlodipine 5 mg once daily. Lifestyle modifications including a low-sodium diet and regular physical exercise (30 minutes/day),28/1/2024
+RC2,PA1,Emo,Gained to much emo energy cus of valorant,girlfriend YJ,28/1/2024
+RC3,PA1,Azoospermia,No sperm.,Some drug,6/7/2024
+RC4,PA2,Emo,Gained to much emo energy cus of valorant,girlfriend YJ,6/7/2024
+RC5,PA2,Azoospermia,No sperm.,Some drug,6/7/2024
+RC6,PA3,Emo,Gained to much emo energy cus of valorant,girlfriend YJ,6/7/2024
+RC6,PA4,Emo,Gained to much emo energy cus of valorant,girlfriend YJ,6/7/2024
+RC6,PA2,,Gained to much emo energy cus of valorant,girlfriend YJ,6/7/2024

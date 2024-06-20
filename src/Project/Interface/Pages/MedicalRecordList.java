@@ -46,6 +46,7 @@ public class MedicalRecordList {
         HBox.setHgrow(containerSpacer, Priority.ALWAYS);
 
         back = new Button("Back");
+        back.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");
         back.setOnAction(e -> {
             ClinicalSystem.back();
         });
