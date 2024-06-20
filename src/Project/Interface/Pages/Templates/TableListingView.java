@@ -3,6 +3,7 @@ package Project.Interface.Pages.Templates;
 import Project.ClinicalSystem;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -65,18 +66,25 @@ public abstract class TableListingView {
             table.getColumns().add(newColumn);
         }
 
+        //Adding a default column where JavaFX will display the data with the same column name getter.
         public void addColumn(String column) {
             TableColumn<Object, ?> newColumn = new TableColumn<>(column);
             newColumn.setCellValueFactory(new PropertyValueFactory<>(column));
             addColumn(newColumn);
         }
 
+        //Adding a column with a custom getter
+        //For example:
+        //Column Name: Years of Experience, Getter: getYearsOfExperience
         public void addColumn(String column, String property) {
             TableColumn<Object, ?> newColumn = new TableColumn<>(column);
             newColumn.setCellValueFactory(new PropertyValueFactory<>(property));
             addColumn(newColumn);
         }
 
+        //Adding a column with a custom callback function
+        //For example:
+        //Column Name: Patient from AppointmentDetail Class, Getter: A callback function that references to the Object Patient and its getters
         public <S> void addColumn(String column, Callback<TableColumn.CellDataFeatures<Object, S>, ObservableValue<S>> callback) {
             TableColumn<Object, S> newColumn = new TableColumn<>(column);
             newColumn.setCellValueFactory(callback);
@@ -126,5 +134,16 @@ public abstract class TableListingView {
             FuncButton.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");
             HBox.setHgrow(spacer, Priority.ALWAYS);
             buttonContainer.getChildren().addAll(spacer, FuncButton);
+        }
+
+        //Returns the index of the button in the table
+        //Used to select the correct row in the table
+        public int getButtonIndex(ActionEvent e){
+            //Get the cell that was clicked.
+            //Type cast the action event to a button from the source of the called action event.
+            //Type cast the button to a TableCell from the ancestor of the button.
+            //Return the index of the button in the table
+            TableCell<?, ?> cell = (TableCell<?, ?>) ((Button) e.getSource()).getParent().getParent();
+            return cell.getIndex();
         }
 }

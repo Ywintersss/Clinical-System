@@ -34,8 +34,7 @@ public class ViewDoctorList extends TableListingView {
 
         updateDoctor = new Button("Update");
         updateDoctor.setOnAction(e -> {
-            TableCell<?, ?> cell = (TableCell<?, ?>) ((Button) e.getSource()).getParent().getParent();
-            int index = cell.getIndex();
+            int index = getButtonIndex(e);
 
             Doctor doctor = (Doctor) getTableView().getItems().get(index);
 

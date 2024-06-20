@@ -30,8 +30,7 @@ public class ViewPatientList extends TableListingView {
         if (flag == 1) {
             columnButton = new Button("Update");
             columnButton.setOnAction(e -> {
-                TableCell<?, ?> cell = (TableCell<?, ?>) ((Button) e.getSource()).getParent().getParent();
-                int index = cell.getIndex();
+                int index = getButtonIndex(e);
 
                 Patient patient = (Patient) getTableView().getItems().get(index);
 
@@ -66,8 +65,7 @@ public class ViewPatientList extends TableListingView {
         } else if (flag == 2) {
             columnButton = new Button("View");
             columnButton.setOnAction(e -> {
-                TableCell<?, ?> cell = (TableCell<?, ?>) ((Button) e.getSource()).getParent().getParent();
-                int index = cell.getIndex();
+                int index = getButtonIndex(e);
 
                 Patient patient = (Patient) getTableView().getItems().get(index);
 

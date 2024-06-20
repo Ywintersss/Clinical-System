@@ -57,4 +57,17 @@ public class PaymentHandler {
 
         return paymentList;
     }
+
+    public void removePayment(String paymentID) {
+        try {
+            ArrayList<String> oldPayment = File.readFile("\\payments\\PaymentHistory.txt");
+            ArrayList<String[]> oldPaymentArray = File.parseData(oldPayment);
+
+            oldPaymentArray.removeIf(data -> data[0].equals(paymentID));
+
+            File.updateFile("\\payments\\PaymentHistory.txt", oldPaymentArray);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

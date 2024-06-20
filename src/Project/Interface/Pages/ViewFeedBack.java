@@ -22,8 +22,7 @@ public class ViewFeedBack extends TableListingView {
 
         deleteFeedBack = new Button("Delete");
         deleteFeedBack.setOnAction(e -> {
-            TableCell<?,?> cell = (TableCell<?,?>) ((Button)e.getSource()).getParent().getParent();
-            int index = cell.getIndex();
+            int index = getButtonIndex(e);
 
             Feedback feedback = (Feedback) getTableView().getItems().get(index);
             try{

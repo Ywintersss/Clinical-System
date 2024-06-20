@@ -8,8 +8,6 @@ import java.util.Date;
 public class Schedule {
     private String scheduleID;
     private String doctorID;
-    private ArrayList<Schedule> schedules;
-    private ArrayList<Appointment> appointments; // List of appointments
     private String startTime;
     private String endTime;
     private String date;
@@ -20,8 +18,6 @@ public class Schedule {
         this.startTime = startTime;
         this.endTime = endTime;
         this.date = date;
-        // Initialize the list of appointments for the doctor
-        this.schedules = new ArrayList<>();
     }
 
     public String getScheduleID() {
@@ -37,19 +33,8 @@ public class Schedule {
     public String getEndTime() {
         return endTime;
     }
+
     public String getDate() {
         return date;
-    }
-
-    public ArrayList<Appointment> getAppointments() {
-        return appointments;
-    }
-
-    public void addAppointments(Appointment appointments) {
-        this.appointments.add(appointments);
-    }
-
-    public void removeAppointment(Appointment appointments) {
-        this.appointments.remove(appointments);
     }
 }

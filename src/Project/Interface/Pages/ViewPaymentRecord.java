@@ -1,5 +1,6 @@
 package Project.Interface.Pages;
 
+import Project.Interface.Pages.Components.Notification;
 import Project.Interface.Pages.Templates.TableListingView;
 import Project.Payments.*;
 import javafx.collections.ObservableList;
@@ -27,7 +28,19 @@ public class ViewPaymentRecord extends TableListingView {
 
         deletePayment = new Button("Delete");
         deletePayment.setOnAction(e -> {
-            //TODO delete
+            int index = getButtonIndex(e);
+
+            Payment payment = (Payment) getTableView().getItems().get(index);
+
+            try{
+                //Notification.confirmation("Are you sure?");
+                ClinicalSystem.getPaymentHandler().removePayment(payment.getPaymentID());
+                Notification.information("Deleted");
+                ClinicalSystem.back();
+                ClinicalSystem.refresh(new ViewPaymentRecord().getTable());
+            } catch (Exception exception) {
+                Notification.information("Error Deleting");
+            }
         });
 
         addColumnButtons(deletePayment);

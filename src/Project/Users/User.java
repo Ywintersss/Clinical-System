@@ -8,7 +8,6 @@ public class User {
     private String password;
     private int Age;
     private Gender gender;
-    private String image;
 
     public User(String ID, String username, String password, String name, String email, String contact, int age, Gender gender) {
         this.ID = ID;
@@ -59,10 +58,6 @@ public class User {
         return password;
     }
 
-    public String getImage() {
-        return image;
-    }
-
     public void setUsername(String username) {
         this.username = username;
     }
@@ -70,6 +65,7 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+    
     public void setName(String name) {
         this.name = name;
     }
@@ -88,10 +84,6 @@ public class User {
 
     public void setGender(Gender gender) {
         this.gender = gender;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     @Override

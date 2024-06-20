@@ -6,12 +6,15 @@ import Project.Scheduler.AppointmentDetail;
 import Project.Scheduler.ScheduleDetail;
 import Project.Users.Doctor;
 import Project.Utilities.Styles;
+import Project.Utilities.Utilities;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -63,8 +66,9 @@ public class ScheduleSelector {
 
         //ex: get 08 from 0800
         int duration = Integer.parseInt(scheduleDetail.getEndTime().substring(0, 2)) - Integer.parseInt(scheduleDetail.getStartTime().substring(0, 2));
-        //TODO diff schedule based on doctor type
+
         LocalTime startTime = LocalTime.of(Integer.parseInt(scheduleDetail.getStartTime().substring(0, 2)), 0);
+        String date = scheduleDetail.getDate();
 
         //Rows
         for (int row = 0; row < duration; row++) {
@@ -73,6 +77,11 @@ public class ScheduleSelector {
                 String formattedTime = startTime.format(DateTimeFormatter.ofPattern("HHmm"));
 
                 if (formattedTime.equals("1200") || formattedTime.equals("1230") || formattedTime.equals("1900") || formattedTime.equals("1930")) {
+                    startTime = startTime.plusMinutes(30);
+                    continue;
+                }
+
+                if (!Utilities.isActive(date, formattedTime)) {
                     startTime = startTime.plusMinutes(30);
                     continue;
                 }
@@ -89,6 +98,10 @@ public class ScheduleSelector {
 
                 schedules.getChildren().add(scheduleButton);
             }
+        }
+
+        if (schedules.getChildren().size() == 0) {
+            Notification.error("No more schedules available");
         }
 
         scheduleScroller = new ScrollPane();

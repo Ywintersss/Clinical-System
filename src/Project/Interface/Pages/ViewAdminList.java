@@ -29,8 +29,7 @@ public class ViewAdminList extends TableListingView {
 
         deleteAdmin = new Button("Delete");
         deleteAdmin.setOnAction(e -> {
-            TableCell<?, ?> cell = (TableCell<?, ?>) ((Button) e.getSource()).getParent().getParent();
-            int index = cell.getIndex();
+            int index = getButtonIndex(e);
 
             Admin admin = (Admin) getTableView().getItems().get(index);
             try{
@@ -52,7 +51,6 @@ public class ViewAdminList extends TableListingView {
         });
 
         addFunctionalButton(addAdmin);
-
     }
 
     @Override

@@ -45,8 +45,7 @@ public class AppointmentList extends TableListingView {
 
         cancelButton = new Button("Cancel");
         cancelButton.setOnAction(e -> {
-            TableCell<?, ?> cell = (TableCell<?, ?>) ((Button) e.getSource()).getParent().getParent();
-            int index = cell.getIndex();
+            int index = getButtonIndex(e);
 
             AppointmentDetail appointmentDetail = (AppointmentDetail) getTableView().getItems().get(index);
 
