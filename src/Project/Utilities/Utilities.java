@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
+import java.util.regex.Pattern;
 
 public class Utilities {
     private static final DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -98,6 +99,11 @@ public class Utilities {
     public static boolean validateEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         return email.matches(emailRegex);
+    }
+
+    public static boolean validatePassword(String password) {
+        Pattern passwordPattern = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
+        return passwordPattern.matcher(password).matches();
     }
 
     public static boolean isSameObjectInstance(Object obj1, Object obj2) {

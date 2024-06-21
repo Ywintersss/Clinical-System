@@ -137,12 +137,16 @@ public abstract class Register {
         return buttonContainer;
     }
 
-    public void register(int flag, String ...data) {
+    public boolean register(int flag, String ...data) {
         try {
-            ClinicalSystem.register(flag, data);
-            Notification.information("Registration Successful");
+            boolean success = ClinicalSystem.register(flag, data);
+            if (success) {
+                Notification.information("Registration Successful");
+                return true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+	    return false;
     }
 }

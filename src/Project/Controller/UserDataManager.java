@@ -36,12 +36,9 @@ public class UserDataManager {
         String path = "\\users\\Patient.txt";
         String ID = Utilities.generateID("PA", path) + ",";
 
-        String medicalRecordPath = "\\records\\MedicalRecords.txt";
-        String medicalRecordID = Utilities.generateID("MR", medicalRecordPath) + ",";
-
         String data = File.formatData(userData);
         try {
-            File.appendToFile(path, ID + medicalRecordID + data);
+            File.appendToFile(path, ID + data);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
