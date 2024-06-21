@@ -91,6 +91,28 @@ public abstract class DetailView {
         contentContainer.getChildren().add(contentBox);
     }
 
+    public void addDatePicker(String labelTitle, DatePicker datePicker) {
+        HBox dateContainer = new HBox();
+        dateContainer.setAlignment(Pos.CENTER_LEFT);
+        dateContainer.setSpacing(25);
+        dateContainer.setPadding(new Insets(15, 0, 0, 0));
+
+        Label Title = new Label(labelTitle);
+        Title.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        Title.setAlignment(Pos.CENTER);
+
+        Button clear = new Button("Clear");
+        clear.setOnAction(e -> {
+            datePicker.setValue(null);
+        });
+
+        datePicker.setPromptText(labelTitle);
+
+        dateContainer.getChildren().addAll(Title, datePicker, clear);
+
+        contentContainer.getChildren().add(dateContainer);
+    }
+
     public void addSelectionContainer(String labelTitle, String[] options) {
         selectionContainer = new HBox();
         selectionContainer.setAlignment(Pos.CENTER_LEFT);

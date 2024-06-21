@@ -1,5 +1,11 @@
 package Project.Controller;
 
+import Project.ClinicalSystem;
+import Project.Records.MedicalRecord;
+import Project.Records.Recorder;
+import Project.Scheduler.Appointment;
+import Project.Scheduler.AppointmentDetail;
+import Project.Scheduler.Schedule;
 import Project.Users.*;
 import Project.Utilities.File;
 import Project.Utilities.Utilities;
@@ -213,6 +219,35 @@ public class UserDataManager {
             //updates the file with the new data without the deleted data
             File.updateFile(path, toBeUpdatedDeleteData);
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void removeAllRelated(String userID){
+        try{
+            ObservableList<AppointmentDetail> appointments = ClinicalSystem.getScheduler().getAllAppointmentDetails();
+            ObservableList<MedicalRecord> records = ClinicalSystem.getRecorder().getAllRecords();
+            ObservableList<Schedule> schedules = ClinicalSystem.getScheduler().getAllSchedules();
+
+            appointments.forEach(appointment -> {
+                if(appointment.getPatient().getID().equals(userID) || appointment.getDoctor().getID().equals(userID)){
+                    ClinicalSystem.getScheduler().cancelAppointment(appointment.getAppointment().getAppointmentID());
+                }
+            });
+
+            records.forEach(record -> {
+                if(record.getPatientID().equals(userID)){
+                   ClinicalSystem.getRecorder().removeRecord(record.getID(), userID);
+                }
+            });
+
+            schedules.forEach(schedule -> {
+                if(schedule.getDoctorID().equals(userID)){
+                    ClinicalSystem.getScheduler().removeSchedule(schedule.getScheduleID());
+                }
+            });
+            
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

@@ -128,6 +128,7 @@ public class DateDoctorSelection {
                 .findFirst()
                 .orElse(null);
 
+            assert scheduleDetail != null;
             ClinicalSystem.navigateTo(new ScheduleSelector(scheduleDetail).getSchedules());
         });
         next.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");

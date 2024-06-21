@@ -188,6 +188,20 @@ public class Scheduler {
         }
     }
 
+    public void removeSchedule(String scheduleID) {
+        String path = "\\schedules\\Schedules.txt";
+        try {
+            ArrayList<String> scheduleData = File.readFile(path);
+            ArrayList<String[]> parseScheduleData = File.parseData(scheduleData);
+
+            parseScheduleData.removeIf(data -> data[0].equals(scheduleID));
+
+            File.updateFile(path, parseScheduleData);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void completeAppointment(String issue, String prescription, String followUpDate, Appointment appointment) {
 //        cancelAppointment(doctor, patient, appointment);
 //

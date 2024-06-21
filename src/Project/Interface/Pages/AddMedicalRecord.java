@@ -4,6 +4,7 @@ import Project.ClinicalSystem;
 import Project.Interface.Pages.Templates.DetailView;
 import Project.Users.Patient;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
@@ -13,7 +14,7 @@ public class AddMedicalRecord extends DetailView {
     private TextField issue;
     private TextField description;
     private TextField prescription;
-    private TextField followUpDate;
+    private DatePicker followUpDate;
 
     public AddMedicalRecord(Patient patient) {
         super("Add Medical Record");
@@ -30,9 +31,8 @@ public class AddMedicalRecord extends DetailView {
         prescription.setPromptText("Enter Prescription...");
         addContent("Prescription",prescription);
 
-        followUpDate = new TextField();
-        followUpDate.setPromptText("Enter FollowUp Date...");
-        addContent("FollowUp Date",followUpDate);
+        followUpDate = new DatePicker();
+        addDatePicker("Follow Up Date", followUpDate);
 
         Button save = new Button("Save");
         save.setPrefHeight(40);
