@@ -192,6 +192,9 @@ public abstract class DetailView {
             if (content.get(1) instanceof ComboBox) {
                 data.add(((ComboBox) content.get(1)).getSelectionModel().getSelectedItem().toString());
             }
+            if (content.get(1) instanceof DatePicker) {
+                data.add(((DatePicker) content.get(1)).getValue().toString());
+            }
         }
         return data;
     }
