@@ -1,7 +1,9 @@
 package Project.Interface.Pages.Templates;
 
 import Project.ClinicalSystem;
+import Project.Interface.Pages.Components.Notification;
 import Project.Utilities.ScreenTools;
+import Project.Utilities.Utilities;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -193,7 +195,15 @@ public abstract class DetailView {
                 data.add(((ComboBox) content.get(1)).getSelectionModel().getSelectedItem().toString());
             }
             if (content.get(1) instanceof DatePicker) {
-                data.add(((DatePicker) content.get(1)).getValue().toString());
+                if (((DatePicker) content.get(1)).getValue() == null){
+                    System.out.println("here");
+                    data.add("null");
+                } else if (Utilities.hasPassedDate(((DatePicker) content.get(1)).getValue().toString())){
+                    Notification.error("Date cannot be in the past");
+                    return null;
+                } else {
+                    data.add(((DatePicker) content.get(1)).getValue().toString());
+                }
             }
         }
         return data;

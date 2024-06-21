@@ -1,6 +1,7 @@
 package Project.Interface.Pages;
 
 import Project.ClinicalSystem;
+import Project.Interface.Pages.Components.Notification;
 import Project.Interface.Pages.Templates.DetailView;
 import Project.Users.Patient;
 import javafx.scene.control.Button;
@@ -8,6 +9,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
+import java.sql.ClientInfoStatus;
 import java.util.ArrayList;
 
 public class AddMedicalRecord extends DetailView {
@@ -39,18 +41,24 @@ public class AddMedicalRecord extends DetailView {
         save.setPrefWidth(100);
 
         save.setOnAction(e ->{
-            ArrayList<String> data = getInputData();
-            System.out.println(data);
+            try {
+                ArrayList<String> data = getInputData();
+                System.out.println(data);
 
-            String issue = data.get(0);
-            String description = data.get(1);
-            String followUpDate = data.get(2);
-            String prescription = data.get(3);
+                String issue = data.get(0);
+                String description = data.get(1);
+                String prescription = data.get(2);
+                String followUpDate = data.get(3);
 
-            ClinicalSystem.getRecorder().addRecord(patient.getID(), issue, prescription, description, followUpDate);
+                ClinicalSystem.getRecorder().addRecord(patient.getID(), issue, prescription, description, followUpDate);
+                Notification.information("Record Added");
 
-            ClinicalSystem.back();
-            ClinicalSystem.refresh(new MedicalRecordList(patient).getMedicalRecordList());
+                ClinicalSystem.back();
+                ClinicalSystem.refresh(new MedicalRecordList(patient).getMedicalRecordList());
+            } catch (Exception e1) {
+                Notification.error("Failed to add record");
+            }
+
         });
 
         addButtonIntoContainer(save);
