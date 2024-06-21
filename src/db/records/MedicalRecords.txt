@@ -1,5 +1,5 @@
-RC1,PA1,Hypertension,Elevated blood pressure readings over the past three months. Current readings average 150/95 mmHg. The patient reports occasional headaches and dizziness. No history of heart disease but family history of hypertension.,Amlodipine 5 mg once daily. Lifestyle modifications including a low-sodium diet and regular physical exercise (30 minutes/day),28/1/2024
-RC2,PA1,Upper Respiratory Infection,Sore throat and mild fever for the past 5 days. No shortness of breath or chest pain. The patient has a history of seasonal allergies.,Amoxicillin 500 mg every 8 hours for 10 days.Acetaminophen 500 mg as needed for fever,15/6/2024
+RC1,PA1,Hypertension,This situation over the past three months. Current readings average 150/95 mmHg.,Amlodipine 5 mg once daily.,28/1/2024
+RC2,PA1,Upper Respiratory Infection,Sore throat and mild fever for the past 5 days. The patient has a history of seasonal allergies.,Amoxicillin 500 mg(every 8 hours). Acetaminophen 500 mg as needed for fever,15/6/2024
 RC3,PA2,Type 2 Diabetes Mellitus,Recent blood tests indicate an HbA1c of 7.8%.The patient reports increased thirst and frequent urination.,Metformin 500 mg twice daily,2/7/2024
-RC4,PA2,Lower Back Pain,Pain is described as a dull ache and exacerbated by prolonged sitting and bending. No significant trauma history.,Spinal manipulation therapy twice a week for 4 weeks,1/7/2024
-RC5,PA1,Atrial Fibrillation,Shortness of breath and occasional dizziness for the past month. An ECG confirms atrial fibrillation.,Warfarin 5 mg daily.Metoprolol 50 mg twice daily,6/7/2024
+RC4,PA2,Lower Back Pain,Pain is described as a dull ache and exacerbated by prolonged sitting and bending.,Spinal manipulation therapy twice a week for 4 weeks,1/7/2024
+RC5,PA1,Atrial Fibrillation,Shortness of breath and occasional dizziness for the past month. An ECG confirms atrial fibrillation.,Warfarin 5 mg daily. Metoprolol 50 mg twice daily,6/7/2024

@@ -17,7 +17,7 @@ public class PatientRegister extends Register {
         super("Register Patient");
 
         addContentContainer("Username","Username");
-        addContentContainer("Password","At least 8 characters, 1 uppercase, 1 number");
+        addContentContainer("Password","At least 8 characters, 1 uppercase, 1 number, 1 symbol");
         addContentContainer("Name","Full Name");
         addContentContainer("Email","Ryan1234@gmail.com");
         addContentContainer("Phone Number","012-1118888");
@@ -44,9 +44,11 @@ public class PatientRegister extends Register {
             String height = data.get(7);
             String weight = data.get(8);
 
-            register(1, username, password, name, email, phoneNumber, age, gender, height, weight);
+            boolean success = register(1, username, password, name, email, phoneNumber, age, gender, height, weight);
 
-            ClinicalSystem.navigateTo(new Home().getHome());
+            if (success) {
+                ClinicalSystem.navigateTo(new Home().getHome());
+            }
         });
 
         addButtonContainer(register);
