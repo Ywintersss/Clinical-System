@@ -97,6 +97,7 @@ public class AppointmentList extends TableListingView {
 
             addFunctionalButton(appointmentHistory);
         } else if (flag == 4) {
+            appointmentDetailsList.removeIf(appointmentDetail -> !appointmentDetail.getPatient().getID().equals(UserSession.getInstance().getCurrentUser().getID()));
             appointmentDetailsList.removeIf(appointmentDetail -> {
                 Schedule schedule = appointmentDetail.getSchedule();
                 String date = schedule.getDate();
