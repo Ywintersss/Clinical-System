@@ -74,6 +74,15 @@ public class AppointmentList extends TableListingView {
         } else if (flag == 2){
             //Remove unrelated appointments
             appointmentDetailsList.removeIf(appointmentDetail -> !appointmentDetail.getDoctor().getID().equals(UserSession.getInstance().getCurrentUser().getID()));
+            appointmentDetailsList.removeIf(appointmentDetail -> {
+                Schedule schedule = appointmentDetail.getSchedule();
+                String date = schedule.getDate();
+                String appointmentTime = appointmentDetail.getAppointmentTime();
+                //Filter out inactive appointments
+                //Return true if appointment is active
+                //Don't remove if it is active
+                return !Utilities.isActive(date, appointmentTime, false);
+            });
 
             addColumnButtons(cancelButton);
         } else if (flag == 3) {
@@ -85,7 +94,7 @@ public class AppointmentList extends TableListingView {
                 //Filter out inactive appointments
                 //Return true if appointment is active
                 //Don't remove if it is active
-                return !Utilities.isActive(date, appointmentTime);
+                return !Utilities.isActive(date, appointmentTime, false);
             });
 
             Button appointmentHistory = new Button("Appointment History");
@@ -103,7 +112,7 @@ public class AppointmentList extends TableListingView {
                 String date = schedule.getDate();
                 String appointmentTime = appointmentDetail.getAppointmentTime();
                 //Remove if it is active
-                return Utilities.isActive(date, appointmentTime);
+                return Utilities.isActive(date, appointmentTime, false);
             });
         }
 

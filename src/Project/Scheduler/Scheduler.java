@@ -46,7 +46,7 @@ public class Scheduler {
                 Schedules.removeIf(schedule -> !schedule.getDoctorID().equals(doctorID));
 
                 if (getActiveSchedules) {
-                    Schedules.removeIf(schedule -> !Utilities.isActive(schedule.getDate(), schedule.getEndTime()));
+                    Schedules.removeIf(schedule -> !Utilities.isActive(schedule.getDate(), schedule.getEndTime(), true));
                 }
 
                 return Schedules;
@@ -143,7 +143,7 @@ public class Scheduler {
     public ObservableList<ScheduleDetail> getActiveScheduleDetails(){
         ObservableList<ScheduleDetail> activeScheduleDetails = FXCollections.observableArrayList();
         for(ScheduleDetail scheduleDetail : getAllScheduleDetails()){
-            if (Utilities.isActive(scheduleDetail.getDate(), scheduleDetail.getEndTime())) {
+            if (Utilities.isActive(scheduleDetail.getDate(), scheduleDetail.getEndTime(), false)) {
                 activeScheduleDetails.add(scheduleDetail);
             }
         }

@@ -81,7 +81,7 @@ public class ScheduleSelector {
                     continue;
                 }
 
-                if (!Utilities.isActive(date, formattedTime)) {
+                if (!Utilities.isActive(date, formattedTime, false)) {
                     startTime = startTime.plusMinutes(30);
                     continue;
                 }

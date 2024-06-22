@@ -23,13 +23,11 @@ public class ScheduleCard {
 
         dateLabel = new Label("Schedule Date: " + schedule.getDate());
         dateLabel.setStyle(Styles.fontWeightBold + Styles.fontSize(16));
-
         if (schedule.getStartTime().equals("null") && schedule.getEndTime().equals("null")) {
             leaveLabel = new Label("On Leave");
             leaveLabel.setStyle(Styles.fontWeightBold + Styles.fontSize(16));
             scheduleCard.getChildren().addAll(dateLabel, leaveLabel);
         } else {
-
             startTimeLabel = new Label("Start Time: " + schedule.getStartTime());
             startTimeLabel.setStyle(Styles.fontWeightBold + Styles.fontSize(16));
 

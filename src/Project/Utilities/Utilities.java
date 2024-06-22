@@ -85,7 +85,10 @@ public class Utilities {
         return LocalTime.now().isAfter(LocalTime.parse(newTime, formatterTime));
     }
 
-    public static boolean isActive(String date, String time) {
+    public static boolean isActive(String date, String time, boolean isDoctorView) {
+        if (time.equals("null") && isDoctorView) {
+            return true;
+        }
         if (date.equals("null") || time.equals("null")) {
             return false;
         }
