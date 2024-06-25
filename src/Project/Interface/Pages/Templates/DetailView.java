@@ -190,11 +190,9 @@ public abstract class DetailView {
             ObservableList<Node> content = ((Parent) children.get(i)).getChildrenUnmodifiable();
             if (content.get(1) instanceof TextField) {
                 data.add(((TextField) content.get(1)).getText());
-            }
-            if (content.get(1) instanceof ComboBox) {
-                data.add(((ComboBox) content.get(1)).getSelectionModel().getSelectedItem().toString());
-            }
-            if (content.get(1) instanceof DatePicker) {
+            } else if (content.get(2) instanceof ComboBox) {
+                data.add(((ComboBox) content.get(2)).getSelectionModel().getSelectedItem().toString());
+            } else if (content.get(1) instanceof DatePicker) {
                 if (((DatePicker) content.get(1)).getValue() == null){
                     System.out.println("here");
                     data.add("null");

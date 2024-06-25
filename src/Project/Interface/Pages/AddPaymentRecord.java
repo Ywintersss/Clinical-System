@@ -48,9 +48,10 @@ public class AddPaymentRecord extends DetailView{
 
         save.setOnAction(e ->{
             ArrayList<String> data = getInputData();
+            System.out.println(data);
 
             String patientID = data.get(0);
-            String amount = data.get(1);
+            String amount = "RM" + data.get(1);
             String paymentMethod = data.get(2);
             String date = Utilities.getCurrentDate()+" "+Utilities.getCurrentTime();
 
