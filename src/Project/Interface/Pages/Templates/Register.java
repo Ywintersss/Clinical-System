@@ -143,6 +143,11 @@ public abstract class Register {
     }
 
     public void register(int flag, String ...data) {
+        System.out.println(data[0] + data[1]);
+        //flag = 1 = Admin register patient
+        //flag = 2 = addDoctor
+        //flag = 3 = addAdmin
+        //flag = 4 = Back to wherever to Patient came from
         try {
             boolean success = ClinicalSystem.register(flag, data);
             if (success) {
@@ -150,9 +155,9 @@ public abstract class Register {
                 ClinicalSystem.back();
                 if (flag == 1){
                     ClinicalSystem.refresh(new ViewPatientList(1).getTable());
-                }else if (flag == 3){
+                }else if (flag == 2){
                     ClinicalSystem.refresh(new ViewDoctorList().getTable());
-                } else if (flag==4){
+                } else if (flag == 3){
                     ClinicalSystem.refresh(new ViewAdminList().getTable());
                 }
             }

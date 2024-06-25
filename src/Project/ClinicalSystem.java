@@ -66,31 +66,32 @@ public class ClinicalSystem {
     }
 
     public static boolean register(int flag, String ...args) {
-
-
-        if (Utilities.validatePassword(args[1]) && Utilities.validateEmail(args[3]) && Utilities.validatePhoneNumber(args[4])) {
-            if (flag == 1) {
-                userDataManager.addPatient(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
-            } else if (flag == 2) {
-                userDataManager.addDoctor(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9],args[10]);
-            } else if (flag == 3) {
-                userDataManager.addAdmin(args[0],args[1]);
+        if (!(args.length < 3)) {
+            if (Utilities.validatePassword(args[1])) {
+                Notification.error("Password is in invalid format!");
+                return false;
             }
-            return true;
-        }else{
-	        if (!Utilities.validatePassword(args[1])) {
-		        Notification.error("Password is in invalid format!");
-	        }
             if (!Utilities.validateEmail(args[3])) {
-		        Notification.error("Email is in invalid format!");
-	        }
+                Notification.error("Email is in invalid format!");
+                return false;
+            }
             if (!Utilities.validatePhoneNumber(args[4])) {
-		        Notification.error("Phone number is in invalid format!");
-	        }
-	        return false;
+                Notification.error("Phone number is in invalid format!");
+                return false;
+            }
         }
 
+        if (flag == 1) {
+            userDataManager.addPatient(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
+        } else if (flag == 2) {
+            userDataManager.addDoctor(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9], args[10]);
+        } else if (flag == 3) {
+            userDataManager.addAdmin(args[0], args[1]);
+        }
+
+        return true;
     }
+
     public static Layout getLayout() {
         if (layout == null) {
             layout = new Layout();
