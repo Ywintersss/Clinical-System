@@ -3,8 +3,10 @@ package Project.Interface.Pages;
 import Project.ClinicalSystem;
 import Project.Interface.Pages.Components.Notification;
 import Project.Scheduler.ScheduleDetail;
+import Project.UserSession;
 import Project.Users.Doctor;
 
+import Project.Users.Patient;
 import Project.Utilities.Styles;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -18,12 +20,17 @@ import javafx.scene.text.FontWeight;
 
 public class DateDoctorSelection {
     private ObservableList<ScheduleDetail> scheduleDetails;
+    private ObservableList<Patient> patients;
     private Label titleLabel;
     private Region spacer1;
     private VBox dateSelectionContainer;
     private HBox dateDoctorSelectorContainer;
     private Label SelectDate;
     private ComboBox<String> dateSelector;
+    private HBox patientSelectorContainer;
+    private Label SelectPatient;
+    private ComboBox<String> patientSelector;
+    private Region adminSpacer;
     private Label SelectDoctor;
     private ComboBox<Doctor> doctorSelector;
     private Region spacer2;
@@ -31,8 +38,9 @@ public class DateDoctorSelection {
     private Button back;
     private Region spacer3;
     private Button next;
-    public DateDoctorSelection() {
+    public DateDoctorSelection(boolean isAdmin) {
         scheduleDetails = ClinicalSystem.getScheduler().getActiveScheduleDetails();
+        patients = ClinicalSystem.getUserDataManager().getAllPatients();
 
         if (scheduleDetails.isEmpty()) {
             Notification.information("No Schedule Available, Please try again later");
@@ -61,6 +69,7 @@ public class DateDoctorSelection {
         dateSelector = new ComboBox<>();
         dateSelector.setPromptText("Select a Date");
 
+
         dateSelector.setOnMouseClicked(e -> {
             dateSelector.getItems().clear();
             if (doctorSelector.getValue() == null) {
@@ -73,6 +82,7 @@ public class DateDoctorSelection {
                 }
             }
         });
+
 
         SelectDoctor = new Label("Select Doctor: ");
         SelectDoctor.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
@@ -114,13 +124,25 @@ public class DateDoctorSelection {
         spacer3 = new Region();
         HBox.setHgrow(spacer3, Priority.ALWAYS);
 
+
         next = new Button("Next");
         next.setPadding(new Insets(10, 20, 10, 20));
         next.setOnAction(e -> {
+            String patientID;
             if (doctorSelector.getValue() == null || dateSelector.getValue() == null) {
                 Notification.error("Please select a doctor and a date");
                 return;
             }
+
+            if (isAdmin && patientSelector.getValue() == null) {
+                Notification.error("Please select a patient");
+                return;
+            } else if (isAdmin && patientSelector.getValue() != null) {
+                patientID = patientSelector.getValue();
+            } else {
+                patientID = UserSession.getInstance().getCurrentUser().getID();
+            }
+
 
             ScheduleDetail scheduleDetail = scheduleDetails.stream()
                 .filter(sd -> sd.getDoctor().equals(doctorSelector.getValue()))
@@ -129,13 +151,36 @@ public class DateDoctorSelection {
                 .orElse(null);
 
             assert scheduleDetail != null;
-            ClinicalSystem.navigateTo(new ScheduleSelector(scheduleDetail).getSchedules());
+            ClinicalSystem.navigateTo(new ScheduleSelector(scheduleDetail, patientID).getSchedules());
         });
         next.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");
 
         buttonContainer.getChildren().addAll(back, spacer3, next);
 
         dateSelectionContainer.getChildren().addAll(titleLabel, spacer1, dateDoctorSelectorContainer, spacer2, buttonContainer);
+
+        if (isAdmin) {
+            patientSelectorContainer = new HBox();
+            patientSelectorContainer.setSpacing(20);
+            patientSelectorContainer.setAlignment(Pos.CENTER);
+            patientSelectorContainer.setPadding(new Insets(10, 10, 10, 10));
+
+            SelectPatient = new Label("Select Patient: ");
+            SelectPatient.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+            SelectPatient.setPadding(new Insets(10, -20, 10, 0));
+
+            patientSelector = new ComboBox<>();
+            patientSelector.setPromptText("Select a Patient");
+            patientSelector.getItems().addAll(patients.stream().map(Patient::getID).distinct().toList());
+
+            adminSpacer = new Region();
+            HBox.setHgrow(adminSpacer, Priority.ALWAYS);
+
+            patientSelectorContainer.getChildren().addAll(SelectPatient, patientSelector);
+
+            dateSelectionContainer.getChildren().add(2, patientSelectorContainer);
+            dateSelectionContainer.getChildren().add(4, adminSpacer);
+        }
     }
 
     public VBox getDateSelection() {

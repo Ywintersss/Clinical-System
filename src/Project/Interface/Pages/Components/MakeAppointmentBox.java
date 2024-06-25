@@ -33,7 +33,7 @@ public class MakeAppointmentBox {
                 Notification.error("Please Login First");
                 return;
             }
-            ClinicalSystem.navigateTo(new DateDoctorSelection().getDateSelection());
+            ClinicalSystem.navigateTo(new DateDoctorSelection(false).getDateSelection());
         });
 
         MakeAppointmentBox.getChildren().addAll(makeAppointmentLabel, makeAppointmentButton);

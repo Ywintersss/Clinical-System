@@ -5,6 +5,7 @@ import Project.Interface.Pages.Components.Notification;
 import Project.Scheduler.AppointmentDetail;
 import Project.Scheduler.ScheduleDetail;
 import Project.Users.Doctor;
+import Project.Users.Patient;
 import Project.Utilities.Styles;
 import Project.Utilities.Utilities;
 import javafx.collections.ObservableList;
@@ -33,7 +34,7 @@ public class ScheduleSelector {
     private Button back;
     private Region spacer;
     private Button makeAppointment;
-    public ScheduleSelector(ScheduleDetail scheduleDetail) {
+    public ScheduleSelector(ScheduleDetail scheduleDetail, String patientID) {
         appointmentDetails = ClinicalSystem.getScheduler().getAllAppointmentDetails();
 
         scheduleContainer = new VBox();
@@ -148,7 +149,7 @@ public class ScheduleSelector {
                 return;
             }
 
-            ClinicalSystem.navigateTo(new MakeAppointmentDetails(scheduleDetail, time).getDetails());
+            ClinicalSystem.navigateTo(new MakeAppointmentDetails(scheduleDetail, patientID, time).getDetails());
         });
 
         buttonContainer.getChildren().addAll(back, spacer, makeAppointment);

@@ -5,6 +5,7 @@ import Project.Interface.Pages.Components.Notification;
 import Project.Interface.Pages.Templates.DetailView;
 import Project.Scheduler.ScheduleDetail;
 import Project.UserSession;
+import Project.Users.Admin;
 import Project.Users.Doctor;
 import Project.Users.Patient;
 import javafx.scene.control.Button;
@@ -21,8 +22,12 @@ public class MakeAppointmentDetails extends DetailView {
     private TextField description;
     private Label consultationFees;
     private Button makeAppointment;
-    public MakeAppointmentDetails(ScheduleDetail scheduleDetail, String selectedTime) {
+    public MakeAppointmentDetails(ScheduleDetail scheduleDetail, String patientID, String selectedTime) {
         super("Appointment Details");
+//        if (!(UserSession.getInstance().getCurrentUser() instanceof Admin)) {
+//            Patient patient = (Patient) UserSession.getInstance().getCurrentUser();
+//            patientID = patient.getID();
+//        }
 
         doctorName = new Label(scheduleDetail.getDoctor().getName());
         doctorSpecialization = new Label(scheduleDetail.getDoctor().getSpecialization());
@@ -42,15 +47,15 @@ public class MakeAppointmentDetails extends DetailView {
         addContent("Fees", consultationFees);
 
         makeAppointment = new Button("Make Appointment");
+
         makeAppointment.setOnAction(e -> {
-            Patient patient = (Patient) UserSession.getInstance().getCurrentUser();
             try {
-                ClinicalSystem.getScheduler().makeAppointment(scheduleDetail.getSchedule().getScheduleID(), patient.getID(), selectedTime, description.getText() != null ? description.getText() : "none");
+                ClinicalSystem.getScheduler().makeAppointment(scheduleDetail.getSchedule().getScheduleID(), patientID, selectedTime, description.getText().equals("") ? "None" : description.getText());
                 Notification.information("Appointment made successfully");
 
                 ClinicalSystem.back();
                 ClinicalSystem.back();
-                ClinicalSystem.refresh(new DateDoctorSelection().getDateSelection());
+                ClinicalSystem.refresh(new DateDoctorSelection(false).getDateSelection());
             } catch (Exception ex) {
                 Notification.error("Something went wrong");
             }

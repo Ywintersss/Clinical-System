@@ -61,7 +61,7 @@ public class AppointmentList extends TableListingView {
 
         addAppointment = new Button("Add");
         addAppointment.setOnAction(e -> {
-            ClinicalSystem.navigateTo(new DateDoctorSelection().getDateSelection());
+            ClinicalSystem.navigateTo(new DateDoctorSelection(true).getDateSelection());
         });
 
         //flag 1: All Appointments

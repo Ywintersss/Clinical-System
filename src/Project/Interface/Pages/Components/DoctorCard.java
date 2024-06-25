@@ -80,7 +80,7 @@ public class DoctorCard {
                     if (scheduleDetail.getStartTime().equals("null") && scheduleDetail.getEndTime().equals("null")) {
                         Notification.error("Doctor is on leave today");
                     } else {
-                        ClinicalSystem.navigateTo(new ScheduleSelector(scheduleDetail).getSchedules());
+                        ClinicalSystem.navigateTo(new ScheduleSelector(scheduleDetail, null).getSchedules());
                         return;
                     }
                 }
