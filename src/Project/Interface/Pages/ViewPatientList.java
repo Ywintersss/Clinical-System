@@ -59,7 +59,7 @@ public class ViewPatientList extends TableListingView {
 
             addPatient = new Button("Add");
             addPatient.setOnAction(e -> {
-                ClinicalSystem.navigateTo(new PatientRegister().getRegisterForm());
+                ClinicalSystem.navigateTo(new PatientRegister(1).getRegisterForm());
             });
 
             addFunctionalButton(addPatient);

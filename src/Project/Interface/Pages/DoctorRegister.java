@@ -13,7 +13,7 @@ public class DoctorRegister extends Register {
     private ArrayList<String> doctorData = new ArrayList<>();
 
     public DoctorRegister() {
-        super("Register Doctor");
+        super("Register Doctor", 3);
 
         addContentContainer("Username","Username");
         addContentContainer("Password","At least 8 characters, 1 uppercase, 1 number");

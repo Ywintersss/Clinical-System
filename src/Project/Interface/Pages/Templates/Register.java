@@ -2,6 +2,9 @@ package Project.Interface.Pages.Templates;
 
 import Project.ClinicalSystem;
 import Project.Interface.Pages.Components.Notification;
+import Project.Interface.Pages.ViewAdminList;
+import Project.Interface.Pages.ViewDoctorList;
+import Project.Interface.Pages.ViewPatientList;
 import Project.Users.Gender;
 import Project.Utilities.ScreenTools;
 import Project.Utilities.Utilities;
@@ -36,7 +39,9 @@ public abstract class Register {
     private Button register;
     private Button back;
 
-    public Register(String title) {
+    public Register(String title, int pageFlag) {
+        //pageFlag = 1 = Admin
+        //pageFlag=2 = Patient
         registerForm = new VBox();
         registerForm.setSpacing(25);
         registerForm.setPadding(new Insets(10, 10, 10, 10));
@@ -137,16 +142,22 @@ public abstract class Register {
         return buttonContainer;
     }
 
-    public boolean register(int flag, String ...data) {
+    public void register(int flag, String ...data) {
         try {
             boolean success = ClinicalSystem.register(flag, data);
             if (success) {
                 Notification.information("Registration Successful");
-                return true;
+                ClinicalSystem.back();
+                if (flag == 1){
+                    ClinicalSystem.refresh(new ViewPatientList(1).getTable());
+                }else if (flag == 3){
+                    ClinicalSystem.refresh(new ViewDoctorList().getTable());
+                } else if (flag==4){
+                    ClinicalSystem.refresh(new ViewAdminList().getTable());
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-	    return false;
     }
 }

@@ -32,7 +32,6 @@ public class ClinicalSystem {
     private static Layout layout;
 
     public static void login(String username, String password) {
-        //TODO validation
         User user = userDataManager.getUser(username, password);
         if (user != null) {
             Notification.information("Login Successful");

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class AdminRegister extends Register {
 
     public AdminRegister() {
-        super("Register Admin");
+        super("Register Admin", 4);
 
         addContentContainer("Username","Username");
         addContentContainer("Password","At least 8 characters, 1 uppercase, 1 number");

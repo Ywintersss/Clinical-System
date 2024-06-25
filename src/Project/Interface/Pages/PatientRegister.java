@@ -1,6 +1,7 @@
 package Project.Interface.Pages;
 
 import Project.ClinicalSystem;
+import Project.Interface.Pages.Components.Notification;
 import Project.Interface.Pages.Templates.Register;
 import Project.Users.Gender;
 import Project.Utilities.Utilities;
@@ -9,15 +10,16 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
+import javax.swing.text.View;
 import java.util.ArrayList;
 
 public class PatientRegister extends Register {
 
-    public PatientRegister() {
-        super("Register Patient");
+    public PatientRegister(int pageFlag) {
+        super("Register Patient", pageFlag);
 
         addContentContainer("Username","Username");
-        addContentContainer("Password","At least 8 characters, 1 uppercase, 1 number, 1 symbol");
+        addContentContainer("Password","At least 8 characters, 1 uppercase, 1 number");
         addContentContainer("Name","Full Name");
         addContentContainer("Email","Ryan1234@gmail.com");
         addContentContainer("Phone Number","012-1118888");
@@ -44,11 +46,8 @@ public class PatientRegister extends Register {
             String height = data.get(7);
             String weight = data.get(8);
 
-            boolean success = register(1, username, password, name, email, phoneNumber, age, gender, height, weight);
+           register(1, username, password, name, email, phoneNumber, age, gender, height, weight);
 
-            if (success) {
-                ClinicalSystem.navigateTo(new Home().getHome());
-            }
         });
 
         addButtonContainer(register);

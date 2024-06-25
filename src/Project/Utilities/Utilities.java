@@ -112,8 +112,8 @@ public class Utilities {
     }
 
     public static boolean validatePassword(String password) {
-        //checks for presence of lowercase, then uppercase, then a number, then a special character
-        Pattern passwordPattern = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
+        //checks for presence of lowercase, then uppercase, then a number
+        Pattern passwordPattern = Pattern.compile("^(?=.*[0-9])(?=.*[A-Z]).{8,}$");
         return passwordPattern.matcher(password).matches();
     }
 
