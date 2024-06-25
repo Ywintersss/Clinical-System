@@ -43,7 +43,7 @@ public class PopUpDefault extends PopUp {
         registerLabel.setFont(Font.font(10));
         register = new Button("Register");
         register.setOnAction(e -> {
-            ClinicalSystem.navigateTo(new PatientRegister(2).getRegisterForm());
+            ClinicalSystem.navigateTo(new PatientRegister(4).getRegisterForm());
             super.setVisible(false);
             usernameInput.clear();
             passwordInput.clear();

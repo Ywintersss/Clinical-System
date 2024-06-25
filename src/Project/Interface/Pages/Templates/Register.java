@@ -41,7 +41,7 @@ public abstract class Register {
 
     public Register(String title, int pageFlag) {
         //pageFlag = 1 = Admin
-        //pageFlag=2 = Patient
+        //pageFlag = 2 = Patient
         registerForm = new VBox();
         registerForm.setSpacing(25);
         registerForm.setPadding(new Insets(10, 10, 10, 10));
@@ -143,7 +143,6 @@ public abstract class Register {
     }
 
     public void register(int flag, String ...data) {
-        System.out.println(data[0] + data[1]);
         //flag = 1 = Admin register patient
         //flag = 2 = addDoctor
         //flag = 3 = addAdmin

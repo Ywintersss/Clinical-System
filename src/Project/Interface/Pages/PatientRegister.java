@@ -46,7 +46,7 @@ public class PatientRegister extends Register {
             String height = data.get(7);
             String weight = data.get(8);
 
-           register(1, username, password, name, email, phoneNumber, age, gender, height, weight);
+            register(pageFlag, username, password, name, email, phoneNumber, age, gender, height, weight);
 
         });
 
