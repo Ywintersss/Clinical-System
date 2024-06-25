@@ -33,10 +33,8 @@ public class ViewPaymentRecord extends TableListingView {
             Payment payment = (Payment) getTableView().getItems().get(index);
 
             try{
-                //Notification.confirmation("Are you sure?");
                 ClinicalSystem.getPaymentHandler().removePayment(payment.getPaymentID());
                 Notification.information("Deleted");
-                ClinicalSystem.back();
                 ClinicalSystem.refresh(new ViewPaymentRecord().getTable());
             } catch (Exception exception) {
                 Notification.information("Error Deleting");
