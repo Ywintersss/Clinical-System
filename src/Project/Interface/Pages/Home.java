@@ -15,7 +15,7 @@ public class Home {
     private ScrollPane aboutUs;
     private VBox makeAppointmentBox;
     private VBox doctorContainer;
-    private VBox doctor;
+    private ScrollPane doctor;
     public Home() {
         home = new HBox();
         home.setSpacing(10);
