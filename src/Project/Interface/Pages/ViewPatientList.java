@@ -34,7 +34,7 @@ public class ViewPatientList extends TableListingView {
 
                 Patient patient = (Patient) getTableView().getItems().get(index);
 
-                UserEditProfile userEditProfile = new UserEditProfile(patient);
+                UserEditProfile userEditProfile = new UserEditProfile(patient, 1);
 
                 Button deleteButton = new Button("Delete");
                 deleteButton.setOnAction(event -> {

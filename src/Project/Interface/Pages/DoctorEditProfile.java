@@ -26,7 +26,7 @@ public class DoctorEditProfile extends DetailView {
     private ComboBox<String> position;
     private TextField consultationFees;
 
-    public DoctorEditProfile(Doctor oldDoctorData) {
+    public DoctorEditProfile(Doctor oldDoctorData, int flag) {
         super("Edit Profile");
 
         if (oldDoctorData == null) {
@@ -76,7 +76,7 @@ public class DoctorEditProfile extends DetailView {
         profileScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         profileScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        Button saveButton = getSaveButton(oldDoctorData);
+        Button saveButton = getSaveButton(oldDoctorData, flag);
         addButtonIntoContainer(saveButton);
 
         getDetails().getChildren().removeAll();
@@ -84,7 +84,7 @@ public class DoctorEditProfile extends DetailView {
         moveButtonContainerToBottom();
     }
 
-    private Button getSaveButton(Doctor oldDoctorData) {
+    private Button getSaveButton(Doctor oldDoctorData, int flag) {
         Button saveButton = new Button("Save");
         saveButton.setOnAction(e -> {
             try {
@@ -113,6 +113,10 @@ public class DoctorEditProfile extends DetailView {
                     Notification.error("Failed to save changes");
                 }
                 ClinicalSystem.back();
+
+                if (flag == 1) {
+                    ClinicalSystem.refresh(new ViewDoctorList().getTable());
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

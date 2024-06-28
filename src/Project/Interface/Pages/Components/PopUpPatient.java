@@ -16,7 +16,7 @@ public class PopUpPatient extends PopUp {
         editProfile = new Button("Edit Profile");
         editProfile.setStyle(Styles.buttonStyle());
         editProfile.setOnAction(e -> {
-            ClinicalSystem.navigateTo(new UserEditProfile(null).getDetails());
+            ClinicalSystem.navigateTo(new UserEditProfile(null,0).getDetails());
         });
 
 

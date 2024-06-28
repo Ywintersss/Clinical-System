@@ -5,4 +5,4 @@ PA4,Faris,bye66881,Faris Muhammad Bin Ali,elon@gmail.com,014-6346688,14,MALE,174
 PA5,tjtoo04,tjto2004,tze jiat,mail@mail.com,016-9804327,21,MALE,169,60
 PA6,shawnny,poopiee9,shanw,nwahs@liam.moc,019-9999999,99,FEMALE,192,92
 PA7,Lily,Lily1234,Lily Tan June,Lily@gmail.com,016-5117111,54,FEMALE,155,34
-PA8,Aini,Aini1234,Aini Binti Fahad,Aini@gmail.com,011-4435533,23,FEMALE,165,57
+PA8,Aini,Aini1234,Aini Binti Fahad,Aini@gmail.com,011-4435533,24,FEMALE,165.0,57.0

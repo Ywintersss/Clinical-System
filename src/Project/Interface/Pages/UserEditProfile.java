@@ -27,7 +27,7 @@ public class UserEditProfile extends DetailView {
     private TextField height;
     private TextField weight;
 
-	public UserEditProfile(Patient oldPatientData) {
+	public UserEditProfile(Patient oldPatientData, int flag) {
         super("Edit Profile");
 
         if (oldPatientData == null) {
@@ -63,7 +63,7 @@ public class UserEditProfile extends DetailView {
         profileScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         profileScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        Button saveButton = getSaveButton(oldPatientData);
+        Button saveButton = getSaveButton(oldPatientData, flag);
         addButtonIntoContainer(saveButton);
 
         getDetails().getChildren().removeAll();
@@ -71,7 +71,7 @@ public class UserEditProfile extends DetailView {
         moveButtonContainerToBottom();
     }
 
-    private Button getSaveButton(Patient oldPatientData) {
+    private Button getSaveButton(Patient oldPatientData, int flag) {
         Button saveButton = new Button("Save");
         saveButton.setOnAction(e -> {
             try {
@@ -97,7 +97,12 @@ public class UserEditProfile extends DetailView {
                 } catch (Exception ex) {
                     Notification.error("Failed to save changes");
                 }
+
                 ClinicalSystem.back();
+
+                if (flag == 1) {
+                    ClinicalSystem.refresh(new ViewPatientList(1).getTable());
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
