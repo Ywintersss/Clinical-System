@@ -62,7 +62,7 @@ public class Scheduler {
             ObservableList<Appointment> FXAppointmentData = FXCollections.observableArrayList();
 
             for (String[] data : parseAppointmentData) {
-                FXAppointmentData.add(new Appointment(data[0], data[1], data[2], data[3], data[4]));
+                FXAppointmentData.add(new Appointment(data[0], data[1], data[2], data[3], data[4], data[5]));
             }
             return FXAppointmentData;
         } catch (IOException e) {
@@ -79,7 +79,7 @@ public class Scheduler {
 
             for (String[] data : parseAppointmentData) {
                 if (data[0].equals(doctorID)){
-                    FXAppointmentData.add(new Appointment(data[0], data[1], data[2], data[3], data[4]));
+                    FXAppointmentData.add(new Appointment(data[0], data[1], data[2], data[3], data[4], data[5]));
                 }
             }
 
@@ -116,14 +116,14 @@ public class Scheduler {
             Patient patient = patientMap.get(appointment.getPatientID());
             Schedule schedule = scheduleMap.get(appointment.getScheduleID());
 
-            appointmentDetails.add(new AppointmentDetail(appointment, doctor, patient, schedule, appointment.getTime(), appointment.getDescription()));
+            appointmentDetails.add(new AppointmentDetail(appointment, doctor, patient, schedule, appointment.getTime(), appointment.getDescription(), appointment.getIsPaid()));
         }
 
         return appointmentDetails;
     }
 
     public ObservableList<ScheduleDetail> getAllScheduleDetails() {
-        ObservableList<Schedule> schedules = ClinicalSystem.getScheduler().getAllSchedules();
+        ObservableList<Schedule> schedules = getAllSchedules();
         ObservableList<Doctor> doctors = ClinicalSystem.getUserDataManager().getAllDoctors();
         HashMap<String, Doctor> doctorMap = new HashMap<>();
         ObservableList<ScheduleDetail> scheduleDetails = FXCollections.observableArrayList();
@@ -165,7 +165,7 @@ public class Scheduler {
     public void makeAppointment(String scheduleID, String patientID, String time, String description) {
         String appointmentID = Utilities.generateID("AP", "\\schedules\\appointments.txt");
         //Write to appointment file
-        String appointmentData = File.formatData(appointmentID, scheduleID, patientID, time, description);
+        String appointmentData = File.formatData(appointmentID, scheduleID, patientID, time, description, "Unpaid");
         try {
             File.appendToFile("\\schedules\\appointments.txt", appointmentData);
         } catch (IOException e) {

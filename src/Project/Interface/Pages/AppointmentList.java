@@ -42,6 +42,7 @@ public class AppointmentList extends TableListingView {
         });
         addColumn("Time", "appointmentTime");
         addColumn("Description");
+        addColumn("Paid", "isPaid");
 
         cancelButton = new Button("Cancel");
         cancelButton.setOnAction(e -> {

@@ -139,7 +139,7 @@ public abstract class DetailView {
         contentContainer.getChildren().add(selectionContainer);
     }
 
-    public void addSelectionContainer(String labelTitle, ComboBox<String> selectionField) {
+    public void addSelectionContainer(String labelTitle, ComboBox<?> selectionField) {
         selectionField.setPrefWidth(ScreenTools.getScreenWidth() * 0.22);
         Background background = new Background(new BackgroundFill( Color.WHITE, borderRadius, null));
         selectionField.setBackground(background);

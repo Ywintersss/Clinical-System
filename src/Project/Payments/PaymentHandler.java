@@ -1,5 +1,6 @@
 package Project.Payments;
 
+import Project.Scheduler.Appointment;
 import Project.Users.Patient;
 import Project.Utilities.File;
 import Project.Utilities.Utilities;
@@ -19,13 +20,23 @@ public class PaymentHandler {
         }
         return instance;
     }
-    public void makePayment ( String... userData) {
+    public void makePayment (String appointmentID, String... userData) {
         String path = "\\payments\\PaymentHistory.txt";
+        String appointmentPath = "\\schedules\\appointments.txt";
+
         String paymentID = Utilities.generateID("PH", path) + ",";
 
         // write into PaymentHistory.txt
         String data = File.formatData(userData);
         try {
+            ArrayList<String[]> parseAppointmentData = File.parseData(File.readFile(appointmentPath));
+            for (String[] appointmentData : parseAppointmentData) {
+                if (appointmentData[0].equals(appointmentID)) {
+                    appointmentData[5] = "Paid";
+                }
+            }
+            File.updateFile(appointmentPath, parseAppointmentData);
+
             File.appendToFile(path, paymentID + data);
         } catch (IOException e) {
             throw new RuntimeException(e);
