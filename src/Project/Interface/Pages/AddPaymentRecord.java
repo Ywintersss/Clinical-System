@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AddPaymentRecord extends DetailView{
     private ObservableList<Patient> patients;
@@ -23,6 +24,7 @@ public class AddPaymentRecord extends DetailView{
     private ComboBox<AppointmentDetail> patientAppointment;
     private TextField consultation;
     private TextField others;
+    private ComboBox<String> paymentMethod;
     private Button save;
 
 
@@ -42,7 +44,6 @@ public class AddPaymentRecord extends DetailView{
         patientAppointment = new ComboBox<AppointmentDetail>();
         patientAppointment.setOnMouseClicked(e -> {
             patientAppointment.getItems().clear();
-            System.out.println(patientID.getValue());
             if (patientID.getValue() == null) {
                 Notification.information("Please select a patient first.");
                 return;
@@ -78,11 +79,15 @@ public class AddPaymentRecord extends DetailView{
 
 
         others = new TextField();
-        others.setPromptText("RM250...");
+        others.setPromptText("RM250");
+        others.setText("0");
+
         addContent("Others", others);
 
-
-        addSelectionContainer("Payment Method", new String[]{"PHYSICAL", "EWALLET", "CARD", "BANKTRANSFER"});
+        paymentMethod = new ComboBox<>();
+        paymentMethod.setPromptText("Select Payment Method");
+        paymentMethod.getItems().addAll("PHYSICAL", "EWALLET", "CARD", "BANKTRANSFER");
+        addSelectionContainer("Payment Method", paymentMethod);
 
 
         save = new Button("Save");
@@ -90,6 +95,15 @@ public class AddPaymentRecord extends DetailView{
         save.setPrefWidth(100);
 
         save.setOnAction(e ->{
+            if (paymentMethod.getValue() == null) {
+                Notification.information("Please select a payment method.");
+                return;
+            }
+
+            if (Objects.equals(others.getText(), "")) {
+                others.setText("0");
+            }
+
             ArrayList<String> data = getInputData();
             System.out.println(data);
 
