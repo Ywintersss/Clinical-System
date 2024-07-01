@@ -1,6 +1,7 @@
 package Project.Utilities;
 
 import Project.Users.Admin;
+import org.w3c.dom.ls.LSOutput;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,6 +59,11 @@ public class Utilities {
     }
 
     public static boolean hasPassedDate(String date) {
+        String dateRegex = "\\d{2}-\\d{2}-\\d{4}";
+        if (!date.matches(dateRegex)) {
+            LocalDate newDate = LocalDate.parse(date);
+            date = newDate.format(formatterDate);
+        }
         return LocalDate.now().isAfter(LocalDate.parse(date, formatterDate));
     }
 

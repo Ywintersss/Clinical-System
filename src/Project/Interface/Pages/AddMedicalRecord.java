@@ -50,7 +50,7 @@ public class AddMedicalRecord extends DetailView {
                 String prescription = data.get(2);
                 String followUpDate = data.get(3);
 
-                ClinicalSystem.getRecorder().addRecord(patient.getID(), issue, prescription, description, followUpDate);
+                ClinicalSystem.getRecorder().addRecord(patient.getID(), issue, description, prescription, followUpDate);
                 Notification.information("Record Added");
 
                 ClinicalSystem.back();

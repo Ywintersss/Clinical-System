@@ -14,6 +14,9 @@ import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 
+import javax.swing.event.MouseInputListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public abstract class DetailView {
@@ -194,13 +197,14 @@ public abstract class DetailView {
                 data.add(((ComboBox) content.get(2)).getSelectionModel().getSelectedItem().toString());
             } else if (content.get(1) instanceof DatePicker) {
                 if (((DatePicker) content.get(1)).getValue() == null){
-                    System.out.println("here");
                     data.add("null");
                 } else if (Utilities.hasPassedDate(((DatePicker) content.get(1)).getValue().toString())){
                     Notification.error("Date cannot be in the past");
                     return null;
                 } else {
-                    data.add(((DatePicker) content.get(1)).getValue().toString());
+                    LocalDate localDate = ((DatePicker) content.get(1)).getValue();
+                    data.add(localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+//                    data.add(((DatePicker) content.get(1)).getValue().toString());
                 }
             }
         }

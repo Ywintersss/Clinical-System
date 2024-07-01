@@ -3,3 +3,4 @@ RC2,PA1,Upper Respiratory Infection,Sore throat and mild fever for the past 5 da
 RC3,PA2,Type 2 Diabetes Mellitus,Recent blood tests indicate an HbA1c of 7.8%.The patient reports increased thirst and frequent urination.,Metformin 500 mg twice daily,2/7/2024
 RC4,PA2,Lower Back Pain,Pain is described as a dull ache and exacerbated by prolonged sitting and bending.,Spinal manipulation therapy twice a week for 4 weeks,1/7/2024
 RC5,PA1,Atrial Fibrillation,Shortness of breath and occasional dizziness for the past month. An ECG confirms atrial fibrillation.,Warfarin 5 mg daily. Metoprolol 50 mg twice daily,6/7/2024
+RC6,PA2,fever,panadol,40 celcius,null
