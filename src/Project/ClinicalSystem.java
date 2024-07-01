@@ -17,14 +17,14 @@ import Project.Users.*;
 import Project.Utilities.Utilities;
 import javafx.scene.Parent;
 import java.util.Stack;
-import java.util.regex.Pattern;
 
 import Project.Interface.Pages.Components.Notification;
-import jdk.jshell.execution.Util;
 
 
 public class ClinicalSystem {
+    //Keeps track of the pages visited
     private static final Stack<Parent> pageStack = new Stack<>();
+    //Singleton Controller classes for user, payment, scheduler and recorder
     private static final UserDataManager userDataManager = UserDataManager.getInstance();
     private static final PaymentHandler paymentHandler = PaymentHandler.getInstance();
     private static final Scheduler scheduler = Scheduler.getInstance();
@@ -32,9 +32,11 @@ public class ClinicalSystem {
     private static Layout layout;
 
     public static void login(String username, String password) {
+        //Check if user exists
         User user = userDataManager.getUser(username, password);
         if (user != null) {
             Notification.information("Login Successful");
+            //Checks type of user and sets user session
             if (user instanceof Patient) {
                 Patient patient = (Patient) user;
                 UserSession.getInstance().setCurrentUser(patient);
@@ -57,6 +59,7 @@ public class ClinicalSystem {
         }
     }
 
+    //Logout
     public static void logout() {
         layout.setContent(new Home().getHome());
         layout.setHeaderPopUp(new PopUpDefault());
@@ -65,7 +68,9 @@ public class ClinicalSystem {
         pageStack.push(new Home().getHome());
     }
 
+    //Register
     public static boolean register(int flag, String ...args) {
+        //validation for patient and doctor registration
         if (!(args.length < 3)) {
             if (!Utilities.validatePassword(args[1])) {
                 System.out.println(args[1]);
@@ -84,6 +89,10 @@ public class ClinicalSystem {
             }
         }
 
+        //flag = 1 = Admin register patient
+        //flag = 2 = addDoctor
+        //flag = 3 = addAdmin
+        //flag = 4 = Back to wherever to Patient came from
         if (flag == 1 || flag == 4) {
             userDataManager.addPatient(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
         } else if (flag == 2) {
@@ -95,6 +104,7 @@ public class ClinicalSystem {
         return true;
     }
 
+    //Singleton layout of the entire page
     public static Layout getLayout() {
         if (layout == null) {
             layout = new Layout();
@@ -102,12 +112,14 @@ public class ClinicalSystem {
         return layout;
     }
 
+    //Singleton getter interface for Controller classes
     public static UserDataManager getUserDataManager() {
         return userDataManager;
     }
     public static PaymentHandler getPaymentHandler() {
         return paymentHandler;
     }
+
     public static Scheduler getScheduler() {
         return scheduler;
     }
@@ -115,6 +127,8 @@ public class ClinicalSystem {
         return recorder;
     }
 
+
+    //Navigation
     public static void navigateTo(Parent newPage) {
         if (!pageStack.isEmpty() && newPage.equals(pageStack.peek())) {
             return;
@@ -125,22 +139,22 @@ public class ClinicalSystem {
         getLayout().setContent(newPage);
     }
 
+    //Refresh a page
     public static void refresh(Parent Page) {
         pageStack.pop();
         getLayout().setContent(Page);
         pageStack.push(Page);
     }
 
+    //Back
     public static void back() {
         pageStack.pop();
         System.out.println(pageStack);
         getLayout().setContent(pageStack.peek());
     }
+
+    //Get page stack
     public static Stack<Parent> getPageStack() {
         return pageStack;
-    }
-
-    public static void main(String[] args) {
-
     }
 }

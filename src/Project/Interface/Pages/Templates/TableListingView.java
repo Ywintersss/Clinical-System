@@ -52,10 +52,6 @@ public abstract class TableListingView {
             return table;
         }
 
-        public void removeTableView() {
-            tableContainer.getChildren().remove(table);
-        }
-
         public void moveButtonsToBottom() {
             tableContainer.getChildren().remove(buttonContainer);
             tableContainer.getChildren().add(buttonContainer);
@@ -115,7 +111,7 @@ public abstract class TableListingView {
         }
 
 
-
+        //Resize the columns to fit the content
         public void evenWidth() {
             table.widthProperty().addListener((observable, oldValue, newValue) -> {
                 double width = (newValue.doubleValue() / table.getColumns().size());
@@ -125,10 +121,12 @@ public abstract class TableListingView {
             });
         }
 
+        //Sets the table data
         public void initTableData(ObservableList data) {
             table.setItems(data);
         }
-        
+
+        //Adds a functional button to the bottom of the table
         public void addFunctionalButton(Button FuncButton) {
             Region spacer = new Region();
             FuncButton.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");

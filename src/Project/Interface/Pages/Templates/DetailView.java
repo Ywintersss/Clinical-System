@@ -168,6 +168,7 @@ public abstract class DetailView {
 
         buttonContainer.getChildren().add(button);
     }
+
     public void addButtonIntoContainer(Button FuncButton) {
         buttonContainer.getChildren().add(FuncButton);
     }
@@ -186,11 +187,16 @@ public abstract class DetailView {
         return buttonContainer;
     }
 
+    //get text-field, combo-box or date-picker data
     public ArrayList<String> getInputData() {
         ArrayList<String> data = new ArrayList<>();
+        //get children of content-container
         ObservableList<Node> children = contentContainer.getChildren();
+        //skip first child (label)
         for (int i = 1; i < children.size(); i++) {
+            //get children of content-container
             ObservableList<Node> content = ((Parent) children.get(i)).getChildrenUnmodifiable();
+
             if (content.get(1) instanceof TextField) {
                 data.add(((TextField) content.get(1)).getText());
             } else if (content.get(2) instanceof ComboBox) {
@@ -204,7 +210,6 @@ public abstract class DetailView {
                 } else {
                     LocalDate localDate = ((DatePicker) content.get(1)).getValue();
                     data.add(localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-//                    data.add(((DatePicker) content.get(1)).getValue().toString());
                 }
             }
         }

@@ -201,15 +201,4 @@ public class Scheduler {
             throw new RuntimeException(e);
         }
     }
-
-    public void completeAppointment(String issue, String prescription, String followUpDate, Appointment appointment) {
-//        cancelAppointment(doctor, patient, appointment);
-//
-//        MedicalRecord medicalRecord = doctor.writeMedicalRecord(issue, prescription, followUpDate, appointment);
-//
-        //write to medical record file
-//        Recorder.addRecord(patient, issue ,prescription, followUpDate, appointment);
-
-        //delete from appointment file
-    }
 }
