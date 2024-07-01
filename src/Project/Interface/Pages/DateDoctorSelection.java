@@ -151,7 +151,7 @@ public class DateDoctorSelection {
                 .orElse(null);
 
             assert scheduleDetail != null;
-            ClinicalSystem.navigateTo(new ScheduleSelector(scheduleDetail, patientID).getSchedules());
+            ClinicalSystem.navigateTo(new ScheduleSelector(scheduleDetail, patientID, isAdmin).getSchedules());
         });
         next.getStylesheets().add("/Project/Interface/Assets/Styles/styles.css");
 

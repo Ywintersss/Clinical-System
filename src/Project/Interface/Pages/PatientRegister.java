@@ -34,6 +34,11 @@ public class PatientRegister extends Register {
 
         register.setOnAction(e ->{
             ArrayList<String> data = getTextFieldsData();
+            if (data == null) {
+                Notification.error("Please fill all the fields");
+                return;
+            }
+
             System.out.println(data);
 
             String username = data.get(0);

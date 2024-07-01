@@ -1,6 +1,7 @@
 package Project.Interface.Pages;
 
 import Project.ClinicalSystem;
+import Project.Interface.Pages.Components.Notification;
 import Project.Interface.Pages.Templates.Register;
 import Project.Users.Gender;
 import javafx.scene.Parent;
@@ -32,6 +33,11 @@ public class DoctorRegister extends Register {
 
         register.setOnAction(e ->{
             ArrayList<String> doctorData = getTextFieldsData();
+            if (doctorData == null) {
+                Notification.error("Please fill in all fields");
+                return;
+            }
+
             System.out.println(doctorData);
 
             String username = doctorData.get(0);

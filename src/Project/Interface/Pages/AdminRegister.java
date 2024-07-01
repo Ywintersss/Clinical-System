@@ -21,6 +21,10 @@ public class AdminRegister extends Register {
 
         register.setOnAction(e ->{
             ArrayList<String> adminData = getTextFieldsData();
+            if (adminData == null) {
+                return;
+            }
+
             System.out.println(adminData);
 
             String username = adminData.get(0);

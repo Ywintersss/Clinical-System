@@ -34,7 +34,7 @@ public class ScheduleSelector {
     private Button back;
     private Region spacer;
     private Button makeAppointment;
-    public ScheduleSelector(ScheduleDetail scheduleDetail, String patientID) {
+    public ScheduleSelector(ScheduleDetail scheduleDetail, String patientID, boolean isAdmin) {
         appointmentDetails = ClinicalSystem.getScheduler().getAllAppointmentDetails();
 
         scheduleContainer = new VBox();
@@ -149,7 +149,7 @@ public class ScheduleSelector {
                 return;
             }
 
-            ClinicalSystem.navigateTo(new MakeAppointmentDetails(scheduleDetail, patientID, time).getDetails());
+            ClinicalSystem.navigateTo(new MakeAppointmentDetails(scheduleDetail, patientID, time, isAdmin).getDetails());
         });
 
         buttonContainer.getChildren().addAll(back, spacer, makeAppointment);

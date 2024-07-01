@@ -107,9 +107,15 @@ public abstract class Register {
         for (int i = 1; i < registerForm.getChildren().size(); i++) {
             ObservableList<Node> content = ((HBox) children.get(i)).getChildren();
             if (content.get(1) instanceof TextField) {
+                if (((TextField) content.get(1)).getText().isEmpty()) {
+                    return null;
+                }
                 data.add(((TextField) content.get(1)).getText());
             }
             if (content.get(1) instanceof ComboBox) {
+                if (((ComboBox) content.get(1)).getSelectionModel().getSelectedItem() == null) {
+                    return null;
+                }
                 data.add(((ComboBox) content.get(1)).getSelectionModel().getSelectedItem().toString());
             }
         }

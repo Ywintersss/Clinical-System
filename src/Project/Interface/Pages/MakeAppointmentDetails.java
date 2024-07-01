@@ -22,7 +22,7 @@ public class MakeAppointmentDetails extends DetailView {
     private TextField description;
     private Label consultationFees;
     private Button makeAppointment;
-    public MakeAppointmentDetails(ScheduleDetail scheduleDetail, String patientID, String selectedTime) {
+    public MakeAppointmentDetails(ScheduleDetail scheduleDetail, String patientID, String selectedTime, boolean isAdmin) {
         super("Appointment Details");
 //        if (!(UserSession.getInstance().getCurrentUser() instanceof Admin)) {
 //            Patient patient = (Patient) UserSession.getInstance().getCurrentUser();
@@ -55,7 +55,12 @@ public class MakeAppointmentDetails extends DetailView {
 
                 ClinicalSystem.back();
                 ClinicalSystem.back();
-                ClinicalSystem.refresh(new DateDoctorSelection(false).getDateSelection());
+                if (isAdmin) {
+                    ClinicalSystem.back();
+                    ClinicalSystem.refresh(new AppointmentList(1, "Appointments").getTable());
+                } else {
+                    ClinicalSystem.refresh(new DateDoctorSelection(false).getDateSelection());
+                }
             } catch (Exception ex) {
                 Notification.error("Something went wrong");
             }
