@@ -91,9 +91,13 @@ public class UserEditProfile extends DetailView {
 
                 try {
                     ClinicalSystem.getUserDataManager().updateUser("\\users\\Patient.txt", newData);
-                    UserSession.getInstance().setCurrentUser(oldPatientData);
-
                     Notification.information("Changes saved successfully");
+
+                    //not admin
+                    if (flag != 1) {
+                        UserSession.getInstance().setCurrentUser(oldPatientData);
+                    }
+
                 } catch (Exception ex) {
                     Notification.error("Failed to save changes");
                 }

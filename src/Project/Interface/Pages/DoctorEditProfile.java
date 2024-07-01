@@ -106,7 +106,10 @@ public class DoctorEditProfile extends DetailView {
 
                 try {
                     ClinicalSystem.getUserDataManager().updateUser("\\users\\Doctor.txt", newData);
-                    UserSession.getInstance().setCurrentUser(oldDoctorData);
+
+                    if (flag != 1){
+                        UserSession.getInstance().setCurrentUser(oldDoctorData);
+                    }
 
                     Notification.information("Changes saved successfully");
                 } catch (Exception ex) {
