@@ -1,3 +1,12 @@
+/*Link to our GitHub Repository: https://github.com/Ywintersss/Clinical-System
+
+Special thanks to everyone who worked on this project:
+Shawn Ryan Peterson, Kelly Pek Xue Er, Too Tze Jiat.
+Miss Tan Li June and everyone who helped along the way.
+
+*/
+
+
 
 import Project.ClinicalSystem;
 import Project.Interface.Pages.Home;

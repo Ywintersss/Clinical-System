@@ -13,3 +13,9 @@ Read [Getting Started with JavaFX](https://openjfx.io/openjfx-docs/#introduction
 3. Add your\path\to\javafx-sdk-21.0.3\lib to your environment variables
 4. Add the same path to "libraries used" in the project ((file > project structure > libraries) IntelliJ IDEA)
 5. Add vmware commands --module-path "your\path\to\javafx-sdk-21.0.3\lib" --add-modules javafx.controls,javafx.fxml ((Run > Edit Configurations) IntelliJ IDEA)
+
+## Running
+
+1. Ensure the environment and required technologies are setup.
+2. Run Main.java to start the application
+3. Enjoy :)
