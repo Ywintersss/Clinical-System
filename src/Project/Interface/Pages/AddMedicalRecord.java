@@ -41,6 +41,10 @@ public class AddMedicalRecord extends DetailView {
         save.setPrefWidth(100);
 
         save.setOnAction(e ->{
+            if (issue.getText().isEmpty() || description.getText().isEmpty() || prescription.getText().isEmpty()) {
+                Notification.error("Please fill all fields");
+                return;
+            }
             try {
                 ArrayList<String> data = getInputData();
                 System.out.println(data);
